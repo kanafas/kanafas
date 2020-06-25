@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "watch": true,
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

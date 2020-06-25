@@ -1,0 +1,13 @@
+{
+  "name": "kanafas",
+  "version": "1.0.0-beta",
+  "description": "Kanafas",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Adam Josefus",
+  "license": "CC-BY-NC-ND-4.0",
+  "dependencies": {
+    "kanafas-units": "git+https://github.com/kanafas/units.git#v1.1.0",
+    "kanafas-utils": "git+https://github.com/kanafas/utils.git#v1.0.0"
+  }
+}
