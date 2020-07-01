@@ -9,7 +9,7 @@ export class Loaders {
 
             reader.addEventListener('load', async () => {
                 img.src = reader.result as string;
-                
+
                 resolve(await Loaders.waitToImageLoad(img));
             }, false);
         });

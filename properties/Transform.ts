@@ -10,7 +10,7 @@ export class Transform {
     scale: Vector;
     rotation: Angle;
 
-    private _parent: Transform|null = null;
+    private _parent: Transform | null = null;
 
 
     constructor(position: Vector = Vector.zero(), scale: Vector = Vector.one(), rotation: Angle = Angle.zero()) {
@@ -80,14 +80,14 @@ export class Transform {
 
         const oldPosition: Vector = this.getComputedPosition();
         const oldScale: Vector = this.getComputedScale();
-        const oldRotation: Angle = this.getComputedRotation();        
+        const oldRotation: Angle = this.getComputedRotation();
 
         this._parent = null;
 
         if (updateLocals) {
             this.position.x = oldPosition.x;
             this.position.y = oldPosition.y;
-            
+
             this.scale.x = oldScale.x;
             this.scale.y = oldScale.y;
 

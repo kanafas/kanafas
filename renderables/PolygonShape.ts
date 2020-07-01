@@ -11,10 +11,10 @@ import { Gizmo } from "./Gizmo.js";
 
 export class PolygonShape extends PolygonGeometry implements IObject, IRenderable, IShape {
 
-    fill: Fill|null = null;
-    stroke: Stroke|null = null;
-    shadow: Shadow|null = null;
-    
+    fill: Fill | null = null;
+    stroke: Stroke | null = null;
+    shadow: Shadow | null = null;
+
     opacity: number = 1;
 
     constructor(points: IVector[], closed?: boolean, trimStart?: number, trimEnd?: number, trimOffset?: number) {

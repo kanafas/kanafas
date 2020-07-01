@@ -22,7 +22,7 @@ source.addEventListener('load', () => {
     engine.loop.addUpdateCallback(() => {
         engine.clear();
 
-        atlas.slices.forEach(slice => {            
+        atlas.slices.forEach(slice => {
             slice.render(engine);
         })
     })

@@ -1,6 +1,6 @@
-export namespace Strings {
+export class Strings {
 
-    export const padLeft = (s: string, length: number, pad: string): string => {
+    static padLeft(s: string, length: number, pad: string): string {
         if (s.length > length) return s;
 
         const repeat = Math.ceil((length - s.length) / pad.length);
@@ -8,8 +8,8 @@ export namespace Strings {
 
         return full.substring(full.length - length, full.length);
     }
-    
-    export const padRight = (s: string, length: number, pad: string): string => {
+
+    static padRight(s: string, length: number, pad: string): string {
         if (s.length > length) return s;
 
         const repeat = Math.ceil((length - s.length) / pad.length);

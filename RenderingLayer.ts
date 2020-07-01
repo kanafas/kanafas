@@ -17,7 +17,7 @@ export class RenderingLayer implements IRenderingLayer {
 
     constructor(canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number = 1) {
         this.pixelScale = pixelScale;
-        
+
         this.width = width;
         this.height = height;
 
@@ -70,10 +70,10 @@ export class RenderingLayer implements IRenderingLayer {
 
         const pxs = this.pixelScale;
         const path: Transform[] = [];
-        
+
         let t: Transform = transform;
         path.unshift(t);
-        
+
         while (t.hasParent()) {
             t = t.getParent();
             path.unshift(t);
@@ -114,14 +114,14 @@ export interface IRenderingLayer {
     gizmoScale: number;
 
     clear(): void;
-    
+
     getRenderingContext(): CanvasRenderingContext2D;
     resetRenderingContext(): void;
 
     setImageSmoothing(toggle: boolean): void;
-    
+
     getCanvas(): HTMLCanvasElement;
-    
+
     setMatrixToTransform(transform: Transform): void;
     resetMatrix(): void;
 

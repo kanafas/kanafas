@@ -6,7 +6,7 @@ import { IGradient, IGradientStep } from "./Gradient.js";
 
 
 export class RadialGradient implements IGradient {
-    
+
     start: Vector;
     end: Vector;
 
@@ -48,12 +48,12 @@ export class RadialGradient implements IGradient {
 
                 gradient.addColorStop(offset, color);
             });
-            
+
             return gradient;
-            
+
         } else {
             const gradient = ctx.createRadialGradient(0, 0, 0, 1, 1, 1);
-            const step = this.steps[this.steps.length -1];
+            const step = this.steps[this.steps.length - 1];
             const color = `rgba(${step.color.red.toFixed(3)}, ${step.color.green.toFixed(3)}, ${step.color.blue.toFixed(3)}, ${step.color.alpha.toFixed(3)})`;
 
             gradient.addColorStop(0, color);

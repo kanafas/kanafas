@@ -22,7 +22,7 @@ export class Timeline {
         if (fps <= 0) {
             throw new Error(`Fps is not positive number.`);
         }
-            
+
         this.fps = fps;
     }
 
@@ -78,8 +78,8 @@ export class Timeline {
             this.update(this._frames);
         }
     }
-    
-    
+
+
     forward(framCount: number = 1) {
         if (framCount <= 0) return;
 

@@ -21,7 +21,7 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
 
     transform: Transform = new Transform();
 
-    shadow: Shadow|null = null;
+    shadow: Shadow | null = null;
     opacity: number = 1;
 
 
@@ -29,7 +29,7 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
         if (source.naturalWidth == 0 || source.naturalHeight == 0) {
             throw new Error("The image is not fully loaded.");
         }
-        
+
         this.width = sliceWidth;
         this.height = sliceHeight;
 
@@ -87,11 +87,11 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
         document.body.appendChild(canvas);
 
         const ctx = canvas.getContext('2d')! as CanvasRenderingContext2D;
-        
+
         ctx.drawImage(this.source, this.sliceX, this.sliceY, this.sliceWidth, this.sliceHeight, 0, 0, this.width, this.height);
 
         const dataURL = canvas.toDataURL('image/png');
-        
+
         const imageElement = document.createElement('img');
         imageElement.src = dataURL;
 

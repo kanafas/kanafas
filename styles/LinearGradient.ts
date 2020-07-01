@@ -6,7 +6,7 @@ import { IGradient, IGradientStep } from "./Gradient.js";
 
 
 export class LinearGradient implements IGradient {
-    
+
     start: Vector;
     end: Vector;
 
@@ -22,8 +22,8 @@ export class LinearGradient implements IGradient {
     getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoxArea) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
-        
-         // TODO: Zkontrolovat jestli "origin" přičítám, nebo odčítáms
+
+        // TODO: Zkontrolovat jestli "origin" přičítám, nebo odčítáms
         const startPoint = this.start.clone().multiple(boundingBox.size).add(boundingBox.origin);
         const endPoint = this.end.clone().multiple(boundingBox.size).add(boundingBox.origin);
 
@@ -40,7 +40,7 @@ export class LinearGradient implements IGradient {
 
             gradient.addColorStop(offset, color);
         });
-        
+
         return gradient;
     }
 }

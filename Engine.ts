@@ -14,7 +14,7 @@ export class Engine implements IRenderingLayer {
 
     get width(): number { return this._renderingLayer.width; }
     get height(): number { return this._renderingLayer.height; }
-    
+
     set gizmoVisibility(toggle: boolean) { this._renderingLayer.gizmoVisibility = toggle; }
     get gizmoVisibility(): boolean { return this._renderingLayer.gizmoVisibility; }
 
@@ -29,7 +29,7 @@ export class Engine implements IRenderingLayer {
         this._renderingLayer = new RenderingLayer(canvas, width, height, pixelScale);
         this.loop = new Loop();
         // this.debuggerBar = new DebuggerBar(this);
-        
+
         // this.loop.addUpdateCallback((milliseconds: number, delta: number) => this.debuggerBar.update(milliseconds, delta));
     }
 

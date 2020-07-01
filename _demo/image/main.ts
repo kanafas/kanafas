@@ -1,5 +1,5 @@
-import { Engine } from "../../Engine.js";
 import { ImageObject } from "../../renderables/ImageObject.js";
+import { Engine } from "../../Engine.js";
 // import { DebuggerBar } from "../../Debugger/DebuggerBar.js";
 
 const canvasEl = document.getElementById('canvas')! as HTMLCanvasElement;

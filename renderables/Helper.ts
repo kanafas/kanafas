@@ -11,7 +11,7 @@ import { IObject, IGeometry, IShape, IRenderable } from "./types";
 // TODO: To by se mělo přejmenovt, nebo přesunout, nebo obojí
 export class Helper {
 
-    static renderShape(renderingLayer: IRenderingLayer, object: IObject&IGeometry&IRenderable&IShape) {
+    static renderShape(renderingLayer: IRenderingLayer, object: IObject & IGeometry & IRenderable & IShape) {
         const ctx = renderingLayer.getRenderingContext();
 
         ctx.beginPath();

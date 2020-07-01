@@ -1,7 +1,7 @@
 import { IVector } from "../units/Vector.js";
 
 
-export namespace Numbers {
+export class Numbers {
 
     /**
      * Remapuje hodnotu na novou škálu
@@ -11,7 +11,7 @@ export namespace Numbers {
      * @param min2 Nové minimum
      * @param max2 Nové maximum
      */
-    export const remap = (value: number, min1: number, max1: number, min2: number = 0, max2: number = 1): number => {
+    static remap(value: number, min1: number, max1: number, min2: number = 0, max2: number = 1): number {
         return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
     }
 
@@ -22,7 +22,7 @@ export namespace Numbers {
      * @param {number} min 
      * @param {number} max 
      */
-    export const limit = (value: number, min: number, max: number) => {
+    static limit(value: number, min: number, max: number) {
         return Math.min(Math.max(value, min), max);
     }
 
@@ -32,7 +32,7 @@ export namespace Numbers {
      * @param min Minumum inkluzivně
      * @param max Maximum exkluzivně
      */
-    export const randomArbitrary = (min: number = 0, max: number = 1): number => {
+    static randomArbitrary(min: number = 0, max: number = 1): number {
         return Math.random() * (max - min) + min;
     }
 
@@ -42,10 +42,10 @@ export namespace Numbers {
      * @param min Minumum inkluzivně
      * @param max Maximum inkluzivně
      */
-    export const randomInt = (min: number = 0, max: number = 1): number => {
+    static randomInt(min: number = 0, max: number = 1): number {
         min = Math.ceil(min);
         max = Math.floor(max);
-        
+
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
@@ -56,9 +56,9 @@ export namespace Numbers {
      * @param p1 Počáteční bod <0, 1>
      * @param p2 Koncový bod <0, 1>
      */
-    export const bezierCurve2 = (t: number, p1: IVector, p2: IVector): IVector => {
+    static bezierCurve2(t: number, p1: IVector, p2: IVector): IVector {
         const compute = (t: number, v1: number, v2: number): number => {
-            return (1-t) * v1 + t * v2;
+            return (1 - t) * v1 + t * v2;
         }
 
         return {
@@ -75,9 +75,9 @@ export namespace Numbers {
      * @param p2 Společné táhlo <0, 1>
      * @param p3 Koncový bod <0, 1>
      */
-    export const bezierCurve3 = (t: number, p1: IVector, p2: IVector, p3: IVector): IVector => {
+    static bezierCurve3(t: number, p1: IVector, p2: IVector, p3: IVector): IVector {
         const compute = (t: number, v1: number, v2: number, v3: number): number => {
-            return (1-t) ** 2 * v1 + 2 * (1-t) * t * v2 + t ** 2 * v3;
+            return (1 - t) ** 2 * v1 + 2 * (1 - t) * t * v2 + t ** 2 * v3;
         }
 
         return {
@@ -95,9 +95,9 @@ export namespace Numbers {
      * @param p3 Táhlo koncového bodu <0, 1>
      * @param p4 Koncový bod <0, 1>
      */
-    export const bezierCurve4 = (t: number, p1: IVector, p2: IVector, p3: IVector, p4: IVector): IVector => {
+    static bezierCurve4(t: number, p1: IVector, p2: IVector, p3: IVector, p4: IVector): IVector {
         const compute = (t: number, v1: number, v2: number, v3: number, v4: number): number => {
-            return (1-t)**3 * v1 + 3 * (1-t)**2 * t * v2 + 3 * (1-t) * t**2 * v3 + t**3 * v4;
+            return (1 - t) ** 3 * v1 + 3 * (1 - t) ** 2 * t * v2 + 3 * (1 - t) * t ** 2 * v3 + t ** 3 * v4;
         }
 
         return {

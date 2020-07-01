@@ -1,10 +1,10 @@
 import { IVector } from "../units/Vector.js";
 
-export namespace BezierEasing {
+export class BezierEasing {
 
-    export const custom = (t: number, p1: IVector, p2: IVector, p3: IVector, p4: IVector): number => {
+    static custom(t: number, p1: IVector, p2: IVector, p3: IVector, p4: IVector): number {
         const compute = (t: number, v1: number, v2: number, v3: number, v4: number): number => {
-            return (1-t)**3 * v1 + 3 * (1-t)**2 * t * v2 + 3 * (1-t) * t**2 * v3 + t**3 * v4;
+            return (1 - t) ** 3 * v1 + 3 * (1 - t) ** 2 * t * v2 + 3 * (1 - t) * t ** 2 * v3 + t ** 3 * v4;
         }
 
         const y = compute(t, p1.y, p2.y, p3.y, p4.y);
@@ -14,13 +14,13 @@ export namespace BezierEasing {
     }
 
 
-    export const linear = (t: number): number => {
+    static linear(t: number): number {
         return t;
     }
 
 
-    export const ease = (t: number): number => {
-        return custom(t,
+    static ease(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.25, y: 0.1 },
             { x: 0.25, y: 1 },
@@ -28,8 +28,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeIn = (t: number): number => {
-        return custom(t,
+    static easeIn(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.42, y: 0 },
             { x: 1, y: 1 },
@@ -37,8 +37,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeInOut = (t: number): number => {
-        return custom(t,
+    static easeInOut(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.42, y: 0 },
             { x: 0.58, y: 1 },
@@ -46,8 +46,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeOut = (t: number): number => {
-        return custom(t,
+    static easeOut(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0, y: 0 },
             { x: 0.58, y: 1 },
@@ -55,8 +55,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeInSine = (t: number): number => {
-        return custom(t,
+    static easeInSine(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.47, y: 0 },
             { x: 0.745, y: 0.715 },
@@ -64,8 +64,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeOutSine = (t: number): number => {
-        return custom(t,
+    static easeOutSine(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.39, y: 0.575 },
             { x: 0.565, y: 1 },
@@ -73,8 +73,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeInOutSine = (t: number): number => {
-        return custom(t,
+    static easeInOutSine(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.445, y: 0.05 },
             { x: 0.55, y: 0.95 },
@@ -82,8 +82,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeInQuad = (t: number): number => {
-        return custom(t,
+    static easeInQuad(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.55, y: 0.085 },
             { x: 0.68, y: 0.53 },
@@ -91,8 +91,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeOutQuad = (t: number): number => {
-        return custom(t,
+    static easeOutQuad(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.25, y: 0.46 },
             { x: 0.45, y: 0.94 },
@@ -100,8 +100,8 @@ export namespace BezierEasing {
     }
 
 
-    export const easeInOutQuad = (t: number): number => {
-        return custom(t,
+    static easeInOutQuad(t: number): number {
+        return BezierEasing.custom(t,
             { x: 0, y: 0 },
             { x: 0.445, y: 0.03 },
             { x: 0.515, y: 0.955 },

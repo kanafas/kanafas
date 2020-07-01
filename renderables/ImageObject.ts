@@ -16,15 +16,15 @@ export class ImageObject implements IObject, IRenderable, IVisible {
 
     transform: Transform = new Transform();
 
-    shadow: Shadow|null = null;
+    shadow: Shadow | null = null;
     opacity: number = 1;
 
 
-    constructor(image: HTMLImageElement, width?: number|valueModifier<number>, height?: number|valueModifier<number>) {
+    constructor(image: HTMLImageElement, width?: number | valueModifier<number>, height?: number | valueModifier<number>) {
         if (image.naturalWidth == 0 || image.naturalHeight == 0) {
             throw new Error("The image is not fully loaded.");
         }
-        
+
         if (width != undefined && height != undefined) {
             this.width = typeof width == 'number' ? width : width(image.naturalWidth);
             this.height = typeof height == 'number' ? height : height(image.naturalHeight);

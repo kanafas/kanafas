@@ -24,7 +24,7 @@ export class PieGeometry implements IObject, IGeometry {
 
         this.startAngle = startAngle;
         this.endAngle = endAngle;
-        
+
         this.innerRadius = innerRadius;
     }
 

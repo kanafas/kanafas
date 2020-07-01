@@ -4,9 +4,9 @@ const regexp = {
 };
 
 
-export namespace Regex {
+export class Regex {
 
-    export const breakLines = (trim: boolean = false) => {
+    static breakLines(trim: boolean = false) {
         if (trim) return regexp.breakTrimedLines;
         else return regexp.breakLines;
     }

@@ -6,51 +6,51 @@ import { Utils } from "../utils/index.js";
 
 
 export class RoundedRectangleGeometry implements IObject, IGeometry {
-    
+
     transform: Transform = new Transform();
 
     width: number;
     height: number;
-    
+
     topLeftRadius: Vector = Vector.zero();
     topRightRadius: Vector = Vector.zero();
     bottomLeftRadius: Vector = Vector.zero();
     bottomRightRadius: Vector = Vector.zero();
 
 
-    constructor(width: number, height: number, radius1: number|Vector, radius2?: number|Vector, radius3?: number|Vector, radius4?: number|Vector) {
+    constructor(width: number, height: number, radius1: number | Vector, radius2?: number | Vector, radius3?: number | Vector, radius4?: number | Vector) {
         this.width = width;
         this.height = height;
         this.setRadius(radius1, radius2, radius3, radius4);
     }
 
 
-    setRadius(radius1: number|Vector, radius2?: number|Vector, radius3?: number|Vector, radius4?: number|Vector) {
+    setRadius(radius1: number | Vector, radius2?: number | Vector, radius3?: number | Vector, radius4?: number | Vector) {
         if (radius1 != undefined && radius2 != undefined && radius3 != undefined && radius4 != undefined) {
             this.setTopLeftRadius(radius1);
             this.setTopRightRadius(radius2);
             this.setBottomRightRadius(radius3);
             this.setBottomLeftRadius(radius4);
-        
+
         } else if (radius1 != undefined && radius2 != undefined && radius3 == undefined && radius4 == undefined) {
             this.setTopLeftRadius(radius1);
             this.setTopRightRadius(radius2);
             this.setBottomRightRadius(radius1);
             this.setBottomLeftRadius(radius2);
-        
+
         } else if (radius1 != undefined && radius2 == undefined && radius3 == undefined && radius4 == undefined) {
             this.setTopLeftRadius(radius1);
             this.setTopRightRadius(radius1);
             this.setBottomRightRadius(radius1);
             this.setBottomLeftRadius(radius1);
-        
+
         } else {
             throw new Error("Incorrect combination of agruments");
         }
     }
 
 
-    setTopLeftRadius(value: number|Vector) {
+    setTopLeftRadius(value: number | Vector) {
         if (value instanceof Vector) {
             this.topLeftRadius = value.clone();
         } else {
@@ -60,7 +60,7 @@ export class RoundedRectangleGeometry implements IObject, IGeometry {
     }
 
 
-    setTopRightRadius(value: number|Vector) {
+    setTopRightRadius(value: number | Vector) {
         if (value instanceof Vector) {
             this.topRightRadius = value.clone();
         } else {
@@ -70,7 +70,7 @@ export class RoundedRectangleGeometry implements IObject, IGeometry {
     }
 
 
-    setBottomRightRadius(value: number|Vector) {
+    setBottomRightRadius(value: number | Vector) {
         if (value instanceof Vector) {
             this.bottomRightRadius = value.clone();
         } else {
@@ -80,7 +80,7 @@ export class RoundedRectangleGeometry implements IObject, IGeometry {
     }
 
 
-    setBottomLeftRadius(value: number|Vector) {
+    setBottomLeftRadius(value: number | Vector) {
         if (value instanceof Vector) {
             this.bottomLeftRadius = value.clone();
         } else {

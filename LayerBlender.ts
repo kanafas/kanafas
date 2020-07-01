@@ -10,7 +10,7 @@ export class LayerBlender implements IRenderable {
 
     readonly compositeOperation: CompositeOperation;
 
-    
+
     constructor(width: number, height: number, compositeOperation: CompositeOperation) {
         const matteCanvas = document.createElement('canvas');
         const sourceCanvas = document.createElement('canvas');
@@ -30,11 +30,11 @@ export class LayerBlender implements IRenderable {
         const resultCanvas = this._resultLayer.getCanvas();
 
         this._resultLayer.clear();
-        
+
         const resultCtx = this._resultLayer.getRenderingContext();
         resultCtx.globalCompositeOperation = CompositeOperation.SourceOver;
         resultCtx.drawImage(matteCanvas, 0, 0);
-        
+
         resultCtx.globalCompositeOperation = this.compositeOperation;
         resultCtx.drawImage(sourceCanvas, 0, 0);
 

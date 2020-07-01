@@ -19,7 +19,7 @@ rectangle.fill = new Fill(Color.green());
 
 
 const scene = new Timeline(60);
-scene.addUpdateCallback((frames) => {    
+scene.addUpdateCallback((frames) => {
     engine.clear();
 
     rectangle.width += 2;

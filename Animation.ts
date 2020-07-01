@@ -7,7 +7,7 @@ export interface IAnimation<TCallback> {
     delay: number,
     looping: boolean,
 
-    update: TCallback, 
+    update: TCallback,
 
     isFirstIteration(): boolean,
     isLastIteration(): boolean,

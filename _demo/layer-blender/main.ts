@@ -68,7 +68,7 @@ async function init() {
         label.font.size = 20;
         label.font.lineHeight = 20;
 
-        
+
         const group = new NullObject();
         group.transform.setParent(pivot.transform);
         group.transform.position.y = labelHeight;
@@ -77,7 +77,7 @@ async function init() {
 
         const rainbowCircle = new ImageObject(rainbowCircleImage, size, size);
         rainbowCircle.transform.setParent(group.transform);
-        
+
         const rainbowStar = new ImageObject(rainbowStarImage, size, size);
         rainbowStar.transform.setParent(rainbowCircle.transform);
         rainbowStar.transform.position.x = size / 3;
@@ -85,7 +85,7 @@ async function init() {
         const bwCircle = new ImageObject(bwCircleImage, size, size);
         bwCircle.transform.setParent(group.transform);
         bwCircle.transform.position.x = size * 1.3 + margin;
-        
+
         const bwStar = new ImageObject(bwStarImage, size, size);
         bwStar.transform.setParent(bwCircle.transform);
         bwStar.transform.position.x = size / 3;
@@ -96,13 +96,13 @@ async function init() {
         bwStar.render(blender.upperLayer);
 
         blender.render(engine)
-        
+
         label.render(engine);
 
     }
-    
+
     operators.forEach((operator, i) => {
-        renderExample(operator, i); 
+        renderExample(operator, i);
     })
 }
 

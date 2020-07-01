@@ -15,14 +15,14 @@ export class Fill {
 
     apply(renderingLayer: IRenderingLayer, boundingBox: IBoxArea): void {
         const ctx = renderingLayer.getRenderingContext();
-        
+
         ctx.fillStyle = this.style.getStyle(renderingLayer, boundingBox);
     }
 
 
     static clear(renderingLayer: IRenderingLayer) {
         const ctx = renderingLayer.getRenderingContext();
-        
+
         ctx.fillStyle = 'transparent';
     }
 }

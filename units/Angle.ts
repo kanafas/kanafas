@@ -1,5 +1,6 @@
 import { Vector } from "./Vector.js";
 
+
 export class Angle {
 
     degrees: number;
@@ -30,7 +31,7 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    add(value: Angle|number): Angle {
+    add(value: Angle | number): Angle {
         if (value instanceof Angle) {
             this.degrees += value.degrees;
         } else {
@@ -46,7 +47,7 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    subtract(value: Angle|number): Angle {
+    subtract(value: Angle | number): Angle {
         if (value instanceof Angle) {
             this.degrees -= value.degrees;
         } else {
@@ -61,7 +62,7 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    multiply(value: Angle|number): Angle {
+    multiply(value: Angle | number): Angle {
         if (value instanceof Angle) {
             this.degrees *= value.degrees;
         } else {
@@ -77,7 +78,7 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    divide(value: Angle|number): Angle {
+    divide(value: Angle | number): Angle {
         if (value instanceof Angle) {
             this.degrees /= value.degrees;
         } else {
@@ -98,11 +99,11 @@ export class Angle {
         return this;
     }
 
-    
+
     getVector(): Vector {
         const angle = this.clone();
         angle.normalize();
-        
+
         const radians = angle.radians;
 
         return new Vector(Math.cos(radians), Math.sin(radians));
@@ -183,7 +184,7 @@ export class Angle {
     static degreesToRevelutions(degrees: number): number {
         return degrees / 360;
     }
-    
+
     /**
      * Convert revolutions to degrees
      * @param revolutions 
@@ -199,7 +200,7 @@ export class Angle {
     static radiansToRevelutions(radians: number): number {
         return radians / (2 * Math.PI);
     }
-    
+
     /**
      * Convert revolutions to radians
      * @param revolutions 

@@ -15,11 +15,11 @@ export class LoopAnimation implements IAnimation<ILoopUpdateCallback> {
     get miliseconds(): number {
         return this.miliseconds;
     }
-    
-    
+
+
     constructor(callback: ILoopUpdateCallback, duration: number, delay: number, looping: boolean) {
         this._callback = callback;
-        
+
         this.duration = duration;
         this.delay = delay;
         this.looping = looping;

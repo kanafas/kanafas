@@ -73,7 +73,7 @@ engine.loop.addUpdateCallback(() => {
     engine.clear();
 
     // polygon.trimOffset += .006;
-    
+
     rectangle.render(engine);
     ellipse.render(engine);
     round.render(engine);

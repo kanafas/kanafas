@@ -32,7 +32,7 @@ export class EllipseGeometry implements IObject, IGeometry {
     drawWithoutMatrixManipulation(renderingLayer: IRenderingLayer) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
-        
+
         const t = this.transform;
 
         const width = (this.width > 0 ? this.width : 0);

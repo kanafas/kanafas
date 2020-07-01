@@ -12,7 +12,7 @@ import { Gizmo } from "../renderables/Gizmo.js";
 
 
 export class TextObject implements IObject, IRenderable, IShape {
-    
+
     transform: Transform = new Transform();
 
     private _contentLines: string[] = [];
@@ -23,11 +23,11 @@ export class TextObject implements IObject, IRenderable, IShape {
         this._contentLines = content.split(Utils.Regex.breakLines());
     }
 
-    fill: Fill|null = new Fill(Color.black());
-    stroke: Stroke|null = null;
+    fill: Fill | null = new Fill(Color.black());
+    stroke: Stroke | null = null;
     font: Font = new Font();
-    
-    shadow: Shadow|null = null;
+
+    shadow: Shadow | null = null;
     opacity: number = 1;
 
     constructor(content: string) {
@@ -43,7 +43,7 @@ export class TextObject implements IObject, IRenderable, IShape {
 
         this._contentLines.forEach((line, i) => {
             const w = ctx.measureText(line).width;
-            
+
             if (width < w) width = w;
             height += this.font.lineHeight
         });
@@ -70,7 +70,7 @@ export class TextObject implements IObject, IRenderable, IShape {
         this.font.apply(renderingLayer);
 
         const lineheight = this.font.lineHeight * pxs;
-        
+
         this._contentLines.forEach((line, i) => {
             if (this.shadow) {
                 this.shadow.apply(renderingLayer, this.getBoundingBox(renderingLayer));
@@ -80,14 +80,14 @@ export class TextObject implements IObject, IRenderable, IShape {
 
             if (this.fill) {
                 this.fill.apply(renderingLayer, this.getBoundingBox(renderingLayer));
-                ctx.fillText(line, 0, (i+1) * lineheight);
+                ctx.fillText(line, 0, (i + 1) * lineheight);
             } else {
                 Fill.clear(renderingLayer);
             }
 
             if (this.stroke) {
                 this.stroke.apply(renderingLayer, this.getBoundingBox(renderingLayer));
-                ctx.strokeText(line, 0, (i+1) * lineheight);
+                ctx.strokeText(line, 0, (i + 1) * lineheight);
             } else {
                 Stroke.clear(renderingLayer);
             }

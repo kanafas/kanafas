@@ -7,10 +7,10 @@ import { Strings } from "./Strings.js";
 
 
 export const Utils = {
-    BezierEasing: BezierEasing,
-    Loaders: Loaders,
-    Numbers: Numbers,
-    Oscillators: Oscillators,
-    Regex: Regex,
-    Strings: Strings,
+    BezierEasing,
+    Loaders,
+    Numbers,
+    Oscillators,
+    Regex,
+    Strings,
 }

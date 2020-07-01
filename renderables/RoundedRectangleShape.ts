@@ -11,13 +11,13 @@ import { Gizmo } from "./Gizmo.js";
 
 export class RoundedRectangleShape extends RoundedRectangleGeometry implements IObject, IRenderable, IShape {
 
-    fill: Fill|null = null;
-    stroke: Stroke|null = null;
-    shadow: Shadow|null = null;
-    
+    fill: Fill | null = null;
+    stroke: Stroke | null = null;
+    shadow: Shadow | null = null;
+
     opacity: number = 1;
 
-    constructor(width: number, height: number, radius1: number|Vector, radius2?: number|Vector, radius3?: number|Vector, radius4?: number|Vector) {
+    constructor(width: number, height: number, radius1: number | Vector, radius2?: number | Vector, radius3?: number | Vector, radius4?: number | Vector) {
         super(width, height, radius1, radius2, radius3, radius4);
     }
 

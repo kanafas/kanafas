@@ -11,10 +11,10 @@ import { Gizmo } from "./Gizmo.js";
 
 export class RectangleShape extends RectangleGeometry implements IObject, IRenderable, IShape {
 
-    fill: Fill|null = null;
-    stroke: Stroke|null = null;
-    shadow: Shadow|null = null;
-    
+    fill: Fill | null = null;
+    stroke: Stroke | null = null;
+    shadow: Shadow | null = null;
+
     opacity: number = 1;
 
     constructor(width: number, height: number) {

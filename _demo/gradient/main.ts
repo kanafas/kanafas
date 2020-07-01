@@ -46,7 +46,7 @@ rectangle2.fill = new Fill(radialGradient);
 
 engine.loop.addUpdateCallback(() => {
     engine.clear();
-    
+
     rectangle1.render(engine);
     rectangle2.render(engine);
 });

@@ -1,6 +1,4 @@
-const limit = (value, min, max) => {
-    return Math.min(Math.max(value, min), max);
-};
+import { Numbers } from "../Utils/Numbers.js";
 export class Color {
     constructor(r = 0, g = 0, b = 0, alpha = 1) {
         this._red = 0;
@@ -13,16 +11,16 @@ export class Color {
         this.alpha = alpha;
     }
     set red(v) {
-        this._red = limit(v, 0, 255);
+        this._red = Numbers.limit(v, 0, 255);
     }
     set green(v) {
-        this._green = limit(v, 0, 255);
+        this._green = Numbers.limit(v, 0, 255);
     }
     set blue(v) {
-        this._blue = limit(v, 0, 255);
+        this._blue = Numbers.limit(v, 0, 255);
     }
     set alpha(v) {
-        this._alpha = limit(v, 0, 1);
+        this._alpha = Numbers.limit(v, 0, 1);
     }
     get red() { return this._red; }
     get green() { return this._green; }

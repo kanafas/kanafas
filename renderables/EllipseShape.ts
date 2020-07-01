@@ -11,9 +11,9 @@ import { IObject, IRenderable, IShape } from "./types.js";
 
 export class EllipseShape extends EllipseGeometry implements IObject, IRenderable, IShape {
 
-    fill: Fill|null = null;
-    stroke: Stroke|null = null;
-    shadow: Shadow|null = null;
+    fill: Fill | null = null;
+    stroke: Stroke | null = null;
+    shadow: Shadow | null = null;
 
     opacity: number = 1;
 
@@ -29,9 +29,9 @@ export class EllipseShape extends EllipseGeometry implements IObject, IRenderabl
 
     renderGizmos(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        
+
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.shapeColor);
-        
+
         renderingLayer.resetMatrix();
     }
 }
