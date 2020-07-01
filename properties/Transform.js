@@ -1,5 +1,5 @@
-import { Vector } from "../node_modules/kanafas-units/Vector.js";
-import { Angle } from "../node_modules/kanafas-units/Angle.js";
+import { Vector } from "../units/Vector.js";
+import { Angle } from "../units/Angle.js";
 export class Transform {
     constructor(position = Vector.zero(), scale = Vector.one(), rotation = Angle.zero()) {
         this.origin = Vector.zero();

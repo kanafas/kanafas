@@ -1,6 +1,6 @@
 import { Engine } from "../../Engine.js";
 import { RectangleShape } from "../../renderables/RectangleShape.js";
-import { Vector } from "../../node_modules/kanafas-units/Vector.js";
+import { Vector } from "../../units/Vector.js";
 import { Fill } from "../../properties/Fill.js";
 import { Shadow } from "../../properties/Shadow.js";
 import { EllipseShape } from "../../renderables/EllipseShape.js";

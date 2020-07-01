@@ -1,5 +1,5 @@
 import { Engine } from "../../Engine.js";
-import { Utils } from "../../node_modules/kanafas-utils/index.js";
+import { Utils } from "../../utils/index.js";
 import { LayerBlender } from "../../LayerBlender.js";
 import { ImageObject } from "../../renderables/ImageObject.js";
 import { NullObject } from "../../renderables/NullObject.js";
@@ -41,10 +41,10 @@ const height = size * operators.length + margin * 3;
 const engine = new Engine(canvasEl, width, height);
 // engine.debuggerBar.enable();
 async function init() {
-    const rainbowCircleImage = await Utils.Loaders.loadImage('./images/rainbow-circle.png');
-    const rainbowStarImage = await Utils.Loaders.loadImage('./images/rainbow-star.png');
-    const bwCircleImage = await Utils.Loaders.loadImage('./images/bw-circle.png');
-    const bwStarImage = await Utils.Loaders.loadImage('./images/bw-star.png');
+    const rainbowCircleImage = await Utils.Loaders.getImageByPath('./images/rainbow-circle.png');
+    const rainbowStarImage = await Utils.Loaders.getImageByPath('./images/rainbow-star.png');
+    const bwCircleImage = await Utils.Loaders.getImageByPath('./images/bw-circle.png');
+    const bwStarImage = await Utils.Loaders.getImageByPath('./images/bw-star.png');
     function renderExample(operator, iterator) {
         const labelHeight = 40;
         const pivot = new NullObject();

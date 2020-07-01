@@ -1,11 +1,11 @@
 import { Engine } from "../../Engine.js";
 import { RectangleShape } from "../../renderables/RectangleShape.js";
-import { Vector } from "../../node_modules/kanafas-units/Vector.js";
+import { Vector } from "../../units/Vector.js";
 import { Fill } from "../../properties/Fill.js";
 import { Stroke } from "../../properties/Stroke.js";
 import { EllipseShape } from "../../renderables/EllipseShape.js";
 import { PieShape } from "../../renderables/PieShape.js";
-import { Angle } from "../../node_modules/kanafas-units/Angle.js";
+import { Angle } from "../../units/Angle.js";
 import { RoundedRectangleShape } from "../../renderables/RoundedRectangleShape.js";
 import { Color } from "../../styles/Color.js";
 import { PolygonShape } from "../../renderables/PolygonShape.js";

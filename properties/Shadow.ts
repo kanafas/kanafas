@@ -1,4 +1,4 @@
-import { Vector } from "../node_modules/kanafas-units/Vector.js";
+import { Vector } from "../units/Vector.js";
 import { IBoxArea } from "../renderables/types.js";
 import { IStyleColor, Color } from "../styles/Color.js";
 import { IRenderingLayer } from "../RenderingLayer.js";

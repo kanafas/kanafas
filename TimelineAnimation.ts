@@ -1,4 +1,4 @@
-import { Utils } from "./node_modules/kanafas-utils/index.js";
+import { Utils } from "./utils/index.js";
 import { ITimelineUpdateCallback } from "./Timeline.js";
 import { IAnimation } from "./Animation.js";
 

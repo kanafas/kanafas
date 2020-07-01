@@ -1,5 +1,5 @@
-import { Utils } from "../node_modules/kanafas-utils/index.js";
-import { Color as UnitColor } from "../node_modules/kanafas-units/Color.js";
+import { Utils } from "../utils/index.js";
+import { Color as UnitColor } from "../units/Color.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { IBoxArea } from "../renderables/types.js";
 import { IStyle } from "./Style.js";

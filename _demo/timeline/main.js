@@ -3,7 +3,7 @@ import { RectangleShape } from "../../renderables/RectangleShape.js";
 import { Fill } from "../../properties/Fill.js";
 // import { MaterialDesignColorPalatte as Palatte } from "../../Helpers/MaterialDesignColorPalatte.js";
 import { Timeline } from "../../Timeline.js";
-import { Color } from "../../node_modules/kanafas-units/Color.js";
+import { Color } from "../../units/Color.js";
 const canvasEl = document.getElementById('canvas');
 const engine = new Engine(canvasEl, 400, 60, window.devicePixelRatio);
 // engine.debuggerBar.enable();

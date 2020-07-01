@@ -1,5 +1,5 @@
-import { Utils } from "../node_modules/kanafas-utils/index.js";
-import { Vector } from "../node_modules/kanafas-units/Vector.js";
+import { Utils } from "../utils/index.js";
+import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { IBoxArea } from "../renderables/types.js";
 import { IGradient, IGradientStep } from "./Gradient.js";

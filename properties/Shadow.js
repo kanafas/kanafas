@@ -1,4 +1,4 @@
-import { Vector } from "../node_modules/kanafas-units/Vector.js";
+import { Vector } from "../units/Vector.js";
 import { Color } from "../styles/Color.js";
 export class Shadow {
     constructor(color, offset, blur) {

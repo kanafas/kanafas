@@ -1,4 +1,4 @@
-import { Utils } from "../node_modules/kanafas-utils/index.js";
+import { Utils } from "../utils/index.js";
 export class RadialGradient {
     constructor(start, end, steps) {
         this.steps = [];

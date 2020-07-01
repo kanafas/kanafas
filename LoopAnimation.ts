@@ -1,4 +1,4 @@
-import { Utils } from "./node_modules/kanafas-utils/index.js";
+import { Utils } from "./utils/index.js";
 import { ILoopUpdateCallback } from "./Loop.js";
 import { IAnimation } from "./Animation.js";
 

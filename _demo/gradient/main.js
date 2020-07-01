@@ -1,5 +1,5 @@
 import { Engine } from "../../Engine.js";
-import { Vector } from "../../node_modules/kanafas-units/index.js";
+import { Vector } from "../../units/index.js";
 import { Fill } from "../../properties/Fill.js";
 import { Color } from "../../styles/Color.js";
 import { LinearGradient } from "../../styles/LinearGradient.js";
