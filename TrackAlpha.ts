@@ -1,6 +1,6 @@
 import { RenderingLayer, IRenderingLayer } from "./RenderingLayer.js";
-import { IRenderable } from "./renderables/types.js";
 import { CompositeOperation, LayerBlender } from "./LayerBlender.js";
+import { IRenderable } from "./renderables/IRenderable.js";
 
 
 export class TrackAlpha implements IRenderable {

@@ -1,5 +1,5 @@
-import { Vector } from "../units/Vector.js";
 import { Angle } from "../units/Angle.js";
+import { Vector } from "../units/Vector.js";
 export class Transform {
     constructor(position = Vector.zero(), scale = Vector.one(), rotation = Angle.zero()) {
         this.origin = Vector.zero();

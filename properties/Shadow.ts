@@ -1,7 +1,7 @@
-import { Vector } from "../units/Vector.js";
-import { IBoxArea } from "../renderables/types.js";
-import { IStyleColor, Color } from "../styles/Color.js";
+import { IBoxArea } from "../renderables/IArea.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
+import { IStyleColor, Color } from "../styles/Color.js";
+import { Vector } from "../units/units.js";
 
 
 export class Shadow {

@@ -1,4 +1,4 @@
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 import { Vector } from "../units/Vector.js";
 import { Transform } from "../properties/Transform.js";
 import { Fill } from "../properties/Fill.js";

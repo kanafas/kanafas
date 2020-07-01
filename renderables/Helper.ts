@@ -1,10 +1,12 @@
-import { Utils } from "../utils/index.js";
-import { Engine } from "../Engine";
+import { Utils } from "../Utils/Utils.js";
 import { Fill } from "../properties/Fill.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
 import { IRenderingLayer } from "../RenderingLayer";
-import { IObject, IGeometry, IShape, IRenderable } from "./types";
+import { IObject } from "./IObject.js";
+import { IGeometry } from "./IGeometry.js";
+import { IRenderable } from "./IRenderable.js";
+import { IShape } from "./IVisible.js";
 
 
 

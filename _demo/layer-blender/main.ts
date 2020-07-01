@@ -1,5 +1,5 @@
 import { Engine } from "../../Engine.js";
-import { Utils } from "../../utils/index.js";
+import { Utils } from "../../Utils/Utils.js";
 import { CompositeOperation, LayerBlender } from "../../LayerBlender.js";
 import { ImageObject } from "../../renderables/ImageObject.js";
 import { NullObject } from "../../renderables/NullObject.js";

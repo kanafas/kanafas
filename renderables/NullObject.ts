@@ -1,8 +1,9 @@
-import { Vector } from "../units/Vector.js";
-import { IObject, IBoxArea } from "./types.js";
-import { Transform } from "../properties/Transform.js";
 import { Gizmo } from "./Gizmo.js";
+import { IBoxArea } from "./IArea.js";
+import { IObject } from "./IObject.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
+import { Transform } from "../properties/Transform.js";
+import { Vector } from "../units/Vector.js";
 
 
 export class NullObject implements IObject {

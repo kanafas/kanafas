@@ -1,4 +1,4 @@
-import { Utils } from "./utils/index.js";
+import { Utils } from "./Utils/Utils.js";
 export class LoopAnimation {
     constructor(callback, duration, delay, looping) {
         this._miliseconds = 0;
@@ -13,7 +13,7 @@ export class LoopAnimation {
         this.looping = looping;
     }
     get miliseconds() {
-        return this.miliseconds;
+        return this._miliseconds;
     }
     isFirstIteration() {
         return this.miliseconds == 0;

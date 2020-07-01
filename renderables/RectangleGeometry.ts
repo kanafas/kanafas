@@ -1,7 +1,9 @@
 import { Transform } from "../properties/Transform.js";
 import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IObject, IGeometry, IBoxArea } from "./types.js";
+import { IBoxArea } from "./IArea.js";
+import { IObject } from "./IObject.js";
+import { IGeometry } from "./IGeometry.js";
 
 
 export class RectangleGeometry implements IObject, IGeometry {

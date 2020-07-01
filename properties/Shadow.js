@@ -1,5 +1,5 @@
-import { Vector } from "../units/Vector.js";
 import { Color } from "../styles/Color.js";
+import { Vector } from "../units/units.js";
 export class Shadow {
     constructor(color, offset, blur) {
         this.color = Color.black();

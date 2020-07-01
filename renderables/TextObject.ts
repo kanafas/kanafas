@@ -1,7 +1,6 @@
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IRenderable, IBoxArea, IShape, IObject } from "../renderables/types.js";
 import { Transform } from "../properties/Transform.js";
 import { Fill } from "../properties/Fill.js";
 import { Stroke } from "../properties/Stroke.js";
@@ -9,6 +8,10 @@ import { Font } from "../properties/Font.js";
 import { Shadow } from "../properties/Shadow.js";
 import { Color } from "../styles/Color.js";
 import { Gizmo } from "../renderables/Gizmo.js";
+import { IBoxArea } from "./IArea.js";
+import { IObject } from "./IObject.js";
+import { IRenderable } from "./IRenderable.js";
+import { IShape } from "./IVisible.js";
 
 
 export class TextObject implements IObject, IRenderable, IShape {

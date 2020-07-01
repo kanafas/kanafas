@@ -1,4 +1,4 @@
-import { Utils } from "./utils/index.js";
+import { Utils } from "./Utils/Utils.js";
 import { ITimelineUpdateCallback } from "./Timeline.js";
 import { IAnimation } from "./Animation.js";
 

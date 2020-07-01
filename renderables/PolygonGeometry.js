@@ -1,6 +1,6 @@
 import { Vector } from "../units/Vector.js";
 import { Transform } from "../properties/Transform.js";
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 export class PolygonGeometry {
     constructor(points, closed = true, trimStart = 0, trimEnd = 1, trimOffset = 0) {
         this.transform = new Transform();

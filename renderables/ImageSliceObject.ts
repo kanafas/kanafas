@@ -1,10 +1,13 @@
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 import { Vector } from "../units/Vector.js";
 import { Shadow } from "../properties/Shadow.js";
 import { Gizmo } from "./Gizmo.js";
 import { Transform } from "../properties/Transform.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IObject, IRenderable, IVisible, IBoxArea } from "./types.js";
+import { IBoxArea } from "./IArea.js";
+import { IObject } from "./IObject.js";
+import { IRenderable } from "./IRenderable.js";
+import { IVisible } from "./IVisible.js";
 
 
 export class ImageSliceObject implements IObject, IRenderable, IVisible {

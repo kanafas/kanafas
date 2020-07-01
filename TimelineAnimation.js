@@ -1,4 +1,4 @@
-import { Utils } from "./utils/index.js";
+import { Utils } from "./Utils/Utils.js";
 export class TimelineAnimation {
     constructor(callback, duration, delay, looping) {
         this._frames = 0;

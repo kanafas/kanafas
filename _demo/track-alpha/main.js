@@ -5,7 +5,7 @@ import { Color } from "../../styles/Color.js";
 import { EllipseShape } from "../../renderables/EllipseShape.js";
 import { TrackAlpha } from "../../TrackAlpha.js";
 import { Stroke } from "../../properties/Stroke.js";
-import { Utils } from "../../utils/index.js";
+import { Utils } from "../../Utils/Utils.js";
 const canvasEl = document.getElementById('canvas');
 const engine = new Engine(canvasEl, 800, 600);
 // engine.debuggerBar.enable();

@@ -1,5 +1,5 @@
 import { Vector } from "../units/Vector.js";
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 import { Transform } from "../properties/Transform.js";
 export class PieGeometry {
     constructor(width, height, startAngle, endAngle, innerRadius) {

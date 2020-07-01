@@ -1,9 +1,8 @@
 import { Engine } from "../../Engine.js";
 import { Fill } from "../../properties/Fill.js";
 import { LoopAnimation } from "../../LoopAnimation.js";
+import { Color } from "../../styles/Color.js";
 import { RoundedRectangleShape } from "../../renderables/RoundedRectangleShape.js";
-import { Color } from "../../units/Color.js";
-// import { MaterialDesignColorPalatte as Palatte } from "../../Helpers/MaterialDesignColorPalatte.js";
 
 
 const canvasEl = document.getElementById('canvas')! as HTMLCanvasElement;

@@ -1,5 +1,5 @@
+import { IRenderable } from "./renderables/IRenderable.js";
 import { RenderingLayer, IRenderingLayer } from "./RenderingLayer.js";
-import { IRenderable } from "./renderables/types.js";
 
 
 export class LayerBlender implements IRenderable {

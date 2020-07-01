@@ -1,5 +1,5 @@
-import { Vector } from "../units/Vector.js";
 import { Transform } from "../properties/Transform.js";
+import { Vector } from "../units/Vector.js";
 export class EllipseGeometry {
     constructor(width, height) {
         this.transform = new Transform();

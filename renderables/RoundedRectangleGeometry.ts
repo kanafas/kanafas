@@ -1,8 +1,10 @@
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IObject, IGeometry, IBoxArea } from "./types.js";
 import { Transform } from "../properties/Transform.js";
 import { Vector } from "../units/Vector.js";
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
+import { IBoxArea } from "./IArea.js";
+import { IObject } from "./IObject.js";
+import { IGeometry } from "./IGeometry.js";
 
 
 export class RoundedRectangleGeometry implements IObject, IGeometry {

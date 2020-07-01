@@ -1,9 +1,10 @@
 import { Vector, IVector } from "../units/Vector.js";
 import { Transform } from "../properties/Transform.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IObject, IGeometry, IBoxArea } from "./types.js";
-import { Angle } from "../units/Angle.js";
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
+import { IBoxArea } from "./IArea.js";
+import { IObject } from "./IObject.js";
+import { IGeometry } from "./IGeometry.js";
 
 
 export class PolygonGeometry implements IObject, IGeometry {

@@ -1,7 +1,7 @@
-import { IRenderingLayer } from "../RenderingLayer.js";
-import { IBoxArea } from "../renderables/types.js";
-import { IStyle } from "../styles/Style.js";
 import { Color } from "../styles/Color.js";
+import { IBoxArea } from "../renderables/IArea.js";
+import { IRenderingLayer } from "../RenderingLayer.js";
+import { IStyle } from "../styles/IStyle.js";
 
 export class Fill {
 

@@ -6,7 +6,9 @@ import { EllipseGeometry } from "./EllipseGeometry.js";
 import { Helper } from "./Helper.js";
 import { Gizmo } from "./Gizmo.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IObject, IRenderable, IShape } from "./types.js";
+import { IObject } from "./IObject.js";
+import { IRenderable } from "./IRenderable.js";
+import { IShape } from "./IVisible.js";
 
 
 export class EllipseShape extends EllipseGeometry implements IObject, IRenderable, IShape {

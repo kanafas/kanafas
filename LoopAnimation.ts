@@ -1,4 +1,4 @@
-import { Utils } from "./utils/index.js";
+import { Utils } from "./Utils/Utils.js";
 import { ILoopUpdateCallback } from "./Loop.js";
 import { IAnimation } from "./Animation.js";
 
@@ -13,7 +13,7 @@ export class LoopAnimation implements IAnimation<ILoopUpdateCallback> {
 
     private _miliseconds: number = 0;
     get miliseconds(): number {
-        return this.miliseconds;
+        return this._miliseconds;
     }
 
 

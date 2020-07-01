@@ -1,6 +1,6 @@
 import { Transform } from "../properties/Transform.js";
 import { Vector } from "../units/Vector.js";
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 export class RoundedRectangleGeometry {
     constructor(width, height, radius1, radius2, radius3, radius4) {
         this.transform = new Transform();

@@ -1,5 +1,5 @@
 import { Vector } from "../units/Vector.js";
-import { IStyle } from "./Style.js";
+import { IStyle } from "./IStyle.js";
 import { IStyleColor } from "./Color.js";
 
 

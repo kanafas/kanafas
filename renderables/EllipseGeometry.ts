@@ -1,7 +1,9 @@
-import { Vector } from "../units/Vector.js";
+import { IBoxArea } from "../renderables/IArea.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IObject, IGeometry, IBoxArea } from "./types.js";
 import { Transform } from "../properties/Transform.js";
+import { Vector } from "../units/Vector.js";
+import { IObject } from "./IObject.js";
+import { IGeometry } from "./IGeometry.js";
 
 
 export class EllipseGeometry implements IObject, IGeometry {

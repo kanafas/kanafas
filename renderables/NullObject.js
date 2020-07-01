@@ -1,6 +1,6 @@
-import { Vector } from "../units/Vector.js";
-import { Transform } from "../properties/Transform.js";
 import { Gizmo } from "./Gizmo.js";
+import { Transform } from "../properties/Transform.js";
+import { Vector } from "../units/Vector.js";
 export class NullObject {
     constructor() {
         this.transform = new Transform();

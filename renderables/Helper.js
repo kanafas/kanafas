@@ -1,4 +1,4 @@
-import { Utils } from "../utils/index.js";
+import { Utils } from "../Utils/Utils.js";
 import { Fill } from "../properties/Fill.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
