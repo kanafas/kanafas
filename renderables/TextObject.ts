@@ -39,6 +39,8 @@ export class TextObject implements IObject, IRenderable, IShape {
 
 
     getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+        this.font.apply(renderingLayer);
+
         const ctx = renderingLayer.getRenderingContext();
 
         let width: number = 0;
@@ -53,7 +55,7 @@ export class TextObject implements IObject, IRenderable, IShape {
 
         return {
             origin: this.transform.origin.clone(),
-            size: new Vector(width, height),
+            size: new Vector(Math.ceil(width), Math.ceil(height)),
         }
     }
 
