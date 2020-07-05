@@ -25,6 +25,7 @@ export class TextObject {
         this._contentLines = content.split(Utils.Regex.breakLines());
     }
     getBoundingBox(renderingLayer) {
+        this.font.apply(renderingLayer);
         const ctx = renderingLayer.getRenderingContext();
         let width = 0;
         let height = 0;
@@ -36,7 +37,7 @@ export class TextObject {
         });
         return {
             origin: this.transform.origin.clone(),
-            size: new Vector(width, height),
+            size: new Vector(Math.ceil(width), Math.ceil(height)),
         };
     }
     render(renderingLayer) {
