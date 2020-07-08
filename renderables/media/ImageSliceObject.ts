@@ -7,7 +7,7 @@ import { IRenderingLayer } from "../../core/RenderingLayer.js";
 import { IBoxArea } from "../IArea.js";
 import { Vector } from "../../units/units.js";
 import { Utils } from "../../utils/Utils.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 
 
 export class ImageSliceObject implements IObject, IRenderable, IVisible {

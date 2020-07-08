@@ -1,6 +1,6 @@
 import { Helper } from "../Helper.js";
 import { Vector } from "../../units/units.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 import { PieGeometry } from "./PieGeometry.js";
 export class PieShape extends PieGeometry {
     constructor(width, height, startAngle, endAngle, innerRadius) {

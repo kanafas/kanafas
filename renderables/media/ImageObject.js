@@ -1,7 +1,7 @@
 import { Transform } from "../../properties/Transform.js";
 import { Vector } from "../../units/units.js";
 import { Utils } from "../../utils/Utils.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 export class ImageObject {
     constructor(image, width, height) {
         this.transform = new Transform();

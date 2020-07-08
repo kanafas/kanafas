@@ -1,6 +1,6 @@
 import { Helper } from "../Helper.js";
 import { Vector } from "../../units/units.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 import { RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
 export class RoundedRectangleShape extends RoundedRectangleGeometry {
     constructor(width, height, radius1, radius2, radius3, radius4) {

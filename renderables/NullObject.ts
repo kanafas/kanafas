@@ -3,7 +3,7 @@ import { IObject } from "./IObject.js";
 import { Transform } from "../properties/Transform.js";
 import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
-import { Gizmo } from "../debuger/Gizmo.js";
+import { Gizmo } from "../debugger/Gizmo.js";
 
 
 export class NullObject implements IObject {
