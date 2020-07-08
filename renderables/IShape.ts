@@ -1,8 +1,8 @@
 import { IVisible } from "./IVisible.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Fill } from "../properties/Fill.js";
-import { IRenderingLayer } from "../RenderingLayer.js";
 import { IBoxArea } from "./IArea.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export interface IShape extends IVisible {

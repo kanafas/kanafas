@@ -1,7 +1,7 @@
 import { Color } from "../styles/Color.js";
 import { IBoxArea } from "../renderables/IArea.js";
-import { IRenderingLayer } from "../RenderingLayer.js";
 import { IStyle } from "../styles/IStyle.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export class Stroke {

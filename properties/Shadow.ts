@@ -1,7 +1,7 @@
 import { IBoxArea } from "../renderables/IArea.js";
-import { IRenderingLayer } from "../RenderingLayer.js";
 import { IStyleColor, Color } from "../styles/Color.js";
 import { Vector } from "../units/units.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export class Shadow {
@@ -9,6 +9,7 @@ export class Shadow {
     color: IStyleColor = Color.black();
     offset: Vector = Vector.zero();
     blur: number = 0;
+
 
     constructor(color: IStyleColor, offset: Vector, blur: number) {
         this.color = color;

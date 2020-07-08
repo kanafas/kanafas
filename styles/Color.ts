@@ -1,7 +1,7 @@
 import { Color as UnitColor } from "../units/Color.js";
-import { IRenderingLayer } from "../RenderingLayer.js";
 import { IStyle } from "./IStyle.js";
 import { IBoxArea } from "../renderables/IArea.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export class Color extends UnitColor implements IStyleColor {

@@ -1,4 +1,4 @@
-import { Numbers } from "../Utils/Numbers.js";
+import { Numbers } from "../utils/Numbers.js";
 
 
 export class Color {

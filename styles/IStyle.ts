@@ -1,5 +1,5 @@
-import { IRenderingLayer } from "../RenderingLayer.js";
 import { IBoxArea } from "../renderables/IArea.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export interface IStyle {

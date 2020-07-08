@@ -1,4 +1,4 @@
-import { IRenderingLayer } from "../RenderingLayer";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export interface IBlueprint {
