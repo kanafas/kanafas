@@ -4,11 +4,10 @@ import { Utils } from "../Utils/Utils.js";
 import { Transform } from "../properties/Transform.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { IBoxArea } from "./IArea.js";
-import { IObject } from "./IObject.js";
 import { IGeometry } from "./IGeometry.js";
 
 
-export class PieGeometry implements IObject, IGeometry {
+export class PieGeometry implements IGeometry {
     transform: Transform = new Transform();
 
     width: number;

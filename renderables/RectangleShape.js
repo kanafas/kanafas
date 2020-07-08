@@ -11,7 +11,7 @@ export class RectangleShape extends RectangleGeometry {
         this.opacity = 1;
     }
     render(renderingLayer) {
-        Helper.renderShape(renderingLayer, this);
+        Helper.render(renderingLayer, this, this, this);
     }
     renderGizmos(renderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);

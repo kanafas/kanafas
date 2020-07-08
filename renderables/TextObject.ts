@@ -11,7 +11,7 @@ import { Gizmo } from "../renderables/Gizmo.js";
 import { IBoxArea } from "./IArea.js";
 import { IObject } from "./IObject.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IVisible.js";
+import { IShape } from "./IShape.js";
 
 
 export class TextObject implements IObject, IRenderable, IShape {

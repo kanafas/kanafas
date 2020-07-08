@@ -1,10 +1,6 @@
-import { IRenderingLayer } from "../RenderingLayer";
+import { IBlueprint } from "./IBlueprint.js";
+import { IObject } from "./IObject.js";
 
 
-export interface IGeometry {
-    contructMatrix(renderingLayer: IRenderingLayer): void,
-    destructMatrix(renderingLayer: IRenderingLayer): void,
-    drawWithoutMatrixManipulation(renderingLayer: IRenderingLayer): void,
-
-    draw(renderingLayer: IRenderingLayer): void,
+export interface IGeometry extends IBlueprint, IObject {
 }

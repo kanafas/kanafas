@@ -10,6 +10,7 @@ import { RoundedRectangleShape } from "../../renderables/RoundedRectangleShape.j
 import { Color } from "../../styles/Color.js";
 import { PolygonShape } from "../../renderables/PolygonShape.js";
 
+
 const canvasEl = document.getElementById('canvas')! as HTMLCanvasElement;
 
 const engine = new Engine(canvasEl, 800, 600, window.devicePixelRatio);

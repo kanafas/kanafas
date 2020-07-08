@@ -3,51 +3,94 @@ import { Fill } from "../properties/Fill.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
 import { IRenderingLayer } from "../RenderingLayer";
-import { IObject } from "./IObject.js";
 import { IGeometry } from "./IGeometry.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IVisible.js";
+import { IShape } from "./IShape.js";
 
 
-
-// TODO: To by se mělo přejmenovt, nebo přesunout, nebo obojí
 export class Helper {
 
-    static renderShape(renderingLayer: IRenderingLayer, object: IObject & IGeometry & IRenderable & IShape) {
+
+    static applyStyles(renderingLayer: IRenderingLayer, shape: IShape): void {
         const ctx = renderingLayer.getRenderingContext();
 
-        ctx.beginPath();
-        object.contructMatrix(renderingLayer);
-        object.drawWithoutMatrixManipulation(renderingLayer);
+        ctx.globalAlpha = Utils.Numbers.limit(shape.opacity, 0, 1);
 
-        ctx.globalAlpha = Utils.Numbers.limit(object.opacity, 0, 1);
-
-        if (object.shadow) {
-            object.shadow.apply(renderingLayer, object.getBoundingBox(renderingLayer));
+        if (shape.shadow) {
+            shape.shadow.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
         } else {
             Shadow.clear(renderingLayer);
         }
 
-        if (object.fill) {
-            object.fill.apply(renderingLayer, object.getBoundingBox(renderingLayer));
+        if (shape.fill) {
+            shape.fill.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
             ctx.fill();
         } else {
             Fill.clear(renderingLayer);
         }
 
-        if (object.stroke) {
-            object.stroke.apply(renderingLayer, object.getBoundingBox(renderingLayer));
+        if (shape.stroke) {
+            shape.stroke.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
             ctx.stroke();
         } else {
             Stroke.clear(renderingLayer);
         }
 
-        object.destructMatrix(renderingLayer);
+        ctx.globalAlpha = 1;
+    }
+
+
+    static render(renderingLayer: IRenderingLayer, geometry: IGeometry, renderable: IRenderable, shape: IShape): void {
+        const ctx = renderingLayer.getRenderingContext();
+
+        ctx.beginPath();
+        geometry.contructMatrix(renderingLayer);
+        geometry.drawWithoutMatrixManipulation(renderingLayer);
+
+        Helper.applyStyles(renderingLayer, shape);
+
+        geometry.destructMatrix(renderingLayer);
         ctx.closePath();
 
-        ctx.globalAlpha = 1;
-
-        if (renderingLayer.gizmoVisibility && object.renderGizmos) object.renderGizmos(renderingLayer);
+        if (renderingLayer.gizmoVisibility && renderable.renderGizmos) renderable.renderGizmos(renderingLayer);
     }
+
+
+    // static render(renderingLayer: IRenderingLayer, geometry: IGeometry, renderable: IRenderable, shape: IShape): void {
+    //     const ctx = renderingLayer.getRenderingContext();
+
+    //     ctx.beginPath();
+    //     geometry.contructMatrix(renderingLayer);
+    //     geometry.drawWithoutMatrixManipulation(renderingLayer);
+
+    //     ctx.globalAlpha = Utils.Numbers.limit(shape.opacity, 0, 1);
+
+    //     if (shape.shadow) {
+    //         shape.shadow.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
+    //     } else {
+    //         Shadow.clear(renderingLayer);
+    //     }
+
+    //     if (shape.fill) {
+    //         shape.fill.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
+    //         ctx.fill();
+    //     } else {
+    //         Fill.clear(renderingLayer);
+    //     }
+
+    //     if (shape.stroke) {
+    //         shape.stroke.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
+    //         ctx.stroke();
+    //     } else {
+    //         Stroke.clear(renderingLayer);
+    //     }
+
+    //     geometry.destructMatrix(renderingLayer);
+    //     ctx.closePath();
+
+    //     ctx.globalAlpha = 1;
+
+    //     if (renderingLayer.gizmoVisibility && renderable.renderGizmos) renderable.renderGizmos(renderingLayer);
+    // }
 
 }

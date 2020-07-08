@@ -8,8 +8,6 @@ export class RenderingLayer {
         this._canvas = canvas;
         this._canvas.width = width * pixelScale;
         this._canvas.height = height * pixelScale;
-        this._canvas.style.width = `${width}px`;
-        this._canvas.style.height = `${height}px`;
         this._renderingContext = this._canvas.getContext('2d');
     }
     clear() {

@@ -1,5 +1,6 @@
 import { IVector } from "../units/Vector.js";
 
+
 export class BezierEasing {
 
     static custom(t: number, p1: IVector, p2: IVector, p3: IVector, p4: IVector): number {
