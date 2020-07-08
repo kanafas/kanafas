@@ -1,6 +1,6 @@
 import { Transform } from "../../properties/Transform.js";
 import { Vector } from "../../units/units.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 import { Helper } from "../Helper.js";
 export class GeometryShape {
     constructor(geometry, getBoundingBox) {

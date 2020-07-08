@@ -11,7 +11,7 @@ import { IRenderingLayer } from "../../core/RenderingLayer.js";
 import { IBoxArea } from "../IArea.js";
 import { Shadow } from "../../properties/Shadow.js";
 import { Font } from "../../properties/Font.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 
 
 export class TextObject implements IObject, IRenderable, IShape {

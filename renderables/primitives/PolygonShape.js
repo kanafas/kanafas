@@ -1,6 +1,6 @@
 import { Helper } from "../Helper.js";
 import { Vector } from "../../units/units.js";
-import { Gizmo } from "../../debuger/Gizmo.js";
+import { Gizmo } from "../../debugger/Gizmo.js";
 import { PolygonGeometry } from "./PolygonGeometry.js";
 export class PolygonShape extends PolygonGeometry {
     constructor(points, closed, trimStart, trimEnd, trimOffset) {
