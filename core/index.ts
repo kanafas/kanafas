@@ -1,2 +1,2 @@
 export { Engine } from "./Engine.js";
-export { RenderingLayer } from "./RenderingLayer.js";
+export { RenderingLayer, IRenderingLayer } from "./RenderingLayer.js";
