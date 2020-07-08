@@ -10,6 +10,7 @@ export class NullObject implements IObject {
 
     transform: Transform = new Transform();
 
+
     constructor() {
     }
 

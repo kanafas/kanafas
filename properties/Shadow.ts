@@ -1,6 +1,6 @@
 import { IBoxArea } from "../renderables/IArea.js";
 import { IStyleColor, Color } from "../styles/Color.js";
-import { Vector } from "../units/units.js";
+import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
