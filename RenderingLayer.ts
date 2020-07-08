@@ -25,9 +25,6 @@ export class RenderingLayer implements IRenderingLayer {
         this._canvas.width = width * pixelScale;
         this._canvas.height = height * pixelScale;
 
-        this._canvas.style.width = `${width}px`;
-        this._canvas.style.height = `${height}px`;
-
         this._renderingContext = this._canvas.getContext('2d')!;
     }
 
@@ -90,16 +87,6 @@ export class RenderingLayer implements IRenderingLayer {
     resetMatrix() {
         this._renderingContext.resetTransform();
     }
-
-
-    getImageElement(): HTMLImageElement {
-        const canvas = this.getCanvas();
-
-        const imageElement = document.createElement('img');
-        imageElement.src = canvas.toDataURL('image/png');
-
-        return imageElement;
-    }
 }
 
 
@@ -124,7 +111,4 @@ export interface IRenderingLayer {
 
     setMatrixToTransform(transform: Transform): void;
     resetMatrix(): void;
-
-    getImageElement(): HTMLImageElement;
-
 }

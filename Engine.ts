@@ -67,9 +67,4 @@ export class Engine implements IRenderingLayer {
     resetMatrix() {
         this._renderingLayer.resetMatrix();
     }
-
-
-    getImageElement(): HTMLImageElement {
-        return this._renderingLayer.getImageElement();
-    }
 }
