@@ -1,11 +1,11 @@
-import { Utils } from "../Utils/Utils.js";
+import { Utils } from "../utils/Utils.js";
 import { Fill } from "../properties/Fill.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
-import { IRenderingLayer } from "../RenderingLayer";
 import { IGeometry } from "./IGeometry.js";
 import { IRenderable } from "./IRenderable.js";
 import { IShape } from "./IShape.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export class Helper {

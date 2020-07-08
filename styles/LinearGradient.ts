@@ -1,8 +1,8 @@
-import { Utils } from "../Utils/Utils.js";
+import { Utils } from "../utils/Utils.js";
 import { Vector } from "../units/Vector.js";
-import { IRenderingLayer } from "../RenderingLayer.js";
 import { IGradient, IGradientStep } from "./Gradient.js";
 import { IBoxArea } from "../renderables/IArea.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export class LinearGradient implements IGradient {

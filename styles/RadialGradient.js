@@ -1,4 +1,4 @@
-import { Utils } from "../Utils/Utils.js";
+import { Utils } from "../utils/Utils.js";
 export class RadialGradient {
     constructor(start, end, steps) {
         this.steps = [];

@@ -1,4 +1,4 @@
-import { IRenderingLayer } from "../RenderingLayer.js";
+import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
 export class Font {

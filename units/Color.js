@@ -1,4 +1,4 @@
-import { Numbers } from "../Utils/Numbers.js";
+import { Numbers } from "../utils/Numbers.js";
 export class Color {
     constructor(r = 0, g = 0, b = 0, alpha = 1) {
         this._red = 0;
