@@ -52,10 +52,4 @@ export class RenderingLayer {
     resetMatrix() {
         this._renderingContext.resetTransform();
     }
-    getImageElement() {
-        const canvas = this.getCanvas();
-        const imageElement = document.createElement('img');
-        imageElement.src = canvas.toDataURL('image/png');
-        return imageElement;
-    }
 }

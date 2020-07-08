@@ -37,7 +37,4 @@ export class Engine {
     resetMatrix() {
         this._renderingLayer.resetMatrix();
     }
-    getImageElement() {
-        return this._renderingLayer.getImageElement();
-    }
 }
