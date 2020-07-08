@@ -5,6 +5,7 @@ import { Fill } from "../../properties/Fill.js";
 import { Timeline } from "../../Timeline.js";
 import { Color } from "../../units/Color.js";
 
+
 const canvasEl = document.getElementById('canvas')! as HTMLCanvasElement;
 
 const engine = new Engine(canvasEl, 400, 60, window.devicePixelRatio);

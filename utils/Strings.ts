@@ -9,6 +9,7 @@ export class Strings {
         return full.substring(full.length - length, full.length);
     }
 
+
     static padRight(s: string, length: number, pad: string): string {
         if (s.length > length) return s;
 

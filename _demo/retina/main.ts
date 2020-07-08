@@ -7,7 +7,6 @@ import { Stroke } from "../../properties/Stroke.js";
 // import { DebuggerBar } from "../../Debugger/DebuggerBar.js";
 
 
-
 const canvasEl = document.getElementById('canvas')! as HTMLCanvasElement;
 const canvasRetinaEl = document.getElementById('canvasRetina')! as HTMLCanvasElement;
 

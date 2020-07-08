@@ -1,6 +1,7 @@
 export { TimelineAnimation } from "./TimelineAnimation.js";
 export { LoopAnimation } from "./LoopAnimation.js";
 
+
 export interface IAnimation<TCallback> {
 
     duration: number,
