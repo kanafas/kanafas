@@ -2,11 +2,10 @@ import { IBoxArea } from "../renderables/IArea.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { Transform } from "../properties/Transform.js";
 import { Vector } from "../units/Vector.js";
-import { IObject } from "./IObject.js";
 import { IGeometry } from "./IGeometry.js";
 
 
-export class EllipseGeometry implements IObject, IGeometry {
+export class EllipseGeometry implements IGeometry {
     transform: Transform = new Transform();
 
     width: number;

@@ -2,38 +2,41 @@ import { Utils } from "../Utils/Utils.js";
 import { Fill } from "../properties/Fill.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
-// TODO: To by se mělo přejmenovt, nebo přesunout, nebo obojí
 export class Helper {
-    static renderShape(renderingLayer, object) {
+    static applyStyles(renderingLayer, shape) {
         const ctx = renderingLayer.getRenderingContext();
-        ctx.beginPath();
-        object.contructMatrix(renderingLayer);
-        object.drawWithoutMatrixManipulation(renderingLayer);
-        ctx.globalAlpha = Utils.Numbers.limit(object.opacity, 0, 1);
-        if (object.shadow) {
-            object.shadow.apply(renderingLayer, object.getBoundingBox(renderingLayer));
+        ctx.globalAlpha = Utils.Numbers.limit(shape.opacity, 0, 1);
+        if (shape.shadow) {
+            shape.shadow.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
         }
         else {
             Shadow.clear(renderingLayer);
         }
-        if (object.fill) {
-            object.fill.apply(renderingLayer, object.getBoundingBox(renderingLayer));
+        if (shape.fill) {
+            shape.fill.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
             ctx.fill();
         }
         else {
             Fill.clear(renderingLayer);
         }
-        if (object.stroke) {
-            object.stroke.apply(renderingLayer, object.getBoundingBox(renderingLayer));
+        if (shape.stroke) {
+            shape.stroke.apply(renderingLayer, shape.getBoundingBox(renderingLayer));
             ctx.stroke();
         }
         else {
             Stroke.clear(renderingLayer);
         }
-        object.destructMatrix(renderingLayer);
-        ctx.closePath();
         ctx.globalAlpha = 1;
-        if (renderingLayer.gizmoVisibility && object.renderGizmos)
-            object.renderGizmos(renderingLayer);
+    }
+    static render(renderingLayer, geometry, renderable, shape) {
+        const ctx = renderingLayer.getRenderingContext();
+        ctx.beginPath();
+        geometry.contructMatrix(renderingLayer);
+        geometry.drawWithoutMatrixManipulation(renderingLayer);
+        Helper.applyStyles(renderingLayer, shape);
+        geometry.destructMatrix(renderingLayer);
+        ctx.closePath();
+        if (renderingLayer.gizmoVisibility && renderable.renderGizmos)
+            renderable.renderGizmos(renderingLayer);
     }
 }

@@ -3,11 +3,10 @@ import { Transform } from "../properties/Transform.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { Utils } from "../Utils/Utils.js";
 import { IBoxArea } from "./IArea.js";
-import { IObject } from "./IObject.js";
 import { IGeometry } from "./IGeometry.js";
 
 
-export class PolygonGeometry implements IObject, IGeometry {
+export class PolygonGeometry implements IGeometry {
     transform: Transform = new Transform();
 
     points: IVector[];

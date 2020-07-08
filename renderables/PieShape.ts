@@ -9,7 +9,7 @@ import { Gizmo } from "./Gizmo.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { IObject } from "./IObject.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IVisible.js";
+import { IShape } from "./IShape.js";
 
 
 export class PieShape extends PieGeometry implements IObject, IRenderable, IShape {
@@ -27,7 +27,7 @@ export class PieShape extends PieGeometry implements IObject, IRenderable, IShap
 
 
     render(renderingLayer: IRenderingLayer) {
-        Helper.renderShape(renderingLayer, this);
+        Helper.render(renderingLayer, this, this, this);
     }
 
 

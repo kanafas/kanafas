@@ -7,7 +7,7 @@ import { IObject } from "./IObject.js";
 import { IGeometry } from "./IGeometry.js";
 
 
-export class RoundedRectangleGeometry implements IObject, IGeometry {
+export class RoundedRectangleGeometry implements IGeometry {
 
     transform: Transform = new Transform();
 

@@ -8,7 +8,7 @@ import { Gizmo } from "./Gizmo.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
 import { IObject } from "./IObject.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IVisible.js";
+import { IShape } from "./IShape.js";
 
 
 export class EllipseShape extends EllipseGeometry implements IObject, IRenderable, IShape {
@@ -25,7 +25,7 @@ export class EllipseShape extends EllipseGeometry implements IObject, IRenderabl
 
 
     render(renderingLayer: IRenderingLayer) {
-        Helper.renderShape(renderingLayer, this);
+        Helper.render(renderingLayer, this, this, this);
     }
 
 

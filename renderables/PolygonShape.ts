@@ -8,7 +8,7 @@ import { Helper } from "./Helper.js";
 import { Gizmo } from "./Gizmo.js";
 import { IObject } from "./IObject.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IVisible.js";
+import { IShape } from "./IShape.js";
 
 
 export class PolygonShape extends PolygonGeometry implements IObject, IRenderable, IShape {
@@ -25,7 +25,7 @@ export class PolygonShape extends PolygonGeometry implements IObject, IRenderabl
 
 
     render(renderingLayer: IRenderingLayer) {
-        Helper.renderShape(renderingLayer, this);
+        Helper.render(renderingLayer, this, this, this);
     }
 
 

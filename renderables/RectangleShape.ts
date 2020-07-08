@@ -4,11 +4,11 @@ import { Helper } from "./Helper.js";
 import { IObject } from "./IObject.js";
 import { IRenderable } from "./IRenderable.js";
 import { IRenderingLayer } from "../RenderingLayer.js";
-import { IShape } from "./IVisible.js";
 import { RectangleGeometry } from "./RectangleGeometry.js";
 import { Shadow } from "../properties/Shadow.js";
 import { Stroke } from "../properties/Stroke.js";
 import { Vector } from "../units/Vector.js";
+import { IShape } from "./IShape.js";
 
 
 export class RectangleShape extends RectangleGeometry implements IObject, IRenderable, IShape {
@@ -25,7 +25,7 @@ export class RectangleShape extends RectangleGeometry implements IObject, IRende
 
 
     render(renderingLayer: IRenderingLayer) {
-        Helper.renderShape(renderingLayer, this);
+        Helper.render(renderingLayer, this, this, this);
     }
 
 
@@ -34,4 +34,5 @@ export class RectangleShape extends RectangleGeometry implements IObject, IRende
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.shapeColor);
         renderingLayer.resetMatrix();
     }
+
 }

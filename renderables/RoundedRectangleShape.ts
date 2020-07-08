@@ -8,7 +8,7 @@ import { Stroke } from "../properties/Stroke.js";
 import { Gizmo } from "./Gizmo.js";
 import { IObject } from "./IObject.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IVisible.js";
+import { IShape } from "./IShape.js";
 
 
 export class RoundedRectangleShape extends RoundedRectangleGeometry implements IObject, IRenderable, IShape {
@@ -25,7 +25,7 @@ export class RoundedRectangleShape extends RoundedRectangleGeometry implements I
 
 
     render(renderingLayer: IRenderingLayer) {
-        Helper.renderShape(renderingLayer, this);
+        Helper.render(renderingLayer, this, this, this);
     }
 
 
