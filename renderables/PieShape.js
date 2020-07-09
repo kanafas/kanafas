@@ -1,6 +1,4 @@
-import { Helper } from "./Helper.js";
-import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
+import { Shape } from "./Shape.js";
 import { PieGeometry } from "./PieGeometry.js";
 export class PieShape extends PieGeometry {
     constructor(width, height, startAngle, endAngle, innerRadius) {
@@ -11,11 +9,9 @@ export class PieShape extends PieGeometry {
         this.opacity = 1;
     }
     render(renderingLayer) {
-        Helper.render(renderingLayer, this, this, this);
+        Shape.renderObject(renderingLayer, this, this, this);
     }
-    renderGizmos(renderingLayer) {
-        renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.shapeColor);
-        renderingLayer.resetMatrix();
+    renderGizmo(renderingLayer) {
+        Shape.renderGizmo(renderingLayer, this);
     }
 }

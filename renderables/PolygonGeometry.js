@@ -1,27 +1,27 @@
-import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
-export class PolygonGeometry {
+import { Geometry } from "./Geometry.js";
+export class PolygonGeometry extends Geometry {
     constructor(points, closed = true, trimStart = 0, trimEnd = 1, trimOffset = 0) {
-        this.transform = new Transform();
+        const d = (ctx, pxs, t) => {
+            this._drawSegments(ctx, pxs, t);
+        };
+        const b = (t) => {
+            const width = Math.max(...this.points.map(p => p.x));
+            const height = Math.max(...this.points.map(p => p.y));
+            return {
+                origin: this.transform.origin.clone(),
+                size: new Vector(width, height),
+            };
+        };
+        super(d, b);
         this.points = points;
         this.closed = closed;
         this.trimEnd = trimEnd;
         this.trimStart = trimStart;
         this.trimOffset = trimOffset;
     }
-    contructMatrix(renderingLayer) {
-        const t = this.transform;
-        renderingLayer.setMatrixToTransform(t);
-    }
-    destructMatrix(renderingLayer) {
-        renderingLayer.resetMatrix();
-    }
-    drawWithoutMatrixManipulation(renderingLayer) {
-        const ctx = renderingLayer.getRenderingContext();
-        const pxs = renderingLayer.pixelScale;
-        const t = this.transform;
-        // 
+    _drawSegments(ctx, pxs, t) {
         const trimOffsetRatio = ((v) => {
             while (v < 0)
                 v += 1;
@@ -44,7 +44,7 @@ export class PolygonGeometry {
         ctx.translate(-t.origin.x * pxs, t.origin.y * pxs);
         ctx.moveTo(0, 0);
         segments.forEach(s => {
-            alreadyDrawn = this._drawSegmentLine(renderingLayer, s.line, alreadyDrawn, trimStartLength, trimEndLength);
+            alreadyDrawn = this._drawSegmentLine(ctx, pxs, s.line, alreadyDrawn, trimStartLength, trimEndLength);
         });
         if (1 < trimEndRatio) {
             if (!this.closed) {
@@ -57,19 +57,16 @@ export class PolygonGeometry {
             let overflowAlreadyDrawn = 0;
             for (let i = 0; i < segments.length; i++) {
                 const s = segments[i];
-                overflowAlreadyDrawn = this._drawSegmentLine(renderingLayer, s.line, overflowAlreadyDrawn, 0, (trimEndLength - circuit));
+                overflowAlreadyDrawn = this._drawSegmentLine(ctx, pxs, s.line, overflowAlreadyDrawn, 0, (trimEndLength - circuit));
                 if (overflowAlreadyDrawn > trimEndLength - circuit)
                     break;
             }
         }
         if (this.closed && (trimStartRatio != trimEndRatio && trimStartRatio - trimEndRatio == 0)) {
-            console.log("CLOSED");
             ctx.closePath();
         }
     }
-    _drawSegmentLine(renderingLayer, segmentLine, alreadyDrawn, trimStartLength, trimEndLength) {
-        const ctx = renderingLayer.getRenderingContext();
-        const pxs = renderingLayer.pixelScale;
+    _drawSegmentLine(ctx, pxs, segmentLine, alreadyDrawn, trimStartLength, trimEndLength) {
         if (trimEndLength >= (alreadyDrawn + segmentLine.length) && trimStartLength <= alreadyDrawn) {
             // FULL
             ctx.lineTo(segmentLine.x * pxs, segmentLine.y * pxs);
@@ -121,18 +118,5 @@ export class PolygonGeometry {
         }
         ctx.translate(segmentLine.x * pxs, segmentLine.y * pxs);
         return alreadyDrawn += segmentLine.length;
-    }
-    draw(renderingLayer) {
-        this.contructMatrix(renderingLayer);
-        this.drawWithoutMatrixManipulation(renderingLayer);
-        this.destructMatrix(renderingLayer);
-    }
-    getBoundingBox(renderingLayer) {
-        const width = Math.max(...this.points.map(p => p.x));
-        const height = Math.max(...this.points.map(p => p.y));
-        return {
-            origin: this.transform.origin.clone(),
-            size: new Vector(width, height),
-        };
     }
 }

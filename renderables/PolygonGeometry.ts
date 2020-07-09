@@ -1,14 +1,12 @@
-import { IGeometry } from "./IGeometry.js";
 import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
-import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { IBoundingBox } from "./IBoundingBox.js";
 import { IVector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
+import { Geometry } from "./Geometry.js";
 
 
-export class PolygonGeometry implements IGeometry {
-    transform: Transform = new Transform();
+export class PolygonGeometry extends Geometry {
 
     points: IVector[];
     closed: boolean;
@@ -19,8 +17,24 @@ export class PolygonGeometry implements IGeometry {
 
 
     constructor(points: IVector[], closed: boolean = true, trimStart: number = 0, trimEnd: number = 1, trimOffset: number = 0) {
-        this.points = points;
+        const d = (ctx: CanvasRenderingContext2D, pxs: number, t: Transform) => {
+            this._drawSegments(ctx, pxs, t);
+        }
 
+        const b = (t: Transform): IBoundingBox => {
+            const width = Math.max(...this.points.map(p => p.x))
+            const height = Math.max(...this.points.map(p => p.y))
+
+            return {
+                origin: this.transform.origin.clone(),
+                size: new Vector(width, height),
+            }
+        }
+
+        super(d, b);
+
+
+        this.points = points;
         this.closed = closed;
 
         this.trimEnd = trimEnd;
@@ -29,25 +43,7 @@ export class PolygonGeometry implements IGeometry {
     }
 
 
-    contructMatrix(renderingLayer: IRenderingLayer) {
-        const t = this.transform;
-
-        renderingLayer.setMatrixToTransform(t);
-    }
-
-
-    destructMatrix(renderingLayer: IRenderingLayer) {
-        renderingLayer.resetMatrix();
-    }
-
-
-    drawWithoutMatrixManipulation(renderingLayer: IRenderingLayer) {
-        const ctx = renderingLayer.getRenderingContext();
-        const pxs = renderingLayer.pixelScale;
-
-        const t = this.transform;
-
-        // 
+    private _drawSegments(ctx: CanvasRenderingContext2D, pxs: number, t: Transform): void {
         const trimOffsetRatio = ((v) => {
             while (v < 0) v += 1;
             while (v > 1) v -= 1;
@@ -75,7 +71,7 @@ export class PolygonGeometry implements IGeometry {
         ctx.moveTo(0, 0);
 
         segments.forEach(s => {
-            alreadyDrawn = this._drawSegmentLine(renderingLayer, s.line, alreadyDrawn, trimStartLength, trimEndLength)
+            alreadyDrawn = this._drawSegmentLine(ctx, pxs, s.line, alreadyDrawn, trimStartLength, trimEndLength)
         });
 
         if (1 < trimEndRatio) {
@@ -89,27 +85,21 @@ export class PolygonGeometry implements IGeometry {
             }
 
             let overflowAlreadyDrawn: number = 0;
-
             for (let i = 0; i < segments.length; i++) {
                 const s = segments[i];
-                overflowAlreadyDrawn = this._drawSegmentLine(renderingLayer, s.line, overflowAlreadyDrawn, 0, (trimEndLength - circuit));
+                overflowAlreadyDrawn = this._drawSegmentLine(ctx, pxs, s.line, overflowAlreadyDrawn, 0, (trimEndLength - circuit));
 
                 if (overflowAlreadyDrawn > trimEndLength - circuit) break;
             }
         }
 
         if (this.closed && (trimStartRatio != trimEndRatio && trimStartRatio - trimEndRatio == 0)) {
-            console.log("CLOSED");
-
             ctx.closePath();
         }
     }
 
 
-    private _drawSegmentLine(renderingLayer: IRenderingLayer, segmentLine: Vector, alreadyDrawn: number, trimStartLength: number, trimEndLength: number): number {
-        const ctx = renderingLayer.getRenderingContext();
-        const pxs = renderingLayer.pixelScale;
-
+    private _drawSegmentLine(ctx: CanvasRenderingContext2D, pxs: number, segmentLine: Vector, alreadyDrawn: number, trimStartLength: number, trimEndLength: number): number {
         if (trimEndLength >= (alreadyDrawn + segmentLine.length) && trimStartLength <= alreadyDrawn) {
             // FULL
             ctx.lineTo(segmentLine.x * pxs, segmentLine.y * pxs);
@@ -127,7 +117,6 @@ export class PolygonGeometry implements IGeometry {
 
         } else if (trimEndLength > alreadyDrawn && trimStartLength <= alreadyDrawn) {
             // GAP AFTER
-
             const afterLength = segmentLine.length - (trimEndLength - alreadyDrawn);
             const lineLength = segmentLine.length - afterLength
 
@@ -162,7 +151,6 @@ export class PolygonGeometry implements IGeometry {
                 const v = segmentLine.clone().multiple(afterGapModifier);
                 ctx.moveTo(v.x * pxs, v.y * pxs);
             }
-
         } else {
             // NONE
             ctx.moveTo(segmentLine.x * pxs, segmentLine.y * pxs);
@@ -173,21 +161,4 @@ export class PolygonGeometry implements IGeometry {
         return alreadyDrawn += segmentLine.length;
     }
 
-
-    draw(renderingLayer: IRenderingLayer) {
-        this.contructMatrix(renderingLayer);
-        this.drawWithoutMatrixManipulation(renderingLayer);
-        this.destructMatrix(renderingLayer);
-    }
-
-
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
-        const width = Math.max(...this.points.map(p => p.x))
-        const height = Math.max(...this.points.map(p => p.y))
-
-        return {
-            origin: this.transform.origin.clone(),
-            size: new Vector(width, height),
-        }
-    }
 }

@@ -71,11 +71,11 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
 
         ctx.globalAlpha = 1;
 
-        if (renderingLayer.gizmoVisibility && this.renderGizmos) this.renderGizmos(renderingLayer);
+        if (renderingLayer.gizmoVisibility && this.renderGizmo) this.renderGizmo(renderingLayer);
     }
 
 
-    renderGizmos(renderingLayer: IRenderingLayer) {
+    renderGizmo(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
         renderingLayer.resetMatrix();

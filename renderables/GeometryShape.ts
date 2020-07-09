@@ -8,7 +8,7 @@ import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Vector } from "./../units/Vector.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
-import { Helper } from "./Helper.js";
+import { Shape } from "./Shape.js";
 
 
 export class GeometryShape implements IRenderable, IShape {
@@ -32,16 +32,12 @@ export class GeometryShape implements IRenderable, IShape {
 
 
     render(renderingLayer: IRenderingLayer) {
-        Helper.render(renderingLayer, this.geometry, this, this);
+        Shape.renderObject(renderingLayer, this.geometry, this, this);
     }
 
 
-    renderGizmos(renderingLayer: IRenderingLayer) {
-        renderingLayer.setMatrixToTransform(this.geometry.transform);
-
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.shapeColor);
-
-        renderingLayer.resetMatrix();
+    renderGizmo(renderingLayer: IRenderingLayer) {
+        Shape.renderGizmo(renderingLayer, this.geometry);
     }
 
 

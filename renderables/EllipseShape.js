@@ -1,6 +1,4 @@
-import { Helper } from "./Helper.js";
-import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
+import { Shape } from "./Shape.js";
 import { EllipseGeometry } from "./EllipseGeometry.js";
 export class EllipseShape extends EllipseGeometry {
     constructor(width, height) {
@@ -11,11 +9,9 @@ export class EllipseShape extends EllipseGeometry {
         this.opacity = 1;
     }
     render(renderingLayer) {
-        Helper.render(renderingLayer, this, this, this);
+        Shape.renderObject(renderingLayer, this, this, this);
     }
-    renderGizmos(renderingLayer) {
-        renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.shapeColor);
-        renderingLayer.resetMatrix();
+    renderGizmo(renderingLayer) {
+        Shape.renderGizmo(renderingLayer, this);
     }
 }

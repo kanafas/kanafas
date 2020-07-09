@@ -36,10 +36,10 @@ export class ImageObject {
         ctx.drawImage(this.source, 0, 0, this.width * pxs, this.height * pxs);
         renderingLayer.resetMatrix();
         ctx.globalAlpha = 1;
-        if (renderingLayer.gizmoVisibility && this.renderGizmos)
-            this.renderGizmos(renderingLayer);
+        if (renderingLayer.gizmoVisibility && this.renderGizmo)
+            this.renderGizmo(renderingLayer);
     }
-    renderGizmos(renderingLayer) {
+    renderGizmo(renderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
         renderingLayer.resetMatrix();
