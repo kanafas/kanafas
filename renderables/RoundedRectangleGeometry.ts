@@ -45,8 +45,8 @@ export class RoundedRectangleGeometry extends Geometry {
                 r4.multiple(Numbers.limit(r4.y, 0, height / 2) / r4.y);
             }
 
+            ctx.translate(-t.origin.x * pxs, -t.origin.y * pxs);
             ctx.beginPath();
-            ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
             ctx.moveTo(0, r1.y * pxs);
 
             ctx.ellipse(
