@@ -16,7 +16,7 @@ export class RoundedRectangleGeometry extends Geometry {
     bottomRightRadius!: Vector;
 
 
-    constructor(width: number, height: number, radius1: number | Vector, radius2?: number | Vector, radius3?: number | Vector, radius4?: number | Vector) {
+    constructor(width: number, height: number, radius1: number | Vector = 0, radius2: number | Vector = 0, radius3: number | Vector = 0, radius4: number | Vector = 0) {
         const d = (ctx: CanvasRenderingContext2D, pxs: number, t: Transform) => {
             const width = (this.width > 0 ? this.width : 0);
             const height = (this.height > 0 ? this.height : 0);
