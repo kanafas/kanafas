@@ -1,23 +1,31 @@
 import { Vector } from "./../units/Vector.js";
-import { Utils } from "./../utils/Utils.js";
+import { Numbers } from "./../utils/Numbers.js";
 import { Geometry } from "./Geometry.js";
 export class RoundedRectangleGeometry extends Geometry {
-    constructor(width, height, radius1 = 0, radius2 = 0, radius3 = 0, radius4 = 0) {
+    constructor(width, height, radius1 = 0, radius2, radius3, radius4) {
         const d = (ctx, pxs, t) => {
             const width = (this.width > 0 ? this.width : 0);
             const height = (this.height > 0 ? this.height : 0);
             const r1 = this.topLeftRadius.clone();
-            r1.multiple(Utils.Numbers.limit(r1.x, 0, width / 2) / r1.x);
-            r1.multiple(Utils.Numbers.limit(r1.y, 0, height / 2) / r1.y);
+            if (r1.x > 0 && r1.y > 0) {
+                r1.multiple(Numbers.limit(r1.x, 0, width / 2) / r1.x);
+                r1.multiple(Numbers.limit(r1.y, 0, height / 2) / r1.y);
+            }
             const r2 = this.topRightRadius.clone();
-            r2.multiple(Utils.Numbers.limit(r2.x, 0, width / 2) / r2.x);
-            r2.multiple(Utils.Numbers.limit(r2.y, 0, height / 2) / r2.y);
+            if (r2.x > 0 && r2.y > 0) {
+                r2.multiple(Numbers.limit(r2.x, 0, width / 2) / r2.x);
+                r2.multiple(Numbers.limit(r2.y, 0, height / 2) / r2.y);
+            }
             const r3 = this.bottomRightRadius.clone();
-            r3.multiple(Utils.Numbers.limit(r3.x, 0, width / 2) / r3.x);
-            r3.multiple(Utils.Numbers.limit(r3.y, 0, height / 2) / r3.y);
+            if (r3.x > 0 && r3.y > 0) {
+                r3.multiple(Numbers.limit(r3.x, 0, width / 2) / r3.x);
+                r3.multiple(Numbers.limit(r3.y, 0, height / 2) / r3.y);
+            }
             const r4 = this.bottomLeftRadius.clone();
-            r4.multiple(Utils.Numbers.limit(r4.x, 0, width / 2) / r4.x);
-            r4.multiple(Utils.Numbers.limit(r4.y, 0, height / 2) / r4.y);
+            if (r4.x > 0 && r4.y > 0) {
+                r4.multiple(Numbers.limit(r4.x, 0, width / 2) / r4.x);
+                r4.multiple(Numbers.limit(r4.y, 0, height / 2) / r4.y);
+            }
             ctx.beginPath();
             ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
             ctx.moveTo(0, r1.y * pxs);
@@ -36,6 +44,10 @@ export class RoundedRectangleGeometry extends Geometry {
         super(d, b);
         this.width = width;
         this.height = height;
+        this.topLeftRadius = Vector.zero();
+        this.topRightRadius = Vector.zero();
+        this.bottomLeftRadius = Vector.zero();
+        this.bottomRightRadius = Vector.zero();
         this.setRadius(radius1, radius2, radius3, radius4);
     }
     setRadius(radius1, radius2, radius3, radius4) {
