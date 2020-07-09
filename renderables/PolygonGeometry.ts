@@ -2,7 +2,7 @@ import { IGeometry } from "./IGeometry.js";
 import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { IVector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 
@@ -181,7 +181,7 @@ export class PolygonGeometry implements IGeometry {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         const width = Math.max(...this.points.map(p => p.x))
         const height = Math.max(...this.points.map(p => p.y))
 

@@ -4,7 +4,7 @@ import { IVisible } from "./IVisible.js";
 import { Transform } from "./../properties/Transform.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { valueModifier } from "./../types/valueModifier.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
@@ -41,7 +41,7 @@ export class ImageObject implements IObject, IRenderable, IVisible {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: new Vector(this.width, this.height),

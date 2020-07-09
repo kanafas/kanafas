@@ -3,7 +3,7 @@ import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Utils } from "./../utils/Utils.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 
 
 export class RoundedRectangleGeometry implements IGeometry {
@@ -171,7 +171,7 @@ export class RoundedRectangleGeometry implements IGeometry {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: new Vector(this.width, this.height),

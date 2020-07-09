@@ -8,7 +8,7 @@ import { Fill } from "./../properties/Fill.js";
 import { Stroke } from "./../properties/Stroke.js";
 import { Vector } from "./../units/Vector.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { Font } from "./../properties/Font.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
@@ -38,7 +38,7 @@ export class TextObject implements IObject, IRenderable, IShape {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         this.font.apply(renderingLayer);
 
         const ctx = renderingLayer.getRenderingContext();

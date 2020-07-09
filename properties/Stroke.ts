@@ -1,5 +1,5 @@
 import { Color } from "../styles/Color.js";
-import { IBoxArea } from "../renderables/IArea.js";
+import { IBoundingBox } from "../renderables/IBoundingBox.js";
 import { IStyle } from "../styles/IStyle.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 
@@ -26,7 +26,7 @@ export class Stroke {
     }
 
 
-    apply(renderingLayer: IRenderingLayer, boundingBox: IBoxArea): void {
+    apply(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): void {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
 

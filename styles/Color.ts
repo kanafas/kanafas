@@ -1,6 +1,6 @@
 import { Color as UnitColor } from "../units/Color.js";
 import { IStyle } from "./IStyle.js";
-import { IBoxArea } from "../renderables/IArea.js";
+import { IBoundingBox } from "../renderables/IBoundingBox.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
@@ -19,5 +19,5 @@ export interface IStyleColor extends IStyle {
     blue: number,
     alpha: number,
 
-    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoxArea): string,
+    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): string,
 }

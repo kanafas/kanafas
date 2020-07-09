@@ -3,6 +3,7 @@ export { EllipseShape } from "./EllipseShape.js";
 export { GeometryShape } from "./GeometryShape.js";
 export { Helper } from "./Helper.js";
 export { IArea, IBoxArea } from "./IArea.js";
+export { IBoundingBox } from "./IBoundingBox.js";
 export { IBlueprint } from "./IBlueprint.js";
 export { IGeometry } from "./IGeometry.js";
 export { ImageObject } from "./ImageObject.js";

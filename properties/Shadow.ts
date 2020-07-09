@@ -1,4 +1,4 @@
-import { IBoxArea } from "../renderables/IArea.js";
+import { IBoundingBox } from "../renderables/IBoundingBox.js";
 import { IStyleColor, Color } from "../styles/Color.js";
 import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
@@ -18,7 +18,7 @@ export class Shadow {
     }
 
 
-    apply(renderingLayer: IRenderingLayer, boundingBox: IBoxArea): void {
+    apply(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): void {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
 

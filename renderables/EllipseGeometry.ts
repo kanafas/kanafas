@@ -2,7 +2,7 @@ import { IGeometry } from "./IGeometry.js";
 import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 
 
 export class EllipseGeometry implements IGeometry {
@@ -64,7 +64,7 @@ export class EllipseGeometry implements IGeometry {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: new Vector(this.width, this.height),

@@ -1,4 +1,4 @@
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { IObject } from "./IObject.js";
 import { Transform } from "../properties/Transform.js";
 import { Vector } from "../units/Vector.js";
@@ -15,7 +15,7 @@ export class NullObject implements IObject {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: Vector.zero(),

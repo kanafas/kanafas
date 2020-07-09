@@ -4,7 +4,7 @@ import { IVisible } from "./IVisible.js";
 import { Transform } from "./../properties/Transform.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
@@ -46,7 +46,7 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: new Vector(this.width, this.height),

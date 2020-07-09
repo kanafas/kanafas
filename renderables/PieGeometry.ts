@@ -3,7 +3,7 @@ import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { Angle } from "./../units/Angle.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { Utils } from "./../utils/Utils.js";
 
 
@@ -95,7 +95,7 @@ export class PieGeometry implements IGeometry {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: new Vector(this.width, this.height),
