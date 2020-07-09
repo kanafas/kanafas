@@ -4,7 +4,7 @@ import { IVisible } from "./IVisible.js";
 import { Transform } from "./../properties/Transform.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { IBoxArea } from "./IArea.js";
+import { IBoundingBox } from "./IBoundingBox.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
@@ -46,7 +46,7 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
     }
 
 
-    getBoundingBox(renderingLayer: IRenderingLayer): IBoxArea {
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
             size: new Vector(this.width, this.height),
@@ -71,11 +71,11 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
 
         ctx.globalAlpha = 1;
 
-        if (renderingLayer.gizmoVisibility && this.renderGizmos) this.renderGizmos(renderingLayer);
+        if (renderingLayer.gizmoVisibility && this.renderGizmo) this.renderGizmo(renderingLayer);
     }
 
 
-    renderGizmos(renderingLayer: IRenderingLayer) {
+    renderGizmo(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
         renderingLayer.resetMatrix();

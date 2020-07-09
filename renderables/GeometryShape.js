@@ -1,7 +1,5 @@
 import { Transform } from "./../properties/Transform.js";
-import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
-import { Helper } from "./Helper.js";
+import { Shape } from "./Shape.js";
 export class GeometryShape {
     constructor(geometry, getBoundingBox) {
         this.transform = new Transform();
@@ -13,12 +11,10 @@ export class GeometryShape {
         this._getBoundingBox = getBoundingBox;
     }
     render(renderingLayer) {
-        Helper.render(renderingLayer, this.geometry, this, this);
+        Shape.renderObject(renderingLayer, this.geometry, this, this);
     }
-    renderGizmos(renderingLayer) {
-        renderingLayer.setMatrixToTransform(this.geometry.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.shapeColor);
-        renderingLayer.resetMatrix();
+    renderGizmo(renderingLayer) {
+        Shape.renderGizmo(renderingLayer, this.geometry);
     }
     getBoundingBox(renderingLayer) {
         return this._getBoundingBox(renderingLayer);

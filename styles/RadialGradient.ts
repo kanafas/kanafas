@@ -1,7 +1,7 @@
 import { Utils } from "../utils/Utils.js";
 import { Vector } from "../units/Vector.js";
 import { IGradient, IGradientStep } from "./Gradient.js";
-import { IBoxArea } from "../renderables/IArea.js";
+import { IBoundingBox } from "../renderables/IBoundingBox.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
@@ -19,7 +19,7 @@ export class RadialGradient implements IGradient {
     }
 
 
-    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoxArea) {
+    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
 
