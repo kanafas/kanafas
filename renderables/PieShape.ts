@@ -5,9 +5,7 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { Vector } from "./../units/Vector.js";
 import { Angle } from "./../units/Angle.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
 import { PieGeometry } from "./PieGeometry.js";
 
 

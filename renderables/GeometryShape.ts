@@ -6,8 +6,6 @@ import { Fill } from "./../properties/Fill.js";
 import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
-import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
 import { Shape } from "./Shape.js";
 
 
