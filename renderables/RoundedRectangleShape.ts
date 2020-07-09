@@ -6,7 +6,6 @@ import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
 import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
 import { RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
 
 

@@ -5,8 +5,6 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
 import { PolygonGeometry } from "./PolygonGeometry.js";
 import { IVector } from "./../units/Vector.js";
 

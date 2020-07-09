@@ -1,4 +1,3 @@
-import { RectangleGeometry } from "./RectangleGeometry.js";
 import { IRenderable } from "./IRenderable.js";
 import { IShape } from "./IShape.js";
 import { Fill } from "./../properties/Fill.js";
@@ -6,8 +5,6 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { Vector } from "./../units/Vector.js";
-import { Gizmo } from "./../debugger/Gizmo.js";
 import { EllipseGeometry } from "./EllipseGeometry.js";
 
 
