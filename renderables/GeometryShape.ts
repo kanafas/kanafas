@@ -11,7 +11,6 @@ import { Gizmo } from "./../debugger/Gizmo.js";
 import { Helper } from "./Helper.js";
 
 
-
 export class GeometryShape implements IRenderable, IShape {
 
     geometry: IGeometry;

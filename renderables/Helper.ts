@@ -10,7 +10,6 @@ import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 export class Helper {
 
-
     static applyStyles(renderingLayer: IRenderingLayer, shape: IShape): void {
         const ctx = renderingLayer.getRenderingContext();
 
