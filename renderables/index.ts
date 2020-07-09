@@ -1,5 +1,6 @@
 export { EllipseGeometry } from "./EllipseGeometry.js";
 export { EllipseShape } from "./EllipseShape.js";
+export { Geometry } from "./Geometry.js";
 export { GeometryShape } from "./GeometryShape.js";
 export { IArea, IBoxArea } from "./IArea.js";
 export { IBlueprint } from "./IBlueprint.js";
