@@ -50,24 +50,24 @@ export class RoundedRectangleGeometry extends Geometry {
         this.bottomRightRadius = Vector.zero();
         this.setRadius(radius1, radius2, radius3, radius4);
     }
-    setRadius(radius1, radius2, radius3, radius4) {
-        if (radius1 != undefined && radius2 != undefined && radius3 != undefined && radius4 != undefined) {
-            this.setTopLeftRadius(radius1);
-            this.setTopRightRadius(radius2);
-            this.setBottomRightRadius(radius3);
-            this.setBottomLeftRadius(radius4);
+    setRadius(radiusA, radiusB, radiusC, radiusD) {
+        if (radiusA != undefined && radiusB != undefined && radiusC != undefined && radiusD != undefined) {
+            this.setTopLeftRadius(radiusA);
+            this.setTopRightRadius(radiusB);
+            this.setBottomRightRadius(radiusC);
+            this.setBottomLeftRadius(radiusD);
         }
-        else if (radius1 != undefined && radius2 != undefined && radius3 == undefined && radius4 == undefined) {
-            this.setTopLeftRadius(radius1);
-            this.setTopRightRadius(radius2);
-            this.setBottomRightRadius(radius1);
-            this.setBottomLeftRadius(radius2);
+        else if (radiusA != undefined && radiusB != undefined && radiusC == undefined && radiusD == undefined) {
+            this.setTopLeftRadius(radiusA);
+            this.setTopRightRadius(radiusB);
+            this.setBottomRightRadius(radiusA);
+            this.setBottomLeftRadius(radiusB);
         }
-        else if (radius1 != undefined && radius2 == undefined && radius3 == undefined && radius4 == undefined) {
-            this.setTopLeftRadius(radius1);
-            this.setTopRightRadius(radius1);
-            this.setBottomRightRadius(radius1);
-            this.setBottomLeftRadius(radius1);
+        else if (radiusA != undefined && radiusB == undefined && radiusC == undefined && radiusD == undefined) {
+            this.setTopLeftRadius(radiusA);
+            this.setTopRightRadius(radiusA);
+            this.setBottomRightRadius(radiusA);
+            this.setBottomLeftRadius(radiusA);
         }
         else {
             throw new Error("Incorrect combination of agruments");
