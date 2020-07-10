@@ -1,10 +1,10 @@
 import { Vector } from "./../units/Vector.js";
-import { Utils } from "./../utils/Utils.js";
+import { Numbers } from "./../utils/Numbers.js";
 import { Geometry } from "./Geometry.js";
 export class PolygonGeometry extends Geometry {
     constructor(points, closed = true, trimStart = 0, trimEnd = 1, trimOffset = 0) {
-        const d = (ctx, pxs, t) => {
-            this._drawSegments(ctx, pxs, t);
+        const d = (ctx, pxs, transform) => {
+            this._draw(ctx, pxs, transform);
         };
         const b = (t) => {
             const width = Math.max(...this.points.map(p => p.x));
@@ -21,43 +21,46 @@ export class PolygonGeometry extends Geometry {
         this.trimStart = trimStart;
         this.trimOffset = trimOffset;
     }
-    _drawSegments(ctx, pxs, t) {
+    _draw(ctx, pxs, transform) {
+        const trimOffsetNormalized = this.trimOffset + this.trimStart;
+        const trimStartNormalized = 0;
+        const trimEndNormalized = this.trimEnd - this.trimStart;
         const trimOffsetRatio = ((v) => {
             while (v < 0)
                 v += 1;
             while (v > 1)
                 v -= 1;
             return v;
-        })(this.trimOffset);
-        const trimStartRatio = Utils.Numbers.limit(this.trimStart, 0, 1) + trimOffsetRatio;
-        const trimEndRatio = Utils.Numbers.limit(this.trimEnd, 0, 1) + trimOffsetRatio;
-        const segments = this.points.map((start, i, arr) => {
+        })(trimOffsetNormalized);
+        const trimStartRatio = Numbers.limit(trimStartNormalized, 0, 1) + trimOffsetRatio;
+        const trimEndRatio = Numbers.limit(trimEndNormalized, 0, 1) + trimOffsetRatio;
+        const sides = this.points.map((start, i, arr) => {
             const end = i + 1 < arr.length ? arr[i + 1] : arr[0];
             const line = Vector.zero().add(end).subtract(start);
-            return { start, end, line };
+            return line;
         }).slice(0, this.closed ? this.points.length : this.points.length - 1);
-        const circuit = segments.reduce((acc, s) => acc + s.line.length, 0);
+        const circuit = sides.reduce((acc, side) => acc + side.length, 0);
         const trimStartLength = trimStartRatio * circuit;
         const trimEndLength = trimEndRatio * circuit;
         let alreadyDrawn = 0;
+        ctx.translate(-transform.origin.x * pxs, -transform.origin.y * pxs);
         ctx.beginPath();
-        ctx.translate(-t.origin.x * pxs, t.origin.y * pxs);
         ctx.moveTo(0, 0);
-        segments.forEach(s => {
-            alreadyDrawn = this._drawSegmentLine(ctx, pxs, s.line, alreadyDrawn, trimStartLength, trimEndLength);
+        sides.forEach(side => {
+            alreadyDrawn = this._drawSide(ctx, pxs, side, alreadyDrawn, trimStartLength, trimEndLength);
         });
         if (1 < trimEndRatio) {
             if (!this.closed) {
-                const reset = segments.reduce((acc, s) => {
-                    return acc.subtract(s.line);
+                const resetMovement = sides.reduce((acc, side) => {
+                    return acc.subtract(side);
                 }, Vector.zero());
-                ctx.moveTo(reset.x * pxs, reset.y * pxs);
-                ctx.translate(reset.x * pxs, reset.y * pxs);
+                ctx.moveTo(resetMovement.x * pxs, resetMovement.y * pxs);
+                ctx.translate(resetMovement.x * pxs, resetMovement.y * pxs);
             }
             let overflowAlreadyDrawn = 0;
-            for (let i = 0; i < segments.length; i++) {
-                const s = segments[i];
-                overflowAlreadyDrawn = this._drawSegmentLine(ctx, pxs, s.line, overflowAlreadyDrawn, 0, (trimEndLength - circuit));
+            for (let i = 0; i < sides.length; i++) {
+                const side = sides[i];
+                overflowAlreadyDrawn = this._drawSide(ctx, pxs, side, overflowAlreadyDrawn, 0, (trimEndLength - circuit));
                 if (overflowAlreadyDrawn > trimEndLength - circuit)
                     break;
             }
@@ -66,57 +69,57 @@ export class PolygonGeometry extends Geometry {
             ctx.closePath();
         }
     }
-    _drawSegmentLine(ctx, pxs, segmentLine, alreadyDrawn, trimStartLength, trimEndLength) {
-        if (trimEndLength >= (alreadyDrawn + segmentLine.length) && trimStartLength <= alreadyDrawn) {
+    _drawSide(ctx, pxs, side, alreadyDrawn, trimStartLength, trimEndLength) {
+        if (trimEndLength >= (alreadyDrawn + side.length) && trimStartLength <= alreadyDrawn) {
             // FULL
-            ctx.lineTo(segmentLine.x * pxs, segmentLine.y * pxs);
+            ctx.lineTo(side.x * pxs, side.y * pxs);
         }
-        else if (trimEndLength >= (alreadyDrawn + segmentLine.length) && trimStartLength < (alreadyDrawn + segmentLine.length) && trimStartLength >= alreadyDrawn) {
+        else if (trimEndLength >= (alreadyDrawn + side.length) && trimStartLength < (alreadyDrawn + side.length) && trimStartLength >= alreadyDrawn) {
             // GAP BEFORE
-            const beforeGapModifier = (trimStartLength - alreadyDrawn) / segmentLine.length;
+            const beforeGapModifier = (trimStartLength - alreadyDrawn) / side.length;
             if (beforeGapModifier > 0) {
-                const v = segmentLine.clone().multiple(beforeGapModifier);
+                const v = side.clone().multiple(beforeGapModifier);
                 ctx.moveTo(v.x * pxs, v.y * pxs);
             }
-            ctx.lineTo(segmentLine.x * pxs, segmentLine.y * pxs);
+            ctx.lineTo(side.x * pxs, side.y * pxs);
         }
         else if (trimEndLength > alreadyDrawn && trimStartLength <= alreadyDrawn) {
             // GAP AFTER
-            const afterLength = segmentLine.length - (trimEndLength - alreadyDrawn);
-            const lineLength = segmentLine.length - afterLength;
-            const lineModifier = lineLength / segmentLine.length;
-            const v = segmentLine.clone().multiple(lineModifier);
+            const afterLength = side.length - (trimEndLength - alreadyDrawn);
+            const lineLength = side.length - afterLength;
+            const lineModifier = lineLength / side.length;
+            const v = side.clone().multiple(lineModifier);
             ctx.lineTo(v.x * pxs, v.y * pxs);
             if (afterLength > 0) {
-                const afterGapModifier = afterLength / segmentLine.length;
-                const v = segmentLine.clone().multiple(afterGapModifier);
+                const afterGapModifier = afterLength / side.length;
+                const v = side.clone().multiple(afterGapModifier);
                 ctx.moveTo(v.x * pxs, v.y * pxs);
             }
         }
-        else if (trimEndLength > alreadyDrawn && trimStartLength < (alreadyDrawn + segmentLine.length) && trimStartLength > alreadyDrawn) {
+        else if (trimEndLength > alreadyDrawn && trimStartLength < (alreadyDrawn + side.length) && trimStartLength > alreadyDrawn) {
             // BETWEEN
             const beforeLength = trimStartLength - alreadyDrawn;
-            const afterLength = segmentLine.length - (trimEndLength - alreadyDrawn);
-            const lineLength = segmentLine.length - (beforeLength + afterLength);
+            const afterLength = side.length - (trimEndLength - alreadyDrawn);
+            const lineLength = side.length - (beforeLength + afterLength);
             if (beforeLength > 0) {
-                const beforeGapModifier = beforeLength / segmentLine.length;
-                const v = segmentLine.clone().multiple(beforeGapModifier);
+                const beforeGapModifier = beforeLength / side.length;
+                const v = side.clone().multiple(beforeGapModifier);
                 ctx.moveTo(v.x * pxs, v.y * pxs);
             }
-            const lineModifier = (lineLength + beforeLength) / segmentLine.length;
-            const v = segmentLine.clone().multiple(lineModifier);
+            const lineModifier = (lineLength + beforeLength) / side.length;
+            const v = side.clone().multiple(lineModifier);
             ctx.lineTo(v.x * pxs, v.y * pxs);
             if (afterLength > 0) {
-                const afterGapModifier = afterLength / segmentLine.length;
-                const v = segmentLine.clone().multiple(afterGapModifier);
+                const afterGapModifier = afterLength / side.length;
+                const v = side.clone().multiple(afterGapModifier);
                 ctx.moveTo(v.x * pxs, v.y * pxs);
             }
         }
         else {
             // NONE
-            ctx.moveTo(segmentLine.x * pxs, segmentLine.y * pxs);
+            ctx.moveTo(side.x * pxs, side.y * pxs);
         }
-        ctx.translate(segmentLine.x * pxs, segmentLine.y * pxs);
-        return alreadyDrawn += segmentLine.length;
+        ctx.translate(side.x * pxs, side.y * pxs);
+        return alreadyDrawn += side.length;
     }
 }
