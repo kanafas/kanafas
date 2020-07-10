@@ -37,8 +37,8 @@ export class RoundedRectangleGeometry extends Geometry {
             r4.multiple(Utils.Numbers.limit(r4.x, 0, width / 2) / r4.x);
             r4.multiple(Utils.Numbers.limit(r4.y, 0, height / 2) / r4.y);
 
+            ctx.translate(-t.origin.x * pxs, -t.origin.y * pxs);
             ctx.beginPath();
-            ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
             ctx.moveTo(0, r1.y * pxs);
 
             ctx.ellipse(
@@ -92,24 +92,24 @@ export class RoundedRectangleGeometry extends Geometry {
     }
 
 
-    setRadius(radius1: number | Vector, radius2?: number | Vector, radius3?: number | Vector, radius4?: number | Vector) {
-        if (radius1 != undefined && radius2 != undefined && radius3 != undefined && radius4 != undefined) {
-            this.setTopLeftRadius(radius1);
-            this.setTopRightRadius(radius2);
-            this.setBottomRightRadius(radius3);
-            this.setBottomLeftRadius(radius4);
+    setRadius(radiusA: number | Vector, radiusB?: number | Vector, radiusC?: number | Vector, radiusD?: number | Vector) {
+        if (radiusA != undefined && radiusB != undefined && radiusC != undefined && radiusD != undefined) {
+            this.setTopLeftRadius(radiusA);
+            this.setTopRightRadius(radiusB);
+            this.setBottomRightRadius(radiusC);
+            this.setBottomLeftRadius(radiusD);
 
-        } else if (radius1 != undefined && radius2 != undefined && radius3 == undefined && radius4 == undefined) {
-            this.setTopLeftRadius(radius1);
-            this.setTopRightRadius(radius2);
-            this.setBottomRightRadius(radius1);
-            this.setBottomLeftRadius(radius2);
+        } else if (radiusA != undefined && radiusB != undefined && radiusC == undefined && radiusD == undefined) {
+            this.setTopLeftRadius(radiusA);
+            this.setTopRightRadius(radiusB);
+            this.setBottomRightRadius(radiusA);
+            this.setBottomLeftRadius(radiusB);
 
-        } else if (radius1 != undefined && radius2 == undefined && radius3 == undefined && radius4 == undefined) {
-            this.setTopLeftRadius(radius1);
-            this.setTopRightRadius(radius1);
-            this.setBottomRightRadius(radius1);
-            this.setBottomLeftRadius(radius1);
+        } else if (radiusA != undefined && radiusB == undefined && radiusC == undefined && radiusD == undefined) {
+            this.setTopLeftRadius(radiusA);
+            this.setTopRightRadius(radiusA);
+            this.setBottomRightRadius(radiusA);
+            this.setBottomLeftRadius(radiusA);
 
         } else {
             throw new Error("Incorrect combination of agruments");
