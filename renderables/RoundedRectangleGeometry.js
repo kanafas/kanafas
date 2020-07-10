@@ -2,7 +2,7 @@ import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 import { Geometry } from "./Geometry.js";
 export class RoundedRectangleGeometry extends Geometry {
-    constructor(width, height, radius1 = 0, radius2 = 0, radius3 = 0, radius4 = 0) {
+    constructor(width, height, radius1 = 0, radius2, radius3, radius4) {
         const d = (ctx, pxs, t) => {
             const width = (this.width > 0 ? this.width : 0);
             const height = (this.height > 0 ? this.height : 0);
@@ -36,6 +36,10 @@ export class RoundedRectangleGeometry extends Geometry {
         super(d, b);
         this.width = width;
         this.height = height;
+        this.topLeftRadius = Vector.zero();
+        this.topRightRadius = Vector.zero();
+        this.bottomLeftRadius = Vector.zero();
+        this.bottomRightRadius = Vector.zero();
         this.setRadius(radius1, radius2, radius3, radius4);
     }
     setRadius(radius1, radius2, radius3, radius4) {
