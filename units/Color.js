@@ -47,6 +47,42 @@ export class Color {
     getHSL() {
         return Color.convertRGBtoHSL(this.red, this.green, this.blue);
     }
+    getHue() {
+        const c = this.getHSL();
+        return c.hue;
+    }
+    getSaturation() {
+        const c = this.getHSL();
+        return c.saturation;
+    }
+    getLightness() {
+        const c = this.getHSL();
+        return c.lightness;
+    }
+    setHSLA(hue, saturation, lightness, alpha) {
+        const rgba = Color.convertHSLAtoRGBA(hue, saturation, lightness, alpha);
+        this.red = rgba.red;
+        this.green = rgba.green;
+        this.blue = rgba.blue;
+        this.alpha = rgba.alpha;
+        return this;
+    }
+    setHSL(hue, saturation, lightness) {
+        this.setHSLA(hue, saturation, lightness, this.alpha);
+        return this;
+    }
+    setHue(hue) {
+        const c = this.getHSLA();
+        this.setHSLA(hue, c.saturation, c.lightness, c.alpha);
+    }
+    setSaturation(saturation) {
+        const c = this.getHSLA();
+        this.setHSLA(c.hue, saturation, c.lightness, c.alpha);
+    }
+    setLightness(lightness) {
+        const c = this.getHSLA();
+        this.setHSLA(c.hue, c.saturation, lightness, c.alpha);
+    }
     getHex() {
         const red = Math.round(this.red).toString(16);
         const green = Math.round(this.green).toString(16);
