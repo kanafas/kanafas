@@ -315,7 +315,7 @@ export class Color {
 
     /**
      * Create new Color object from HSLA values
-     * @param {number} h 🌈 Hue channel <0, 360>
+     * @param {number} h 🌈 Hue channel <0, 360)
      * @param {number} s ☯️ Saturation channel <0, 100>
      * @param {number} l ☀️ Lightness channel <0, 100>
      * @param {number} alpha 🏁 Alpha channel <0, 1>
@@ -336,7 +336,7 @@ export class Color {
 
     /**
      * Create new Color object from HSL values
-     * @param {number} h 🌈 Hue channel <0, 360>
+     * @param {number} h 🌈 Hue channel <0, 360)
      * @param {number} s ☯️ Saturation channel <0, 100>
      * @param {number} l ☀️ Lightness channel <0, 100>
      * @returns {Color} new Color
@@ -356,6 +356,11 @@ export class Color {
      * @returns IColorHSLA
      */
     static convertRGBAtoHSLA = (r: number, g: number, b: number, alpha: number): IColorHSLA => {
+        r = Numbers.limit(r, 0, 255);
+        g = Numbers.limit(g, 0, 255);
+        b = Numbers.limit(b, 0, 255);
+        alpha = Numbers.limit(alpha, 0, 1);
+
         r /= 255;
         g /= 255;
         b /= 255;
@@ -405,13 +410,20 @@ export class Color {
 
     /**
      * Convert HSLA to RGBA
-     * @param {number} r ❤️ Red channel <0, 255>
-     * @param {number} g 💚 Green channel <0, 255>
-     * @param {number} b 🟦 Blue channel <0, 255>
+     * @param {number} h 🌈 Hue channel <0, 360)
+     * @param {number} s ☯️ Saturation channel <0, 100>
+     * @param {number} l ☀️ Lightness channel <0, 100>
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns IColorRGBA
      */
     static convertHSLAtoRGBA = (h: number, s: number, l: number, alpha: number): IColorRGBA => {
+        if (h > 0) while (h >= 360) h -= 360;
+        else if (h < 0) while (h < 0) h += 360;
+
+        s = Numbers.limit(s, 0, 100);
+        l = Numbers.limit(l, 0, 100);
+        alpha = Numbers.limit(alpha, 0, 1);
+
         s /= 100;
         l /= 100;
 
