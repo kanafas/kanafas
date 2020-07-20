@@ -261,6 +261,12 @@ export class Color {
             rr = value.substring(0, 1) + value.substring(0, 1);
             gg = value.substring(1, 2) + value.substring(1, 2);
             bb = value.substring(2, 3) + value.substring(2, 3);
+        
+        } else if (value.length == 4) {
+            rr = value.substring(0, 1) + value.substring(0, 1);
+            gg = value.substring(1, 2) + value.substring(1, 2);
+            bb = value.substring(2, 3) + value.substring(2, 3);
+            aa = value.substring(3, 4) + value.substring(3, 4);
 
         } else if (value.length == 6) {
             rr = value.substring(0, 2);
