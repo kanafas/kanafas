@@ -248,6 +248,8 @@ export class Color {
      * @returns {Color} new Color
      */
     static fromHex(value: string): Color {
+        value = value.trim();
+
         if (value.substr(0, 1) == '#') {
             value = value.substr(1);
         }
