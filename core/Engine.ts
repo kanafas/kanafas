@@ -34,6 +34,11 @@ export class Engine implements IRenderingLayer {
     }
 
 
+    updateSize(width: number, height: number, pixelScale?: number) {
+        this._renderingLayer.updateSize(width, height, pixelScale);
+    }
+
+
     clear() {
         this._renderingLayer.clear();
     }
