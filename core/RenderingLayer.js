@@ -1,11 +1,21 @@
 export class RenderingLayer {
     constructor(canvas, width, height, pixelScale = 1) {
+        this._pixelScale = 1;
+        this._width = 0;
+        this._height = 0;
         this.gizmoVisibility = false;
         this.gizmoScale = 1;
-        this.pixelScale = pixelScale;
-        this.width = width;
-        this.height = height;
         this._canvas = canvas;
+        this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
+    }
+    get pixelScale() { return this._pixelScale; }
+    get width() { return this._width; }
+    get height() { return this._height; }
+    updateSize(width, height, pixelScale = NaN) {
+        if (!isNaN(pixelScale))
+            this._pixelScale = Math.max(pixelScale, 0);
+        this._width = Math.max(width, 0);
+        this._height = Math.max(height, 0);
         this._canvas.width = width * pixelScale;
         this._canvas.height = height * pixelScale;
         this._renderingContext = this._canvas.getContext('2d');

@@ -3,25 +3,33 @@ import { Transform } from "../properties/Transform.js";
 
 export class RenderingLayer implements IRenderingLayer {
 
-    readonly pixelScale: number;
+    private _pixelScale: number = 1;
+    get pixelScale(): number { return this._pixelScale; }
 
-    readonly width: number;
-    readonly height: number;
+    private _width: number = 0;
+    private _height: number = 0;
+    get width(): number { return this._width; }
+    get height(): number { return this._height; }
 
     private _canvas: HTMLCanvasElement;
-    private _renderingContext: CanvasRenderingContext2D;
+    private _renderingContext!: CanvasRenderingContext2D;
 
     gizmoVisibility: boolean = false;
     gizmoScale: number = 1;
 
 
     constructor(canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number = 1) {
-        this.pixelScale = pixelScale;
-
-        this.width = width;
-        this.height = height;
-
         this._canvas = canvas;
+        this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
+    }
+
+        
+    updateSize(width: number, height: number, pixelScale: number = NaN) {
+        if (!isNaN(pixelScale)) this._pixelScale = Math.max(pixelScale, 0);
+
+        this._width = Math.max(width, 0);
+        this._height = Math.max(height, 0);
+
         this._canvas.width = width * pixelScale;
         this._canvas.height = height * pixelScale;
 
@@ -99,6 +107,8 @@ export interface IRenderingLayer {
 
     gizmoVisibility: boolean;
     gizmoScale: number;
+
+    updateSize(width: number, height: number, pixelScale: number): void;
 
     clear(): void;
 

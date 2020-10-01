@@ -16,6 +16,9 @@ export class Engine {
     get gizmoVisibility() { return this._renderingLayer.gizmoVisibility; }
     set gizmoScale(scale) { this._renderingLayer.gizmoScale = scale; }
     get gizmoScale() { return this._renderingLayer.gizmoScale; }
+    updateSize(width, height, pixelScale) {
+        this._renderingLayer.updateSize(width, height, pixelScale);
+    }
     clear() {
         this._renderingLayer.clear();
     }
