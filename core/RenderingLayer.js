@@ -5,9 +5,11 @@ export class RenderingLayer {
         this._height = 0;
         this.gizmoVisibility = false;
         this.gizmoScale = 1;
+        this.updateSizeStyleCallback = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
         this._canvas = canvas;
         this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
     }
+    static get PIXELSCALE() { return window.devicePixelRatio; }
     get pixelScale() { return this._pixelScale; }
     get width() { return this._width; }
     get height() { return this._height; }
@@ -61,3 +63,7 @@ export class RenderingLayer {
         this._renderingContext.resetTransform();
     }
 }
+RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK = (canvas, width, height, pixelScale) => {
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+};

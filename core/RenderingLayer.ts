@@ -3,6 +3,14 @@ import { Transform } from "../properties/Transform.js";
 
 export class RenderingLayer implements IRenderingLayer {
 
+    static readonly DEFAULT_UPDATESIZE_CALLBACK = (canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number): void => {
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+    }
+
+    static get PIXELSCALE(): number { return window.devicePixelRatio; } 
+
+
     private _pixelScale: number = 1;
     get pixelScale(): number { return this._pixelScale; }
 
@@ -35,6 +43,11 @@ export class RenderingLayer implements IRenderingLayer {
 
         this._renderingContext = this._canvas.getContext('2d')!;
     }
+
+
+    updateSizeStyleCallback: {
+        (canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number): void;
+    } = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
 
 
     clear() {

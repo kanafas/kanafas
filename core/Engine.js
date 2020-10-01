@@ -9,6 +9,7 @@ export class Engine {
         // this.debuggerBar = new DebuggerBar(this);
         // this.loop.addUpdateCallback((milliseconds: number, delta: number) => this.debuggerBar.update(milliseconds, delta));
     }
+    static get PIXELSCALE() { return RenderingLayer.PIXELSCALE; }
     get pixelScale() { return this._renderingLayer.pixelScale; }
     get width() { return this._renderingLayer.width; }
     get height() { return this._renderingLayer.height; }

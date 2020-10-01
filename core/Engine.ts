@@ -6,6 +6,9 @@ import { Transform } from "../properties/Transform.js";
 
 export class Engine implements IRenderingLayer {
 
+    static get PIXELSCALE(): number { return RenderingLayer.PIXELSCALE; }
+
+
     readonly loop: Loop;
 
     private _renderingLayer: RenderingLayer;
