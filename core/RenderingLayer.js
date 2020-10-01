@@ -20,6 +20,8 @@ export class RenderingLayer {
         this._height = Math.max(height, 0);
         this._canvas.width = width * pixelScale;
         this._canvas.height = height * pixelScale;
+        if (this.updateSizeStyleCallback !== null)
+            this.updateSizeStyleCallback(this._canvas, width, height, this._pixelScale);
         this._renderingContext = this._canvas.getContext('2d');
     }
     clear() {

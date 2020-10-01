@@ -4,6 +4,9 @@ import { Loop } from "../repeaters/Loop.js";
 export class Engine {
     // debuggerBar: DebuggerBar;
     constructor(canvas, width, height, pixelScale) {
+        this.updateSizeStyleCallback = (canvas, width, height, pixelScale) => {
+            this._renderingLayer.updateSizeStyleCallback(canvas, width, height, pixelScale);
+        };
         this._renderingLayer = new RenderingLayer(canvas, width, height, pixelScale);
         this.loop = new Loop();
         // this.debuggerBar = new DebuggerBar(this);
