@@ -1,10 +1,13 @@
 // import { DebuggerBar } from "./Debugger/DebuggerBar.js"; TODO: Dodělat gizma
-import { IRenderingLayer, RenderingLayer } from "./RenderingLayer.js";
+import { IRenderingLayer, RenderingLayer, updateSizeStyleCallbackType } from "./RenderingLayer.js";
 import { Loop } from "../repeaters/Loop.js";
 import { Transform } from "../properties/Transform.js";
 
 
 export class Engine implements IRenderingLayer {
+
+    static get PIXELSCALE(): number { return RenderingLayer.PIXELSCALE; }
+
 
     readonly loop: Loop;
 
@@ -36,6 +39,11 @@ export class Engine implements IRenderingLayer {
 
     updateSize(width: number, height: number, pixelScale?: number) {
         this._renderingLayer.updateSize(width, height, pixelScale);
+    }
+
+
+    updateSizeStyleCallback: updateSizeStyleCallbackType = (canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number): void => {
+        this._renderingLayer.updateSizeStyleCallback!(canvas, width, height, pixelScale);
     }
 
 

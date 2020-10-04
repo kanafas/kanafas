@@ -3,6 +3,14 @@ import { Transform } from "../properties/Transform.js";
 
 export class RenderingLayer implements IRenderingLayer {
 
+    static readonly DEFAULT_UPDATESIZE_CALLBACK = (canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number): void => {
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+    }
+
+    static get PIXELSCALE(): number { return window.devicePixelRatio; }
+
+
     private _pixelScale: number = 1;
     get pixelScale(): number { return this._pixelScale; }
 
@@ -23,7 +31,7 @@ export class RenderingLayer implements IRenderingLayer {
         this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
     }
 
-        
+
     updateSize(width: number, height: number, pixelScale: number = NaN) {
         if (!isNaN(pixelScale)) this._pixelScale = Math.max(pixelScale, 0);
 
@@ -33,8 +41,13 @@ export class RenderingLayer implements IRenderingLayer {
         this._canvas.width = width * pixelScale;
         this._canvas.height = height * pixelScale;
 
+        if (this.updateSizeStyleCallback !== null) this.updateSizeStyleCallback(this._canvas, width, height, this._pixelScale);
+
         this._renderingContext = this._canvas.getContext('2d')!;
     }
+
+
+    updateSizeStyleCallback: updateSizeStyleCallbackType = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
 
 
     clear() {
@@ -110,6 +123,8 @@ export interface IRenderingLayer {
 
     updateSize(width: number, height: number, pixelScale: number): void;
 
+    updateSizeStyleCallback: updateSizeStyleCallbackType;
+
     clear(): void;
 
     getRenderingContext(): CanvasRenderingContext2D;
@@ -122,3 +137,8 @@ export interface IRenderingLayer {
     setMatrixToTransform(transform: Transform): void;
     resetMatrix(): void;
 }
+
+
+export type updateSizeStyleCallbackType =  null | {
+    (canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number): void;
+};

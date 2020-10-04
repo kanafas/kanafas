@@ -4,11 +4,15 @@ import { Loop } from "../repeaters/Loop.js";
 export class Engine {
     // debuggerBar: DebuggerBar;
     constructor(canvas, width, height, pixelScale) {
+        this.updateSizeStyleCallback = (canvas, width, height, pixelScale) => {
+            this._renderingLayer.updateSizeStyleCallback(canvas, width, height, pixelScale);
+        };
         this._renderingLayer = new RenderingLayer(canvas, width, height, pixelScale);
         this.loop = new Loop();
         // this.debuggerBar = new DebuggerBar(this);
         // this.loop.addUpdateCallback((milliseconds: number, delta: number) => this.debuggerBar.update(milliseconds, delta));
     }
+    static get PIXELSCALE() { return RenderingLayer.PIXELSCALE; }
     get pixelScale() { return this._renderingLayer.pixelScale; }
     get width() { return this._renderingLayer.width; }
     get height() { return this._renderingLayer.height; }
