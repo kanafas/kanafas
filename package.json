@@ -1,6 +1,6 @@
 {
-  "version": "3.1.4-beta",
-  "name": "kanafas",
+  "version": "3.1.5-beta",
+  "name": "@kanafas/kanafas",
   "description": "Kanafas",
   "main": "./core/index.js",
   "scripts": {},
