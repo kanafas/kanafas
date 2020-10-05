@@ -1,7 +1,7 @@
 import { Vector } from "./../units/Vector.js";
 import { Numbers } from "./../utils/Numbers.js";
 import { Geometry } from "./Geometry.js";
-export class PolygonGeometry extends Geometry {
+export class TrimablePolygonGeometry extends Geometry {
     constructor(points, closed = true, trimStart = 0, trimEnd = 1, trimOffset = 0) {
         const d = (ctx, pxs, transform) => {
             this._draw(ctx, pxs, transform);

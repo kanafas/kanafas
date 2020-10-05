@@ -5,11 +5,11 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { PolygonGeometry } from "./PolygonGeometry.js";
+import { TrimablePolygonGeometry } from "./TrimablePolygonGeometry.js";
 import { IVector } from "./../units/Vector.js";
 
 
-export class PolygonShape extends PolygonGeometry implements IRenderable, IShape {
+export class TrimablePolygonShape extends TrimablePolygonGeometry implements IRenderable, IShape {
 
     fill: Fill | null = null;
     stroke: Stroke | null = null;

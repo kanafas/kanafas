@@ -6,7 +6,7 @@ import { Numbers } from "./../utils/Numbers.js";
 import { Geometry } from "./Geometry.js";
 
 
-export class PolygonGeometry extends Geometry {
+export class TrimablePolygonGeometry extends Geometry {
 
     points: IVector[];
     closed: boolean;
