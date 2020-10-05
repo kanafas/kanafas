@@ -76,7 +76,7 @@ export class Transform {
     }
     getParent() {
         if (this._parent == null) {
-            throw new Error("Transform has no parent. You can test it by method `.hasParent()`");
+            throw new Error("Transform has no parent. You can test by method `.hasParent()`");
         }
         return this._parent;
     }
