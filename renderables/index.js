@@ -1,17 +1,21 @@
+export { Geometry } from "./Geometry.js";
+export { Shape } from "./Shape.js";
+export { GeometryShape } from "./GeometryShape.js";
+// Primitives
+export { RectangleGeometry } from "./RectangleGeometry.js";
+export { RectangleShape } from "./RectangleShape.js";
 export { EllipseGeometry } from "./EllipseGeometry.js";
 export { EllipseShape } from "./EllipseShape.js";
-export { Geometry } from "./Geometry.js";
-export { GeometryShape } from "./GeometryShape.js";
-export { ImageObject } from "./ImageObject.js";
-export { ImageSliceObject } from "./ImageSliceObject.js";
-export { NullObject } from "./NullObject.js";
+export { RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
+export { RoundedRectangleShape } from "./RoundedRectangleShape.js";
+export { PolygonGeometry } from "./PolygonGeometry.js";
+export { PolygonShape } from "./PolygonShape.js";
 export { PieGeometry } from "./PieGeometry.js";
 export { PieShape } from "./PieShape.js";
 export { TrimablePolygonGeometry } from "./TrimablePolygonGeometry.js";
 export { TrimablePolygonShape } from "./TrimablePolygonShape.js";
-export { RectangleGeometry } from "./RectangleGeometry.js";
-export { RectangleShape } from "./RectangleShape.js";
-export { RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
-export { RoundedRectangleShape } from "./RoundedRectangleShape.js";
-export { Shape } from "./Shape.js";
+// Objects
+export { NullObject } from "./NullObject.js";
 export { TextObject } from "./TextObject.js";
+export { ImageObject } from "./ImageObject.js";
+export { ImageSliceObject } from "./ImageSliceObject.js";

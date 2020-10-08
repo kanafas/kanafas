@@ -2,6 +2,7 @@ import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
+/** @deprecated */
 export class ImageSliceObject {
     constructor(source, sliceX, sliceY, sliceWidth, sliceHeight) {
         this.transform = new Transform();
