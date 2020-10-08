@@ -1,12 +1,12 @@
 import { Angle } from "../units/Angle.js";
 import { Vector } from "../units/Vector.js";
 export class Transform {
-    constructor(position = Vector.zero(), scale = Vector.one(), rotation = Angle.zero()) {
-        this.origin = Vector.zero();
+    constructor(position = Vector.zero(), scale = Vector.one(), rotation = Angle.zero(), origin = Vector.zero()) {
         this._parent = null;
         this.position = position;
         this.scale = scale;
         this.rotation = rotation;
+        this.origin = origin;
     }
     /**
      * Vrátí dopočítanou pozici zděděnou od předků
