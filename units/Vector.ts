@@ -113,7 +113,6 @@ export class Vector implements IVector {
     }
 
 
-
     /**
      * TODO: Dodělat popis
      * @returns {Vector} Same Vector object.
