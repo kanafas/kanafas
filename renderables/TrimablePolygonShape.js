@@ -1,8 +1,8 @@
-import { PolygonGeometry } from "./PolygonGeometry.js";
 import { Shape } from "./Shape.js";
-export class PolygonShape extends PolygonGeometry {
-    constructor(...points) {
-        super(...points);
+import { TrimablePolygonGeometry } from "./TrimablePolygonGeometry.js";
+export class TrimablePolygonShape extends TrimablePolygonGeometry {
+    constructor(points, closed, trimStart, trimEnd, trimOffset) {
+        super(points, closed, trimStart, trimEnd, trimOffset);
         this.fill = null;
         this.stroke = null;
         this.shadow = null;

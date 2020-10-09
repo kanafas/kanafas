@@ -10,6 +10,7 @@ import { Utils } from "./../utils/Utils.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
 
 
+/** @deprecated */
 export class ImageSliceObject implements IObject, IRenderable, IVisible {
 
     readonly source: HTMLImageElement;

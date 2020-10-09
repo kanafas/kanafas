@@ -1,4 +1,4 @@
-import { PolygonGeometry } from "./PolygonGeometry.js";
+import { BezierGeometry } from "./BezierGeometry.js";
 import { IRenderable } from "./IRenderable.js";
 import { IShape } from "./IShape.js";
 import { Fill } from "./../properties/Fill.js";
@@ -6,10 +6,10 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { IVector } from "../units/index.js";
+import { BezierPoint } from "../units/BezierPoint.js";
 
 
-export class PolygonShape extends PolygonGeometry implements IRenderable, IShape {
+export class BezierShape extends BezierGeometry implements IRenderable, IShape {
 
     fill: Fill | null = null;
     stroke: Stroke | null = null;
@@ -17,7 +17,7 @@ export class PolygonShape extends PolygonGeometry implements IRenderable, IShape
 
     opacity: number = 1;
 
-    constructor(...points: IVector[]) {
+    constructor(...points: BezierPoint[]) {
         super(...points);
     }
 

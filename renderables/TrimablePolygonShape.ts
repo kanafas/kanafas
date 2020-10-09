@@ -1,4 +1,3 @@
-import { PolygonGeometry } from "./PolygonGeometry.js";
 import { IRenderable } from "./IRenderable.js";
 import { IShape } from "./IShape.js";
 import { Fill } from "./../properties/Fill.js";
@@ -6,10 +5,11 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { IVector } from "../units/index.js";
+import { TrimablePolygonGeometry } from "./TrimablePolygonGeometry.js";
+import { IVector } from "./../units/Vector.js";
 
 
-export class PolygonShape extends PolygonGeometry implements IRenderable, IShape {
+export class TrimablePolygonShape extends TrimablePolygonGeometry implements IRenderable, IShape {
 
     fill: Fill | null = null;
     stroke: Stroke | null = null;
@@ -17,8 +17,8 @@ export class PolygonShape extends PolygonGeometry implements IRenderable, IShape
 
     opacity: number = 1;
 
-    constructor(...points: IVector[]) {
-        super(...points);
+    constructor(points: IVector[], closed?: boolean, trimStart?: number, trimEnd?: number, trimOffset?: number) {
+        super(points, closed, trimStart, trimEnd, trimOffset);
     }
 
 

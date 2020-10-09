@@ -1,6 +1,6 @@
-import { PolygonGeometry } from "./PolygonGeometry.js";
+import { BezierGeometry } from "./BezierGeometry.js";
 import { Shape } from "./Shape.js";
-export class PolygonShape extends PolygonGeometry {
+export class BezierShape extends BezierGeometry {
     constructor(...points) {
         super(...points);
         this.fill = null;

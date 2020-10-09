@@ -4,8 +4,7 @@ import { Vector } from "../units/Vector.js";
 
 export class Transform {
 
-    origin: Vector = Vector.zero();
-
+    origin: Vector;
     position: Vector;
     scale: Vector;
     rotation: Angle;
@@ -13,10 +12,11 @@ export class Transform {
     private _parent: Transform | null = null;
 
 
-    constructor(position: Vector = Vector.zero(), scale: Vector = Vector.one(), rotation: Angle = Angle.zero()) {
+    constructor(position: Vector = Vector.zero(), scale: Vector = Vector.one(), rotation: Angle = Angle.zero(), origin: Vector = Vector.zero()) {
         this.position = position;
         this.scale = scale;
         this.rotation = rotation;
+        this.origin = origin;
     }
 
 
@@ -103,7 +103,7 @@ export class Transform {
 
     getParent(): Transform {
         if (this._parent == null) {
-            throw new Error("Transform has no parent. You can test it by method `.hasParent()`");
+            throw new Error("Transform has no parent. You can test by method `.hasParent()`");
         }
 
         return this._parent;

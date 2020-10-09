@@ -1,10 +1,15 @@
-import { Angle } from "./Angle.js";
+import { Angle, AngleType } from "./Angle.js";
 
 
 export interface IVector {
     x: number,
     y: number,
 }
+
+
+export type VectorType =
+    | [ vector: IVector ]
+    | [ scalar: number ]
 
 
 export class Vector implements IVector {
@@ -22,7 +27,9 @@ export class Vector implements IVector {
     }
 
 
-    add(value: IVector | number): Vector {
+    add(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -41,7 +48,9 @@ export class Vector implements IVector {
     }
 
 
-    subtract(value: IVector | number): Vector {
+    subtract(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -60,7 +69,9 @@ export class Vector implements IVector {
     }
 
 
-    multiple(value: IVector | number): Vector {
+    multiple(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -79,7 +90,9 @@ export class Vector implements IVector {
     }
 
 
-    divide(value: IVector | number): Vector {
+    divide(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -98,6 +111,28 @@ export class Vector implements IVector {
     }
 
 
+    rotate(...values: AngleType): Vector {
+        const value = values[0];
+
+        let degrees: number;
+        if (value instanceof Angle) {
+            degrees = value.degrees;
+        } else {
+            degrees = value;
+        }
+
+        const length = this.length;
+        const angle = this.getAngle().add(degrees);
+
+        const vector = angle.getVector().multiple(length);
+
+        this.x = vector.x;
+        this.y = vector.y;
+
+        return this;
+    }
+
+
     /**
      * Normalize the Vector to length equal 1.
      * @returns {Vector} Same Vector object.
@@ -111,7 +146,6 @@ export class Vector implements IVector {
 
         return this;
     }
-
 
 
     /**
