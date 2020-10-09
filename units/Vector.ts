@@ -1,10 +1,15 @@
-import { Angle } from "./Angle.js";
+import { Angle, AngleType } from "./Angle.js";
 
 
 export interface IVector {
     x: number,
     y: number,
 }
+
+
+export type VectorType =
+    | [ vector: IVector ]
+    | [ scalar: number ]
 
 
 export class Vector implements IVector {
@@ -22,7 +27,9 @@ export class Vector implements IVector {
     }
 
 
-    add(value: IVector | number): Vector {
+    add(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -41,7 +48,9 @@ export class Vector implements IVector {
     }
 
 
-    subtract(value: IVector | number): Vector {
+    subtract(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -60,7 +69,9 @@ export class Vector implements IVector {
     }
 
 
-    multiple(value: IVector | number): Vector {
+    multiple(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
@@ -79,7 +90,9 @@ export class Vector implements IVector {
     }
 
 
-    divide(value: IVector | number): Vector {
+    divide(...values: VectorType): Vector {
+        const value = values[0];
+
         let x: number;
         let y: number;
 
