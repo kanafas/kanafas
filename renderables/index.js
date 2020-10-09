@@ -8,10 +8,12 @@ export { EllipseGeometry } from "./EllipseGeometry.js";
 export { EllipseShape } from "./EllipseShape.js";
 export { RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
 export { RoundedRectangleShape } from "./RoundedRectangleShape.js";
-export { PolygonGeometry } from "./PolygonGeometry.js";
-export { PolygonShape } from "./PolygonShape.js";
 export { PieGeometry } from "./PieGeometry.js";
 export { PieShape } from "./PieShape.js";
+export { PolygonGeometry } from "./PolygonGeometry.js";
+export { PolygonShape } from "./PolygonShape.js";
+export { BezierGeometry } from "./BezierGeometry.js";
+export { BezierShape } from "./BezierShape.js";
 export { TrimablePolygonGeometry } from "./TrimablePolygonGeometry.js";
 export { TrimablePolygonShape } from "./TrimablePolygonShape.js";
 // Objects
