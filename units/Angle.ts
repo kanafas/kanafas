@@ -1,6 +1,11 @@
 import { Vector } from "./Vector.js";
 
 
+export type AngleType =
+    | [degrees: number]
+    | [angle: Angle];
+
+
 export class Angle {
 
     degrees: number;
@@ -31,7 +36,9 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    add(value: Angle | number): Angle {
+    add(...values: AngleType): Angle {
+        const value = values[0];
+
         if (value instanceof Angle) {
             this.degrees += value.degrees;
         } else {
@@ -47,7 +54,9 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    subtract(value: Angle | number): Angle {
+    subtract(...values: AngleType): Angle {
+        const value = values[0];
+
         if (value instanceof Angle) {
             this.degrees -= value.degrees;
         } else {
@@ -62,7 +71,9 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    multiply(value: Angle | number): Angle {
+    multiply(...values: AngleType): Angle {
+        const value = values[0];
+
         if (value instanceof Angle) {
             this.degrees *= value.degrees;
         } else {
@@ -78,7 +89,9 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    divide(value: Angle | number): Angle {
+    divide(...values: AngleType): Angle {
+        const value = values[0];
+
         if (value instanceof Angle) {
             this.degrees /= value.degrees;
         } else {

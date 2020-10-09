@@ -20,7 +20,8 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    add(value) {
+    add(...values) {
+        const value = values[0];
         if (value instanceof Angle) {
             this.degrees += value.degrees;
         }
@@ -34,7 +35,8 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    subtract(value) {
+    subtract(...values) {
+        const value = values[0];
         if (value instanceof Angle) {
             this.degrees -= value.degrees;
         }
@@ -48,7 +50,8 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    multiply(value) {
+    multiply(...values) {
+        const value = values[0];
         if (value instanceof Angle) {
             this.degrees *= value.degrees;
         }
@@ -62,7 +65,8 @@ export class Angle {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    divide(value) {
+    divide(...values) {
+        const value = values[0];
         if (value instanceof Angle) {
             this.degrees /= value.degrees;
         }
