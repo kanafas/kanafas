@@ -7,7 +7,8 @@ export class Vector {
     get length() {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
-    add(value) {
+    add(...values) {
+        const value = values[0];
         let x;
         let y;
         if (typeof value == 'number') {
@@ -22,7 +23,8 @@ export class Vector {
         this.y += y;
         return this;
     }
-    subtract(value) {
+    subtract(...values) {
+        const value = values[0];
         let x;
         let y;
         if (typeof value == 'number') {
@@ -37,7 +39,8 @@ export class Vector {
         this.y -= y;
         return this;
     }
-    multiple(value) {
+    multiple(...values) {
+        const value = values[0];
         let x;
         let y;
         if (typeof value == 'number') {
@@ -52,7 +55,8 @@ export class Vector {
         this.y *= y;
         return this;
     }
-    divide(value) {
+    divide(...values) {
+        const value = values[0];
         let x;
         let y;
         if (typeof value == 'number') {
@@ -65,6 +69,22 @@ export class Vector {
         }
         this.x /= x;
         this.y /= y;
+        return this;
+    }
+    rotate(...values) {
+        const value = values[0];
+        let degrees;
+        if (value instanceof Angle) {
+            degrees = value.degrees;
+        }
+        else {
+            degrees = value;
+        }
+        const length = this.length;
+        const angle = this.getAngle().add(degrees);
+        const vector = angle.getVector().multiple(length);
+        this.x = vector.x;
+        this.y = vector.y;
         return this;
     }
     /**

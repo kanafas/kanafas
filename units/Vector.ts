@@ -111,6 +111,28 @@ export class Vector implements IVector {
     }
 
 
+    rotate(...values: AngleType): Vector {
+        const value = values[0];
+
+        let degrees: number;
+        if (value instanceof Angle) {
+            degrees = value.degrees;
+        } else {
+            degrees = value;
+        }
+
+        const length = this.length;
+        const angle = this.getAngle().add(degrees);
+
+        const vector = angle.getVector().multiple(length);
+
+        this.x = vector.x;
+        this.y = vector.y;
+
+        return this;
+    }
+
+
     /**
      * Normalize the Vector to length equal 1.
      * @returns {Vector} Same Vector object.
