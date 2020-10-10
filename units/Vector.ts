@@ -8,8 +8,9 @@ export interface IVector {
 
 
 export type VectorType =
+    | [ x: number, y: number ]
     | [ vector: IVector ]
-    | [ scalar: number ]
+    | [ length: number ];
 
 
 export class Vector implements IVector {
@@ -21,91 +22,68 @@ export class Vector implements IVector {
     }
 
 
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+    private static _parseVectorType(raw: VectorType): IVector {
+        let x: number;
+        let y: number;
+
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        } else if (typeof raw[0] == 'number') {
+            x = raw[0];
+            y = raw[0];
+        } else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+
+        return { x, y }
+    }
+
+
+    constructor(...values: VectorType) {
+        const v = Vector._parseVectorType(values);
+
+        this.x = v.x;
+        this.y = v.y;
     }
 
 
     add(...values: VectorType): Vector {
-        const value = values[0];
+        const v = Vector._parseVectorType(values);
 
-        let x: number;
-        let y: number;
-
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        } else {
-            x = value.x;
-            y = value.y;
-        }
-
-        this.x += x;
-        this.y += y;
+        this.x += v.x;
+        this.y += v.y;
 
         return this;
     }
 
 
     subtract(...values: VectorType): Vector {
-        const value = values[0];
+        const v = Vector._parseVectorType(values);
 
-        let x: number;
-        let y: number;
-
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        } else {
-            x = value.x;
-            y = value.y;
-        }
-
-        this.x -= x;
-        this.y -= y;
+        this.x -= v.x;
+        this.y -= v.y;
 
         return this;
     }
 
 
     multiple(...values: VectorType): Vector {
-        const value = values[0];
+        const v = Vector._parseVectorType(values);
 
-        let x: number;
-        let y: number;
-
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        } else {
-            x = value.x;
-            y = value.y;
-        }
-
-        this.x *= x;
-        this.y *= y;
+        this.x *= v.x;
+        this.y *= v.y;
 
         return this;
     }
 
 
     divide(...values: VectorType): Vector {
-        const value = values[0];
+        const v = Vector._parseVectorType(values);
 
-        let x: number;
-        let y: number;
-
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        } else {
-            x = value.x;
-            y = value.y;
-        }
-
-        this.x /= x;
-        this.y /= y;
+        this.x /= v.x;
+        this.y /= v.y;
 
         return this;
     }
