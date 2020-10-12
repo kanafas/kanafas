@@ -1,74 +1,52 @@
 import { Angle } from "./Angle.js";
 export class Vector {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(...values) {
+        const v = Vector._parseVectorType(values);
+        this.x = v.x;
+        this.y = v.y;
     }
     get length() {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
-    add(...values) {
-        const value = values[0];
+    static _parseVectorType(raw) {
         let x;
         let y;
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        }
+        else if (typeof raw[0] == 'number') {
+            x = raw[0];
+            y = raw[0];
         }
         else {
-            x = value.x;
-            y = value.y;
+            x = raw[0].x;
+            y = raw[0].y;
         }
-        this.x += x;
-        this.y += y;
+        return { x, y };
+    }
+    add(...values) {
+        const v = Vector._parseVectorType(values);
+        this.x += v.x;
+        this.y += v.y;
         return this;
     }
     subtract(...values) {
-        const value = values[0];
-        let x;
-        let y;
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        }
-        else {
-            x = value.x;
-            y = value.y;
-        }
-        this.x -= x;
-        this.y -= y;
+        const v = Vector._parseVectorType(values);
+        this.x -= v.x;
+        this.y -= v.y;
         return this;
     }
     multiple(...values) {
-        const value = values[0];
-        let x;
-        let y;
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        }
-        else {
-            x = value.x;
-            y = value.y;
-        }
-        this.x *= x;
-        this.y *= y;
+        const v = Vector._parseVectorType(values);
+        this.x *= v.x;
+        this.y *= v.y;
         return this;
     }
     divide(...values) {
-        const value = values[0];
-        let x;
-        let y;
-        if (typeof value == 'number') {
-            x = value;
-            y = value;
-        }
-        else {
-            x = value.x;
-            y = value.y;
-        }
-        this.x /= x;
-        this.y /= y;
+        const v = Vector._parseVectorType(values);
+        this.x /= v.x;
+        this.y /= v.y;
         return this;
     }
     rotate(...values) {
