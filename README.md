@@ -1,1 +1,1 @@
-Objective oriented typescript library for rendering 2d graphics.
+Object-oriented library for rendering 2d graphics. All in typescript!
