@@ -1,12 +1,15 @@
 {
-	"version": "3.1.10-beta",
-	"name": "@kanafas/kanafas",
-	"repository": "kanafas/kanafas",
-	"url": "https://github.com/kanafas/kanafas/issues",
-	"email": "adamjosefus+npm@gmail.com",
-	"description": "Objective oriented typescript library for rendering 2d graphics.",
-	"main": "./core/index.js",
-	"scripts": {},
-	"author": "Adam Josefus",
-	"license": "CC-BY-NC-ND-4.0"
+    "version": "3.1.10-beta",
+    "name": "@kanafas/kanafas",
+    "repository": "kanafas/kanafas",
+    "url": "https://github.com/kanafas/kanafas/issues",
+    "email": "adamjosefus+npm@gmail.com",
+    "description": "Objective oriented typescript library for rendering 2d graphics.",
+    "main": "./core/index.js",
+    "scripts": {},
+    "author": "Adam Josefus",
+    "license": "CC-BY-NC-ND-4.0",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    }
 }
