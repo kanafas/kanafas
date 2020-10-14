@@ -2,9 +2,10 @@ import { IBoundingBox } from "../renderables/IBoundingBox.js";
 import { IStyleColor, Color } from "../styles/Color.js";
 import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class Shadow {
+export class Shadow implements IClonable<Shadow> {
 
     color: IStyleColor = Color.black();
     offset: Vector = Vector.zero();
@@ -26,6 +27,14 @@ export class Shadow {
         ctx.shadowBlur = this.blur * pxs;
         ctx.shadowOffsetX = this.offset.x * pxs;
         ctx.shadowOffsetY = this.offset.y * pxs;
+    }
+
+
+    clone(): Shadow {
+        const thisColor = this.color as any;
+        const color = thisColor.hasOwnProperty('clone') ? thisColor.clone() : { ...this.color };
+
+        return new Shadow(color, this.offset.clone(), this.blur);
     }
 
 

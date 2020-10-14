@@ -17,6 +17,11 @@ export class Shadow {
         ctx.shadowOffsetX = this.offset.x * pxs;
         ctx.shadowOffsetY = this.offset.y * pxs;
     }
+    clone() {
+        const thisColor = this.color;
+        const color = thisColor.hasOwnProperty('clone') ? thisColor.clone() : { ...this.color };
+        return new Shadow(color, this.offset.clone(), this.blur);
+    }
     static clear(renderingLayer) {
         const ctx = renderingLayer.getRenderingContext();
         ctx.shadowBlur = 0;
