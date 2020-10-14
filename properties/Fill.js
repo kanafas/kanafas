@@ -7,6 +7,11 @@ export class Fill {
         const ctx = renderingLayer.getRenderingContext();
         ctx.fillStyle = this.style.getStyle(renderingLayer, boundingBox);
     }
+    clone() {
+        const thisStyle = this.style;
+        const style = thisStyle.hasOwnProperty('clone') ? thisStyle.clone() : { ...this.style };
+        return new Fill(style);
+    }
     static clear(renderingLayer) {
         const ctx = renderingLayer.getRenderingContext();
         ctx.fillStyle = 'transparent';

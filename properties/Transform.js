@@ -80,4 +80,10 @@ export class Transform {
         }
         return this._parent;
     }
+    clone() {
+        const t = new Transform(this.position.clone(), this.scale.clone(), this.rotation.clone(), this.origin.clone());
+        if (this.hasParent())
+            t.setParent(t.getParent());
+        return t;
+    }
 }
