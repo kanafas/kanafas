@@ -18,6 +18,11 @@ export class Stroke {
         ctx.miterLimit = this.miterLimit * pxs;
         ctx.strokeStyle = this.style.getStyle(renderingLayer, boundingBox);
     }
+    clone() {
+        const thisStyle = this.style;
+        const style = thisStyle.hasOwnProperty('clone') ? thisStyle.clone() : { ...this.style };
+        return new Stroke(style, this.lineWidth, this.lineJoin, this.lineCap, this.lineDashOffset, this.miterLimit);
+    }
     static clear(renderingLayer) {
         const ctx = renderingLayer.getRenderingContext();
         ctx.lineWidth = 0;
