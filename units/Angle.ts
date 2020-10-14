@@ -1,3 +1,4 @@
+import { IClonable } from "../core/IClonable.js";
 import { Vector } from "./Vector.js";
 
 
@@ -6,7 +7,7 @@ export type AngleType =
     | [angle: Angle];
 
 
-export class Angle {
+export class Angle implements IClonable<Angle> {
 
     degrees: number;
 

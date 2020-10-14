@@ -26,6 +26,20 @@ export class Font {
         ctx.font = font;
         ctx.textAlign = this.align;
     }
+    clone() {
+        const f = new Font();
+        f.size = this.size;
+        f.family = this.family;
+        f.size = this.size;
+        f.weight = this.weight;
+        f.italic = this.italic;
+        f.lineHeight = this.lineHeight;
+        f.letterSpacing = this.letterSpacing;
+        f.features = this.features;
+        f.align = this.align;
+        f.baseline = this.baseline;
+        return f;
+    }
     static clear(renderingLayer) {
         const canvas = renderingLayer.getCanvas();
         canvas.style.letterSpacing = `0em`;

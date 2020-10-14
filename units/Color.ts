@@ -1,7 +1,8 @@
+import { IClonable } from "../core/IClonable.js";
 import { Numbers } from "../utils/Numbers.js";
 
 
-export class Color {
+export class Color implements IClonable<Color> {
     private _red: number = 0;
     private _green: number = 0;
     private _blue: number = 0;

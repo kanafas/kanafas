@@ -1,13 +1,15 @@
+import { IClonable } from "../core/IClonable.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
+import { Transform } from "./Transform.js";
 
 
-export class Font {
+export class Font implements IClonable<Font> {
 
-    size: number;
-    lineHeight: number;
     family: string;
+    size: number;
     weight: number = 400;
     italic: boolean = false;
+    lineHeight: number;
     letterSpacing: number = 0;
     features: FontFeatures[] = [];
     align: CanvasTextAlign = "left";
@@ -41,6 +43,24 @@ export class Font {
 
         ctx.font = font;
         ctx.textAlign = this.align;
+    }
+
+
+    clone(): Font {
+        const f = new Font();
+
+        f.size = this.size;
+        f.family = this.family;
+        f.size = this.size;
+        f.weight = this.weight;
+        f.italic = this.italic;
+        f.lineHeight = this.lineHeight;
+        f.letterSpacing = this.letterSpacing;
+        f.features = this.features;
+        f.align = this.align;
+        f.baseline = this.baseline;
+
+        return f;
     }
 
 
