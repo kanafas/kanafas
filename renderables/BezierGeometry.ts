@@ -13,15 +13,15 @@ export class BezierGeometry extends Geometry {
     constructor(...points: BezierPoint[]) {
         const d = (ctx: CanvasRenderingContext2D, pxs: number, t: Transform) => {
             ctx.beginPath();
-            
-            const point = points[points.length-1];
+
+            const point = points[points.length - 1];
             const x = pxs * (-t.origin.x + point.x);
             const y = pxs * (-t.origin.y + point.y);
 
             ctx.moveTo(x, y);
 
             for (let i = 0; i < points.length; i++) {
-                const point1 = i > 0 ? points[i-1] : points[points.length-1];
+                const point1 = i > 0 ? points[i - 1] : points[points.length - 1];
                 const point2 = points[i];
 
                 const cp1x = point1.x + point1.endControl.x;
@@ -54,7 +54,7 @@ export class BezierGeometry extends Geometry {
                 max.x = Math.max(max.x, p.x);
                 max.y = Math.max(max.y, p.y);
             });
-    
+
             return {
                 origin: t.origin.clone().add(min),
                 size: max.subtract(min),

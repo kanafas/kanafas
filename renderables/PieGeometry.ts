@@ -1,8 +1,6 @@
-import { IGeometry } from "./IGeometry.js";
 import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { Angle } from "./../units/Angle.js";
-import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { IBoundingBox } from "./IBoundingBox.js";
 import { Utils } from "./../utils/Utils.js";
 import { Geometry } from "./Geometry.js";
