@@ -1,8 +1,9 @@
+import { IClonable } from "../core/IClonable.js";
 import { Angle } from "../units/Angle.js";
 import { Vector } from "../units/Vector.js";
 
 
-export class Transform {
+export class Transform implements IClonable<Transform> {
 
     origin: Vector;
     position: Vector;
@@ -107,6 +108,15 @@ export class Transform {
         }
 
         return this._parent;
+    }
+
+
+    clone(): Transform {
+        const t = new Transform(this.position.clone(), this.scale.clone(), this.rotation.clone(), this.origin.clone());
+
+        if (this.hasParent()) t.setParent(t.getParent());
+
+        return t;
     }
 
 }
