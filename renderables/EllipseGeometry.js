@@ -23,4 +23,7 @@ export class EllipseGeometry extends Geometry {
         this.width = width;
         this.height = height;
     }
+    clone() {
+        return new EllipseGeometry(this.width, this.height);
+    }
 }

@@ -3,9 +3,10 @@ import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { IBoundingBox } from "./IBoundingBox.js";
 import { Geometry } from "./Geometry.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class EllipseGeometry extends Geometry {
+export class EllipseGeometry extends Geometry implements IClonable<EllipseGeometry> {
 
     width: number;
     height: number;
@@ -44,4 +45,10 @@ export class EllipseGeometry extends Geometry {
         this.width = width;
         this.height = height;
     }
+
+
+    clone(): EllipseGeometry {
+        return new EllipseGeometry(this.width, this.height);
+    }
+
 }
