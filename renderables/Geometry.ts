@@ -4,26 +4,24 @@ import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { IBoundingBox } from "./IBoundingBox.js";
 
 
+type drawWithoutMatrixManipulationType = {
+    (ctx: CanvasRenderingContext2D, pxs: number, transform: Transform): void
+};
+
+type getBoundingBoxType = {
+    (transform: Transform): IBoundingBox
+}
+
+
 export abstract class Geometry implements IGeometry {
 
     transform: Transform = new Transform();
 
-    private _drawWithoutMatrixManipulation: {
-        (ctx: CanvasRenderingContext2D, pxs: number, transform: Transform): void
-    };
+    private _drawWithoutMatrixManipulation: drawWithoutMatrixManipulationType;
+    private _getBoundingBox: getBoundingBoxType;
 
-    private _getBoundingBox: {
-        (transform: Transform): IBoundingBox
-    }
 
-    constructor(
-        draw: {
-            (ctx: CanvasRenderingContext2D, pxs: number, transform: Transform): void
-        },
-        getBoundingBox: {
-            (transform: Transform): IBoundingBox
-        }) {
-
+    constructor(draw: drawWithoutMatrixManipulationType, getBoundingBox: getBoundingBoxType) {
         this._drawWithoutMatrixManipulation = draw;
         this._getBoundingBox = getBoundingBox;
     }
