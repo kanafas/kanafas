@@ -42,4 +42,5 @@ export class GeometryShape implements IRenderable, IShape {
     getBoundingBox(renderingLayer: IRenderingLayer) {
         return this._getBoundingBox(renderingLayer)
     }
+
 }
