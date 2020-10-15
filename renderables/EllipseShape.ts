@@ -6,9 +6,10 @@ import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
 import { EllipseGeometry } from "./EllipseGeometry.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class EllipseShape extends EllipseGeometry implements IRenderable, IShape {
+export class EllipseShape extends EllipseGeometry implements IRenderable, IShape, IClonable<EllipseShape> {
 
     fill: Fill | null = null;
     stroke: Stroke | null = null;
@@ -29,4 +30,17 @@ export class EllipseShape extends EllipseGeometry implements IRenderable, IShape
     renderGizmo(renderingLayer: IRenderingLayer) {
         Shape.renderGizmo(renderingLayer, this);
     }
+
+
+    clone(): EllipseShape {
+        const ellipse = new EllipseShape(this.width, this.height);
+
+        ellipse.fill = this.fill?.clone() ?? null;
+        ellipse.stroke = this.stroke?.clone() ?? null;
+        ellipse.shadow = this.shadow?.clone() ?? null;
+        ellipse.opacity = this.opacity;
+
+        return ellipse;
+    }
+
 }
