@@ -117,4 +117,12 @@ export class RoundedRectangleGeometry extends Geometry {
         }
         return { x, y };
     }
+    clone() {
+        const topLeftRadius = { x: this.topLeftRadius.x, y: this.topLeftRadius.y };
+        const topRightRadius = { x: this.topRightRadius.x, y: this.topRightRadius.y };
+        const bottomRightRadius = { x: this.bottomRightRadius.x, y: this.bottomRightRadius.y };
+        const bottomLeftRadius = { x: this.bottomLeftRadius.x, y: this.bottomLeftRadius.y };
+        const geometry = new RoundedRectangleGeometry(this.width, this.height, topLeftRadius, topRightRadius, bottomRightRadius, bottomLeftRadius);
+        return geometry;
+    }
 }
