@@ -9,9 +9,9 @@ export interface IVector {
 
 
 export type VectorType =
-    | [ x: number, y: number ]
-    | [ vector: IVector ]
-    | [ length: number ];
+    | [x: number, y: number]
+    | [vector: IVector]
+    | [length: number];
 
 
 export class Vector implements IVector, IClonable<Vector> {
@@ -20,25 +20,6 @@ export class Vector implements IVector, IClonable<Vector> {
 
     get length(): number {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
-    }
-
-
-    private static _parseVectorType(raw: VectorType): IVector {
-        let x: number;
-        let y: number;
-
-        if (raw.length == 2) {
-            x = raw[0];
-            y = raw[1];
-        } else if (typeof raw[0] == 'number') {
-            x = raw[0];
-            y = raw[0];
-        } else {
-            x = raw[0].x;
-            y = raw[0].y;
-        }
-
-        return { x, y }
     }
 
 
@@ -128,7 +109,7 @@ export class Vector implements IVector, IClonable<Vector> {
 
 
     /**
-     * TODO: Dodělat popis
+     * TODO: Add description
      * @returns {Vector} Same Vector object.
      */
     absolute(): Vector {
@@ -140,7 +121,7 @@ export class Vector implements IVector, IClonable<Vector> {
 
 
     /**
-     * TODO: Dodělat popis
+     * TODO: Add description
      */
     isEquals(vector: Vector): boolean {
         return this.x == vector.x && this.y == vector.y;
@@ -225,6 +206,25 @@ export class Vector implements IVector, IClonable<Vector> {
       */
     static right(): Vector {
         return new Vector(1, 0);
+    }
+
+
+    private static _parseVectorType(raw: VectorType): IVector {
+        let x: number;
+        let y: number;
+
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        } else if (typeof raw[0] == 'number') {
+            x = raw[0];
+            y = raw[0];
+        } else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+
+        return { x, y }
     }
 
 }
