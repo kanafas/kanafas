@@ -2,7 +2,7 @@ import { Vector } from "./../units/Vector.js";
 import { Numbers } from "./../utils/Numbers.js";
 import { Geometry } from "./Geometry.js";
 export class RoundedRectangleGeometry extends Geometry {
-    constructor(width, height, radius1 = 0, radius2, radius3, radius4) {
+    constructor(width, height, ...radius) {
         const d = (ctx, pxs, t) => {
             const width = (this.width > 0 ? this.width : 0);
             const height = (this.height > 0 ? this.height : 0);
@@ -48,65 +48,73 @@ export class RoundedRectangleGeometry extends Geometry {
         this.topRightRadius = Vector.zero();
         this.bottomLeftRadius = Vector.zero();
         this.bottomRightRadius = Vector.zero();
-        this.setRadius(radius1, radius2, radius3, radius4);
+        this.setRadius(...radius);
     }
-    setRadius(radiusA, radiusB, radiusC, radiusD) {
-        if (radiusA != undefined && radiusB != undefined && radiusC != undefined && radiusD != undefined) {
-            this.setTopLeftRadius(radiusA);
-            this.setTopRightRadius(radiusB);
-            this.setBottomRightRadius(radiusC);
-            this.setBottomLeftRadius(radiusD);
+    setRadius(...radius) {
+        if (radius.length == 4) {
+            this.setTopLeftRadius(radius[0]);
+            this.setTopRightRadius(radius[1]);
+            this.setBottomRightRadius(radius[2]);
+            this.setBottomLeftRadius(radius[3]);
         }
-        else if (radiusA != undefined && radiusB != undefined && radiusC == undefined && radiusD == undefined) {
-            this.setTopLeftRadius(radiusA);
-            this.setTopRightRadius(radiusB);
-            this.setBottomRightRadius(radiusA);
-            this.setBottomLeftRadius(radiusB);
+        else if (radius.length == 3) {
+            this.setTopLeftRadius(radius[0]);
+            this.setTopRightRadius(radius[1]);
+            this.setBottomRightRadius(radius[2]);
+            this.setBottomLeftRadius(radius[1]);
         }
-        else if (radiusA != undefined && radiusB == undefined && radiusC == undefined && radiusD == undefined) {
-            this.setTopLeftRadius(radiusA);
-            this.setTopRightRadius(radiusA);
-            this.setBottomRightRadius(radiusA);
-            this.setBottomLeftRadius(radiusA);
+        else if (radius.length == 2) {
+            this.setTopLeftRadius(radius[0]);
+            this.setTopRightRadius(radius[1]);
+            this.setBottomRightRadius(radius[0]);
+            this.setBottomLeftRadius(radius[1]);
+        }
+        else if (radius.length == 1) {
+            const v = radius[0];
+            this.setTopLeftRadius(radius[0]);
+            this.setTopRightRadius(radius[0]);
+            this.setBottomRightRadius(radius[0]);
+            this.setBottomLeftRadius(radius[0]);
         }
         else {
             throw new Error("Incorrect combination of agruments");
         }
     }
-    setTopLeftRadius(value) {
-        if (value instanceof Vector) {
-            this.topLeftRadius = value.clone();
-        }
-        else {
-            this.topLeftRadius.x = value;
-            this.topLeftRadius.y = value;
-        }
+    setTopLeftRadius(...values) {
+        const radius = RoundedRectangleGeometry._parseRadiusValue(...values);
+        this.topLeftRadius.x = radius.x;
+        this.topLeftRadius.y = radius.y;
     }
-    setTopRightRadius(value) {
-        if (value instanceof Vector) {
-            this.topRightRadius = value.clone();
-        }
-        else {
-            this.topRightRadius.x = value;
-            this.topRightRadius.y = value;
-        }
+    setTopRightRadius(...values) {
+        const radius = RoundedRectangleGeometry._parseRadiusValue(...values);
+        this.topRightRadius.x = radius.x;
+        this.topRightRadius.y = radius.y;
     }
-    setBottomRightRadius(value) {
-        if (value instanceof Vector) {
-            this.bottomRightRadius = value.clone();
-        }
-        else {
-            this.bottomRightRadius.x = value;
-            this.bottomRightRadius.y = value;
-        }
+    setBottomRightRadius(...values) {
+        const radius = RoundedRectangleGeometry._parseRadiusValue(...values);
+        this.bottomRightRadius.x = radius.x;
+        this.bottomRightRadius.y = radius.y;
     }
-    setBottomLeftRadius(value) {
-        if (value instanceof Vector) {
-            this.bottomLeftRadius = value.clone();
+    setBottomLeftRadius(...values) {
+        const radius = RoundedRectangleGeometry._parseRadiusValue(...values);
+        this.bottomLeftRadius.x = radius.x;
+        this.bottomLeftRadius.y = radius.y;
+    }
+    static _parseRadiusValue(...values) {
+        let x;
+        let y;
+        if (values.length == 2) {
+            x = values[0];
+            y = values[1];
+        }
+        else if (typeof values[0] == 'number') {
+            x = values[0];
+            y = values[0];
         }
         else {
-            this.bottomLeftRadius.x = value;
-            this.bottomLeftRadius.y = value;
+            x = values[0].x;
+            y = values[0].y;
         }
+        return { x, y };
     }
 }
