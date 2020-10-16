@@ -8,23 +8,6 @@ export class Vector {
     get length() {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
-    static _parseVectorType(raw) {
-        let x;
-        let y;
-        if (raw.length == 2) {
-            x = raw[0];
-            y = raw[1];
-        }
-        else if (typeof raw[0] == 'number') {
-            x = raw[0];
-            y = raw[0];
-        }
-        else {
-            x = raw[0].x;
-            y = raw[0].y;
-        }
-        return { x, y };
-    }
     add(...values) {
         const v = Vector._parseVectorType(values);
         this.x += v.x;
@@ -78,7 +61,7 @@ export class Vector {
         return this;
     }
     /**
-     * TODO: Dodělat popis
+     * TODO: Add description
      * @returns {Vector} Same Vector object.
      */
     absolute() {
@@ -87,7 +70,7 @@ export class Vector {
         return this;
     }
     /**
-     * TODO: Dodělat popis
+     * TODO: Add description
      */
     isEquals(vector) {
         return this.x == vector.x && this.y == vector.y;
@@ -154,5 +137,22 @@ export class Vector {
       */
     static right() {
         return new Vector(1, 0);
+    }
+    static _parseVectorType(raw) {
+        let x;
+        let y;
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        }
+        else if (typeof raw[0] == 'number') {
+            x = raw[0];
+            y = raw[0];
+        }
+        else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+        return { x, y };
     }
 }

@@ -5,8 +5,7 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
-import { Vector } from "./../units/Vector.js";
-import { RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
+import { MultipleRadiusInitType, RoundedRectangleGeometry } from "./RoundedRectangleGeometry.js";
 
 
 export class RoundedRectangleShape extends RoundedRectangleGeometry implements IRenderable, IShape {
@@ -17,8 +16,8 @@ export class RoundedRectangleShape extends RoundedRectangleGeometry implements I
 
     opacity: number = 1;
 
-    constructor(width: number, height: number, radius1: number | Vector, radius2?: number | Vector, radius3?: number | Vector, radius4?: number | Vector) {
-        super(width, height, radius1, radius2, radius3, radius4);
+    constructor(width: number, height: number, ...radius: MultipleRadiusInitType) {
+        super(width, height, ...radius);
     }
 
 
