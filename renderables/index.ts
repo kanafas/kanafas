@@ -6,7 +6,6 @@ export { IVisible } from "./IVisible.js";
 
 export { Geometry } from "./Geometry.js";
 export { Shape } from "./Shape.js";
-export { GeometryShape } from "./GeometryShape.js";
 
 export { IArea, IBoxArea } from "./IArea.js";
 export { IBlueprint } from "./IBlueprint.js";

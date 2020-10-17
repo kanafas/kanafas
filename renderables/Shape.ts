@@ -4,13 +4,47 @@ import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
 import { IGeometry } from "./IGeometry.js";
 import { IRenderable } from "./IRenderable.js";
-import { IShape } from "./IShape.js";
+import { getBoundingBox, IShape } from "./IShape.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { Gizmo } from "../debugger/Gizmo.js";
 import { Vector } from "../units/index.js";
+import { Transform } from "../properties/index.js";
 
 
-export abstract class Shape {
+export class Shape {
+
+    geometry: IGeometry;
+    private _getBoundingBox: getBoundingBox;
+
+    transform: Transform = new Transform();
+
+    fill: Fill | null = null;
+    stroke: Stroke | null = null;
+    shadow: Shadow | null = null;
+
+    opacity: number = 1;
+
+
+    constructor(geometry: IGeometry, getBoundingBox: getBoundingBox) {
+        this.geometry = geometry;
+        this._getBoundingBox = getBoundingBox;
+    }
+
+
+    render(renderingLayer: IRenderingLayer) {
+        Shape.renderObject(renderingLayer, this.geometry, this, this);
+    }
+
+
+    renderGizmo(renderingLayer: IRenderingLayer) {
+        Shape.renderGizmo(renderingLayer, this.geometry);
+    }
+
+
+    getBoundingBox(renderingLayer: IRenderingLayer) {
+        return this._getBoundingBox(renderingLayer)
+    }
+
 
     static applyStyles(renderingLayer: IRenderingLayer, shape: IShape): void {
         const ctx = renderingLayer.getRenderingContext();
