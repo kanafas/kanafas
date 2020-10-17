@@ -20,4 +20,9 @@ export class NullObject {
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.nullColor);
         renderingLayer.resetMatrix();
     }
+    clone() {
+        const n = new NullObject();
+        n.transform = this.transform.clone();
+        return n;
+    }
 }

@@ -81,4 +81,14 @@ export class TextObject {
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.textColor);
         renderingLayer.resetMatrix();
     }
+    clone() {
+        const text = new TextObject(this.content);
+        text.transform = this.transform.clone();
+        text.fill = this.fill?.clone() ?? null;
+        text.stroke = this.stroke?.clone() ?? null;
+        text.font = this.font?.clone() ?? null;
+        text.shadow = this.shadow?.clone() ?? null;
+        text.opacity = this.opacity;
+        return text;
+    }
 }

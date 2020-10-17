@@ -3,6 +3,7 @@ import { IVector, Vector } from "./../units/Vector.js";
 import { Numbers } from "./../utils/Numbers.js";
 import { IBoundingBox } from "./IBoundingBox.js";
 import { Geometry } from "./Geometry.js";
+import { IClonable } from "../core/IClonable.js";
 
 
 export type MultipleRadiusInitType =
@@ -18,7 +19,7 @@ export type SingleRadiusInitType =
     | [radiusX: number, radiusY: number];
 
 
-export class RoundedRectangleGeometry extends Geometry {
+export class RoundedRectangleGeometry extends Geometry implements IClonable<RoundedRectangleGeometry> {
 
     width: number;
     height: number;
@@ -196,6 +197,18 @@ export class RoundedRectangleGeometry extends Geometry {
         }
 
         return { x, y }
+    }
+
+
+    clone(): RoundedRectangleGeometry {
+        const topLeftRadius = { x: this.topLeftRadius.x, y: this.topLeftRadius.y };
+        const topRightRadius = { x: this.topRightRadius.x, y: this.topRightRadius.y };
+        const bottomRightRadius = { x: this.bottomRightRadius.x, y: this.bottomRightRadius.y };
+        const bottomLeftRadius = { x: this.bottomLeftRadius.x, y: this.bottomLeftRadius.y };
+
+        const geometry = new RoundedRectangleGeometry(this.width, this.height, topLeftRadius, topRightRadius, bottomRightRadius, bottomLeftRadius);
+
+        return geometry;
     }
 
 }

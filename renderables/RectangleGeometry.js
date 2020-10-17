@@ -19,4 +19,7 @@ export class RectangleGeometry extends Geometry {
         this.width = width;
         this.height = height;
     }
+    clone() {
+        return new RectangleGeometry(this.width, this.height);
+    }
 }

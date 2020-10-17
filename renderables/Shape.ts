@@ -10,7 +10,7 @@ import { Gizmo } from "../debugger/Gizmo.js";
 import { Vector } from "../units/index.js";
 
 
-export class Shape {
+export abstract class Shape {
 
     static applyStyles(renderingLayer: IRenderingLayer, shape: IShape): void {
         const ctx = renderingLayer.getRenderingContext();
