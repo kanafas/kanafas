@@ -1,6 +1,5 @@
 export { Geometry } from "./Geometry.js";
 export { Shape } from "./Shape.js";
-export { GeometryShape } from "./GeometryShape.js";
 // Primitives
 export { RectangleGeometry } from "./RectangleGeometry.js";
 export { RectangleShape } from "./RectangleShape.js";

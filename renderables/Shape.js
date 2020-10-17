@@ -4,7 +4,26 @@ import { Stroke } from "../properties/Stroke.js";
 import { Shadow } from "../properties/Shadow.js";
 import { Gizmo } from "../debugger/Gizmo.js";
 import { Vector } from "../units/index.js";
+import { Transform } from "../properties/index.js";
 export class Shape {
+    constructor(geometry, getBoundingBox) {
+        this.transform = new Transform();
+        this.fill = null;
+        this.stroke = null;
+        this.shadow = null;
+        this.opacity = 1;
+        this.geometry = geometry;
+        this._getBoundingBox = getBoundingBox;
+    }
+    render(renderingLayer) {
+        Shape.renderObject(renderingLayer, this.geometry, this, this);
+    }
+    renderGizmo(renderingLayer) {
+        Shape.renderGizmo(renderingLayer, this.geometry);
+    }
+    getBoundingBox(renderingLayer) {
+        return this._getBoundingBox(renderingLayer);
+    }
     static applyStyles(renderingLayer, shape) {
         const ctx = renderingLayer.getRenderingContext();
         ctx.globalAlpha = Utils.Numbers.limit(shape.opacity, 0, 1);
