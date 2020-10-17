@@ -1,5 +1,5 @@
 {
-    "version": "3.2.1-beta",
+    "version": "3.2.2-beta",
     "name": "@kanafas/kanafas",
     "repository": "kanafas/kanafas",
     "url": "https://github.com/kanafas/kanafas/issues",
@@ -8,8 +8,5 @@
     "main": "./core/index.js",
     "scripts": {},
     "author": "Adam Josefus",
-    "license": "CC-BY-NC-ND-4.0",
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
-    }
+    "license": "CC-BY-NC-ND-4.0"
 }
