@@ -46,7 +46,6 @@ export class Shape {
     }
 
 
-
     static applyStyles(renderingLayer: IRenderingLayer, shape: IShape): void {
         const ctx = renderingLayer.getRenderingContext();
 
