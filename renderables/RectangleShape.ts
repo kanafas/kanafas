@@ -6,9 +6,10 @@ import { Stroke } from "./../properties/Stroke.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Shape } from "./Shape.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class RectangleShape extends RectangleGeometry implements IRenderable, IShape {
+export class RectangleShape extends RectangleGeometry implements IRenderable, IShape, IClonable<RectangleShape> {
 
     fill: Fill | null = null;
     stroke: Stroke | null = null;
@@ -28,5 +29,17 @@ export class RectangleShape extends RectangleGeometry implements IRenderable, IS
 
     renderGizmo(renderingLayer: IRenderingLayer) {
         Shape.renderGizmo(renderingLayer, this);
+    }
+
+
+    clone(): RectangleShape {
+        const rectangle = new RectangleShape(this.width, this.height);
+
+        rectangle.fill = this.fill?.clone() ?? null;
+        rectangle.stroke = this.stroke?.clone() ?? null;
+        rectangle.shadow = this.shadow?.clone() ?? null;
+        rectangle.opacity = this.opacity;
+
+        return rectangle;
     }
 }

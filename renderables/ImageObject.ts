@@ -9,9 +9,10 @@ import { IRenderingLayer } from "./../core/RenderingLayer.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class ImageObject implements IObject, IRenderable, IVisible {
+export class ImageObject implements IObject, IRenderable, IVisible, IClonable<ImageObject> {
 
     readonly source: HTMLImageElement;
 
@@ -74,5 +75,15 @@ export class ImageObject implements IObject, IRenderable, IVisible {
         renderingLayer.setMatrixToTransform(this.transform);
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
         renderingLayer.resetMatrix();
+    }
+
+
+    clone(): ImageObject {
+        const image = new ImageObject(this.source, this.width, this.height);
+        image.transform = this.transform.clone();
+        image.shadow = this.shadow?.clone() ?? null;
+        image.opacity = this.opacity;
+
+        return image;
     }
 }

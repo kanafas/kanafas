@@ -12,9 +12,10 @@ import { IBoundingBox } from "./IBoundingBox.js";
 import { Shadow } from "./../properties/Shadow.js";
 import { Font } from "./../properties/Font.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class TextObject implements IObject, IRenderable, IShape {
+export class TextObject implements IObject, IRenderable, IShape, IClonable<TextObject> {
 
     transform: Transform = new Transform();
 
@@ -32,6 +33,7 @@ export class TextObject implements IObject, IRenderable, IShape {
 
     shadow: Shadow | null = null;
     opacity: number = 1;
+
 
     constructor(content: string) {
         this.content = content;
@@ -110,5 +112,19 @@ export class TextObject implements IObject, IRenderable, IShape {
         renderingLayer.setMatrixToTransform(this.transform);
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.textColor);
         renderingLayer.resetMatrix();
+    }
+
+
+    clone(): TextObject {
+        const text = new TextObject(this.content);
+
+        text.transform = this.transform.clone();
+        text.fill = this.fill?.clone() ?? null;
+        text.stroke = this.stroke?.clone() ?? null;
+        text.font = this.font?.clone() ?? null;
+        text.shadow = this.shadow?.clone() ?? null;
+        text.opacity = this.opacity;
+
+        return text;
     }
 }

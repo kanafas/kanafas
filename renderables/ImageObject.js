@@ -44,4 +44,11 @@ export class ImageObject {
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
         renderingLayer.resetMatrix();
     }
+    clone() {
+        const image = new ImageObject(this.source, this.width, this.height);
+        image.transform = this.transform.clone();
+        image.shadow = this.shadow?.clone() ?? null;
+        image.opacity = this.opacity;
+        return image;
+    }
 }

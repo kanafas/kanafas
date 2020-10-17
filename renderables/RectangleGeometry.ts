@@ -2,9 +2,10 @@ import { Transform } from "./../properties/Transform.js";
 import { Vector } from "./../units/Vector.js";
 import { IBoundingBox } from "./IBoundingBox.js";
 import { Geometry } from "./Geometry.js";
+import { IClonable } from "../core/IClonable.js";
 
 
-export class RectangleGeometry extends Geometry {
+export class RectangleGeometry extends Geometry implements IClonable<RectangleGeometry> {
 
     width: number;
     height: number;
@@ -37,4 +38,10 @@ export class RectangleGeometry extends Geometry {
         this.width = width;
         this.height = height;
     }
+
+
+    clone(): RectangleGeometry {
+        return new RectangleGeometry(this.width, this.height);
+    }
+
 }

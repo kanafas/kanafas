@@ -14,4 +14,12 @@ export class EllipseShape extends EllipseGeometry {
     renderGizmo(renderingLayer) {
         Shape.renderGizmo(renderingLayer, this);
     }
+    clone() {
+        const ellipse = new EllipseShape(this.width, this.height);
+        ellipse.fill = this.fill?.clone() ?? null;
+        ellipse.stroke = this.stroke?.clone() ?? null;
+        ellipse.shadow = this.shadow?.clone() ?? null;
+        ellipse.opacity = this.opacity;
+        return ellipse;
+    }
 }

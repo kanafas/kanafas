@@ -14,4 +14,12 @@ export class RectangleShape extends RectangleGeometry {
     renderGizmo(renderingLayer) {
         Shape.renderGizmo(renderingLayer, this);
     }
+    clone() {
+        const rectangle = new RectangleShape(this.width, this.height);
+        rectangle.fill = this.fill?.clone() ?? null;
+        rectangle.stroke = this.stroke?.clone() ?? null;
+        rectangle.shadow = this.shadow?.clone() ?? null;
+        rectangle.opacity = this.opacity;
+        return rectangle;
+    }
 }
