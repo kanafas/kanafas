@@ -12,5 +12,12 @@
     "main": "./core/index.js",
     "scripts": {},
     "author": "Adam Josefus",
-    "license": "CC-BY-NC-ND-4.0"
+    "license": "CC-BY-NC-ND-4.0",
+    "keywords": [
+        "canvas",
+        "typescript",
+        "renderer",
+        "render",
+        "drawer"
+    ]
 }
