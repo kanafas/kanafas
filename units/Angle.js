@@ -92,6 +92,9 @@ export class Angle {
         const radians = angle.radians;
         return new Vector(Math.cos(radians), Math.sin(radians));
     }
+    getCSSValue() {
+        return `${this.degrees.toFixed(3)}deg`;
+    }
     clone() {
         return new Angle(this.degrees);
     }
