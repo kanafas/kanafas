@@ -1,5 +1,5 @@
 import { IBoundingBox } from "../renderables/IBoundingBox.js";
-import { IStyleColor, Color } from "../styles/Color.js";
+import { IColorRGBA, Color } from "../styles/Color.js";
 import { Vector } from "../units/Vector.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { IClonable } from "../core/IClonable.js";
@@ -7,12 +7,12 @@ import { IClonable } from "../core/IClonable.js";
 
 export class Shadow implements IClonable<Shadow> {
 
-    color: IStyleColor = Color.black();
+    color: IColorRGBA = Color.black();
     offset: Vector = Vector.zero();
     blur: number = 0;
 
 
-    constructor(color: IStyleColor, offset: Vector, blur: number) {
+    constructor(color: IColorRGBA, offset: Vector, blur: number) {
         this.color = color;
         this.offset = offset;
         this.blur = blur;
@@ -23,7 +23,7 @@ export class Shadow implements IClonable<Shadow> {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
 
-        ctx.shadowColor = this.color.getStyle(renderingLayer, boundingBox);
+        ctx.shadowColor = Color.convertRGBAtoStyle(this.color);
         ctx.shadowBlur = this.blur * pxs;
         ctx.shadowOffsetX = this.offset.x * pxs;
         ctx.shadowOffsetY = this.offset.y * pxs;

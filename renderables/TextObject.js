@@ -1,6 +1,6 @@
 import { Transform } from "./../properties/Transform.js";
 import { Utils } from "./../utils/Utils.js";
-import { Color } from "./../units/Color.js";
+import { Color } from "./../styles/Color.js";
 import { Fill } from "./../properties/Fill.js";
 import { Stroke } from "./../properties/Stroke.js";
 import { Vector } from "./../units/Vector.js";

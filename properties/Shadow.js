@@ -12,7 +12,7 @@ export class Shadow {
     apply(renderingLayer, boundingBox) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
-        ctx.shadowColor = this.color.getStyle(renderingLayer, boundingBox);
+        ctx.shadowColor = Color.convertRGBAtoStyle(this.color);
         ctx.shadowBlur = this.blur * pxs;
         ctx.shadowOffsetX = this.offset.x * pxs;
         ctx.shadowOffsetY = this.offset.y * pxs;

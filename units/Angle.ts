@@ -124,6 +124,11 @@ export class Angle implements IClonable<Angle> {
     }
 
 
+    getCSSValue(): string {
+        return `${this.degrees.toFixed(3)}deg`;
+    }
+
+
     clone(): Angle {
         return new Angle(this.degrees);
     }

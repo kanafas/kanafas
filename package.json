@@ -1,23 +1,30 @@
 {
-    "version": "3.2.2-beta",
-    "name": "@kanafas/kanafas",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/kanafas/kanafas.git",
-        "directory": "kanafas/kanafas"
-    },
-    "url": "https://github.com/kanafas/kanafas/issues",
-    "email": "adamjosefus+npm@gmail.com",
-    "description": "Objective oriented typescript library for rendering 2d graphics.",
-    "main": "./core/index.js",
-    "scripts": {},
-    "author": "Adam Josefus",
-    "license": "CC-BY-NC-ND-4.0",
-    "keywords": [
-        "canvas",
-        "typescript",
-        "renderer",
-        "render",
-        "drawer"
-    ]
+  "version": "3.2.4-beta",
+  "name": "@kanafas/kanafas",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanafas/kanafas.git",
+    "directory": "kanafas/kanafas"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "url": "https://github.com/kanafas/kanafas/issues",
+  "email": "adamjosefus+npm@gmail.com",
+  "description": "Objective oriented typescript library for rendering 2d graphics.",
+  "main": "./core/index.js",
+  "scripts": {},
+  "author": "Adam Josefus",
+  "license": "CC-BY-NC-ND-4.0",
+  "keywords": [
+    "canvas",
+    "typescript",
+    "renderer",
+    "render",
+    "drawer"
+  ],
+  "bugs": {
+    "url": "https://github.com/kanafas/kanafas/issues"
+  },
+  "homepage": "https://github.com/kanafas/kanafas#readme"
 }
