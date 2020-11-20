@@ -1,23 +1,11 @@
 import { Utils } from "../utils/Utils.js";
 import { Vector } from "../units/Vector.js";
-import { IGradient, IGradientStep } from "./Gradient.js";
+import { Gradient, IGradient, IGradientStep } from "./Gradient.js";
 import { IBoundingBox } from "../renderables/IBoundingBox.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 
-export class LinearGradient implements IGradient {
-
-    start: Vector;
-    end: Vector;
-
-    steps: IGradientStep[] = [];
-
-    constructor(start: Vector, end: Vector, steps: IGradientStep[]) {
-        this.start = start;
-        this.end = end;
-        this.steps = steps;
-    }
-
+export class LinearGradient extends Gradient {
 
     getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox) {
         const ctx = renderingLayer.getRenderingContext();

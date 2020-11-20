@@ -1,11 +1,6 @@
 import { Utils } from "../utils/Utils.js";
-export class LinearGradient {
-    constructor(start, end, steps) {
-        this.steps = [];
-        this.start = start;
-        this.end = end;
-        this.steps = steps;
-    }
+import { Gradient } from "./Gradient.js";
+export class LinearGradient extends Gradient {
     getStyle(renderingLayer, boundingBox) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
