@@ -12,6 +12,10 @@ export type VectorEntry =
     | [x: number, y: number]
     | [vector: IVector];
 
+export type VectorModifierEntry =
+    | VectorEntry
+    | [scalar: number];
+
 
 export class Vector implements IVector, IClonable<Vector> {
     x: number;
@@ -30,8 +34,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    add(...values: VectorEntry): Vector {
-        const v = Vector._parseVectorEntry(values);
+    add(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x += v.x;
         this.y += v.y;
@@ -40,8 +44,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    subtract(...values: VectorEntry): Vector {
-        const v = Vector._parseVectorEntry(values);
+    subtract(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x -= v.x;
         this.y -= v.y;
@@ -50,8 +54,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    multiple(...values: VectorEntry): Vector {
-        const v = Vector._parseVectorEntry(values);
+    multiple(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x *= v.x;
         this.y *= v.y;
@@ -60,8 +64,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    divide(...values: VectorEntry): Vector {
-        const v = Vector._parseVectorEntry(values);
+    divide(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x /= v.x;
         this.y /= v.y;
@@ -223,6 +227,25 @@ export class Vector implements IVector, IClonable<Vector> {
         if (raw.length == 2) {
             x = raw[0];
             y = raw[1];
+        } else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+
+        return { x, y }
+    }
+
+
+    private static _parseVectorModifierEntry(raw: VectorModifierEntry): IVector {
+        let x: number;
+        let y: number;
+
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        } else if (typeof raw[0] == 'number') {
+            x = raw[0];
+            y = raw[0];
         } else {
             x = raw[0].x;
             y = raw[0].y;

@@ -9,25 +9,25 @@ export class Vector {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
     add(...values) {
-        const v = Vector._parseVectorEntry(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x += v.x;
         this.y += v.y;
         return this;
     }
     subtract(...values) {
-        const v = Vector._parseVectorEntry(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x -= v.x;
         this.y -= v.y;
         return this;
     }
     multiple(...values) {
-        const v = Vector._parseVectorEntry(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x *= v.x;
         this.y *= v.y;
         return this;
     }
     divide(...values) {
-        const v = Vector._parseVectorEntry(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x /= v.x;
         this.y /= v.y;
         return this;
@@ -149,6 +149,23 @@ export class Vector {
         if (raw.length == 2) {
             x = raw[0];
             y = raw[1];
+        }
+        else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+        return { x, y };
+    }
+    static _parseVectorModifierEntry(raw) {
+        let x;
+        let y;
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        }
+        else if (typeof raw[0] == 'number') {
+            x = raw[0];
+            y = raw[0];
         }
         else {
             x = raw[0].x;
