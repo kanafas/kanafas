@@ -1,10 +1,15 @@
 import { IRenderingLayer } from "../core/RenderingLayer.js";
+import { Gizmo } from "../debugger/Gizmo.js";
+import { Transform } from "../properties/index.js";
+import { IObject, IVisible } from "../renderables/index.js";
 import { IRenderable } from "../renderables/IRenderable.js";
 import { IColorRGBA } from "../styles/Color.js";
 import { Vector } from "../units/index.js";
 import { Numbers } from "../utils/Numbers.js";
 
-export class WorleyNoise implements IRenderable {
+export class WorleyNoise implements IObject, IRenderable {
+
+    transform: Transform = new Transform();
 
     width: number;
     height: number;
@@ -17,9 +22,7 @@ export class WorleyNoise implements IRenderable {
 
     private _imageData: ImageData | null = null;
     private _pixelModifierCallback: IPixelModifierCallback = (red: number, green: number, blue: number, alpha: number, x: number, y: number, pixelIndex: number) => {
-        return {
-            red, green, blue, alpha: 1
-        }
+        return { red, green, blue, alpha: 1 }
     }
 
 
@@ -41,58 +44,80 @@ export class WorleyNoise implements IRenderable {
     }
 
 
-    private async _computeImageData(renderingLayer: IRenderingLayer): Promise<void> {
-        const ctx = renderingLayer.getRenderingContext();
-        const imageData = ctx.createImageData(this.width, this.height);
-        const buffer = new Uint8Array(imageData.data.buffer);
+    async generate(renderingLayer: IRenderingLayer): Promise<void> {
+        const promise = new Promise<void>((resolve, reject) => {
+            // const canvas = document.createElement
 
-        const nClosest = 0;
+            const ctx = renderingLayer.getRenderingContext();
+            const pxs = renderingLayer.pixelScale;
 
-        for (let x = 0; x < this.width; x++) {
-            for (let y = 0; y < this.height; y++) {
-                const pixelIndex = x + y * this.width;
-                const channelIndex = pixelIndex * 4;
+            const imageData = ctx.createImageData(this.width * pxs, this.height * pxs);
+            const buffer = new Uint8Array(imageData.data.buffer);
 
-                const distances: number[] = Array(this.points.length);
+            const nClosest = 0;
 
-                for (let i = 0; i < this.points.length; i++) {
-                    const point = this.points[i];
+            for (let x = 0; x < this.width; x++) {
+                for (let y = 0; y < this.height; y++) {
+                    const pixelIndex = x + y * this.width;
+                    const channelIndex = pixelIndex * 4;
 
-                    const d = Vector.distance({ x, y }, point);
-                    distances[i] = d;
+                    const distances: number[] = Array(this.points.length);
+
+                    for (let i = 0; i < this.points.length; i++) {
+                        const point = this.points[i];
+
+                        const d = Vector.distance({ x, y }, point);
+                        distances[i] = d;
+                    }
+
+                    const sortedDistances = distances.sort((a, b) => a - b);
+
+                    const nClosestDistance = sortedDistances[Math.min(nClosest, sortedDistances.length - 1)] * this.contrast;
+                    const noise = Numbers.remap(
+                        Numbers.limit(nClosestDistance, this.noiseLimitMin, this.noiseLimitMax),
+                        this.noiseLimitMin, this.noiseLimitMax, 0, 255);
+
+                    const color = this._pixelModifierCallback(noise, noise, noise, noise, x, y, pixelIndex);
+
+                    buffer[channelIndex + 0] = color.red;
+                    buffer[channelIndex + 1] = color.green;
+                    buffer[channelIndex + 2] = color.blue;
+                    buffer[channelIndex + 3] = color.alpha * 255;
                 }
-
-                const sortedDistances = distances.sort((a, b) => a - b);
-
-                const nClosestDistance = sortedDistances[Math.min(nClosest, sortedDistances.length - 1)] * this.contrast;
-                const noise = Numbers.remap(
-                    Numbers.limit(nClosestDistance, this.noiseLimitMin, this.noiseLimitMax),
-                    this.noiseLimitMin, this.noiseLimitMax, 0, 255);
-
-                const color = this._pixelModifierCallback(noise, noise, noise, noise, x, y, pixelIndex);
-
-                buffer[channelIndex + 0] = color.red;
-                buffer[channelIndex + 1] = color.green;
-                buffer[channelIndex + 2] = color.blue;
-                buffer[channelIndex + 3] = color.alpha * 255;
             }
-        }
 
-        this._imageData = imageData;
+            this._imageData = imageData;
+            resolve();
+        });
     }
 
 
-    render(renderingLayer: IRenderingLayer) {
+    render(renderingLayer: IRenderingLayer): void {
         const ctx = renderingLayer.getRenderingContext();
+        const pxs = renderingLayer.pixelScale;
 
+        const t = this.transform;
+        renderingLayer.setMatrixToTransform(t);
+        ctx.fillRect(0, 0, 50, 100);
+
+        ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
         if (this._imageData) {
-            ctx.putImageData(this._imageData, 0, 0);
+            // ctx.putImageData(this._imageData, 0, 0);
+            ctx.drawImage(this._imageData as any, 0, 0);
         } else {
-            setTimeout(async () => {
-                this._computeImageData(renderingLayer);
-                this.render(renderingLayer);
-            }, 0);
+            throw new Error("WorleyNoise is not generated.");
         }
+
+        renderingLayer.resetMatrix();
+
+        if (renderingLayer.gizmoVisibility && this.renderGizmo) this.renderGizmo(renderingLayer);
+    }
+
+
+    renderGizmo(renderingLayer: IRenderingLayer) {
+        renderingLayer.setMatrixToTransform(this.transform);
+        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
+        renderingLayer.resetMatrix();
     }
 }
 
