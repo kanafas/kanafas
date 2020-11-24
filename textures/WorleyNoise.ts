@@ -1,41 +1,44 @@
+import { IClonable } from "../core/IClonable.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { Gizmo } from "../debugger/Gizmo.js";
-import { Transform } from "../properties/index.js";
-import { IObject, IVisible } from "../renderables/index.js";
+import { Shadow, Transform } from "../properties/index.js";
+import { IBoundingBox, IObject, IVisible } from "../renderables/index.js";
 import { IRenderable } from "../renderables/IRenderable.js";
 import { IColorRGBA } from "../styles/Color.js";
-import { Vector } from "../units/index.js";
+import { IVector, Vector } from "../units/index.js";
 import { Numbers } from "../utils/Numbers.js";
 
-export class WorleyNoise implements IObject, IRenderable {
+
+interface ITexture extends IObject, IRenderable, IVisible {
+    generate(renderingLayer: IRenderingLayer): Promise<void>,
+}
+
+
+export class WorleyNoise implements ITexture, IClonable<WorleyNoise> {
+
+    points: Vector[] = [];
+    limitMin: number = 0;
+    limitMax: number = 255;
+    contrast: number = 1;
+
+    readonly width: number;
+    readonly height: number;
 
     transform: Transform = new Transform();
 
-    width: number;
-    height: number;
-    points: Vector[] = [];
+    shadow: Shadow | null = null;
+    opacity: number = 1;
 
-    noiseLimitMin: number = 0;
-    noiseLimitMax: number = 255;
 
-    contrast: number;
-
-    private _imageData: ImageData | null = null;
+    private _shadowCanvas: HTMLCanvasElement | null = null;
     private _pixelModifierCallback: IPixelModifierCallback = (red: number, green: number, blue: number, alpha: number, x: number, y: number, pixelIndex: number) => {
         return { red, green, blue, alpha: 1 }
     }
 
 
-    constructor(width: number, height: number, pointCount: number, contrast: number = 1) {
+    constructor(width: number, height: number) {
         this.width = width;
         this.height = height;
-
-        this.contrast = contrast;
-
-        for (let i = 0; i < pointCount; i++) {
-            const p = new Vector(Math.random() * this.width, Math.random() * this.height);
-            this.points.push(p);
-        }
     }
 
 
@@ -46,12 +49,16 @@ export class WorleyNoise implements IObject, IRenderable {
 
     async generate(renderingLayer: IRenderingLayer): Promise<void> {
         const promise = new Promise<void>((resolve, reject) => {
-            // const canvas = document.createElement
+            const width = this.width * renderingLayer.pixelScale;
+            const height = this.height * renderingLayer.pixelScale;
 
-            const ctx = renderingLayer.getRenderingContext();
-            const pxs = renderingLayer.pixelScale;
+            const canvas = document.createElement('canvas') as HTMLCanvasElement;
+            canvas.width = width;
+            canvas.height = height;
+            
+            const ctx = canvas.getContext('2d')!;
 
-            const imageData = ctx.createImageData(this.width * pxs, this.height * pxs);
+            const imageData = ctx.createImageData(width, height);
             const buffer = new Uint8Array(imageData.data.buffer);
 
             const nClosest = 0;
@@ -66,7 +73,7 @@ export class WorleyNoise implements IObject, IRenderable {
                     for (let i = 0; i < this.points.length; i++) {
                         const point = this.points[i];
 
-                        const d = Vector.distance({ x, y }, point);
+                        const d = Vector.distance({ x, y }, point); // Připočítat retinu
                         distances[i] = d;
                     }
 
@@ -74,8 +81,8 @@ export class WorleyNoise implements IObject, IRenderable {
 
                     const nClosestDistance = sortedDistances[Math.min(nClosest, sortedDistances.length - 1)] * this.contrast;
                     const noise = Numbers.remap(
-                        Numbers.limit(nClosestDistance, this.noiseLimitMin, this.noiseLimitMax),
-                        this.noiseLimitMin, this.noiseLimitMax, 0, 255);
+                        Numbers.limit(nClosestDistance, this.limitMin, this.limitMax),
+                        this.limitMin, this.limitMax, 0, 255);
 
                     const color = this._pixelModifierCallback(noise, noise, noise, noise, x, y, pixelIndex);
 
@@ -86,10 +93,21 @@ export class WorleyNoise implements IObject, IRenderable {
                 }
             }
 
-            this._imageData = imageData;
+            ctx.putImageData(imageData, 0, 0);
+            this._shadowCanvas = canvas;
+
             resolve();
         });
     }
+
+
+    getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
+        return {
+            origin: this.transform.origin.clone(),
+            size: new Vector(this.width, this.height),
+        }
+    }
+
 
 
     render(renderingLayer: IRenderingLayer): void {
@@ -98,12 +116,11 @@ export class WorleyNoise implements IObject, IRenderable {
 
         const t = this.transform;
         renderingLayer.setMatrixToTransform(t);
-        ctx.fillRect(0, 0, 50, 100);
 
         ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
-        if (this._imageData) {
-            // ctx.putImageData(this._imageData, 0, 0);
-            ctx.drawImage(this._imageData as any, 0, 0);
+
+        if (this._shadowCanvas) {
+            ctx.drawImage(this._shadowCanvas, 0, 0, this.width * pxs, this.height * pxs);
         } else {
             throw new Error("WorleyNoise is not generated.");
         }
@@ -118,6 +135,33 @@ export class WorleyNoise implements IObject, IRenderable {
         renderingLayer.setMatrixToTransform(this.transform);
         Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
         renderingLayer.resetMatrix();
+    }
+
+
+    clone(): WorleyNoise {
+        const texture = new WorleyNoise(this.width, this.height);
+        texture.points = this.points.map(p => p.clone());
+        texture.limitMin = this.limitMin;
+        texture.limitMax = this.limitMax;
+        texture.contrast = this.contrast;
+
+        texture.transform = this.transform.clone();
+        texture.shadow = this.shadow?.clone() ?? null;
+        texture.opacity = this.opacity;
+
+        return texture;
+    }
+
+
+    static getRandomPoints(width: number, height: number, count: number): Vector[] {
+        const points: Vector[] = [];
+
+        for (let i = 0; i < count; i++) {
+            const p = new Vector(Math.random() * width, Math.random() * height);
+            points.push(p);
+        }
+
+        return points;
     }
 }
 
