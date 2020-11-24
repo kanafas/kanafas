@@ -1,7 +1,7 @@
 import { Angle } from "./Angle.js";
 export class Vector {
     constructor(...values) {
-        const v = Vector._parseVectorType(values);
+        const v = Vector._parseVectorEntry(values);
         this.x = v.x;
         this.y = v.y;
     }
@@ -9,25 +9,25 @@ export class Vector {
         return Math.sqrt(this.x ** 2 + this.y ** 2);
     }
     add(...values) {
-        const v = Vector._parseVectorType(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x += v.x;
         this.y += v.y;
         return this;
     }
     subtract(...values) {
-        const v = Vector._parseVectorType(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x -= v.x;
         this.y -= v.y;
         return this;
     }
     multiple(...values) {
-        const v = Vector._parseVectorType(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x *= v.x;
         this.y *= v.y;
         return this;
     }
     divide(...values) {
-        const v = Vector._parseVectorType(values);
+        const v = Vector._parseVectorModifierEntry(values);
         this.x /= v.x;
         this.y /= v.y;
         return this;
@@ -138,7 +138,25 @@ export class Vector {
     static right() {
         return new Vector(1, 0);
     }
-    static _parseVectorType(raw) {
+    static distance(vector1, vector2) {
+        const a = vector1.x - vector2.x;
+        const b = vector1.y - vector2.y;
+        return Math.sqrt(a ** 2 + b ** 2);
+    }
+    static _parseVectorEntry(raw) {
+        let x;
+        let y;
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        }
+        else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+        return { x, y };
+    }
+    static _parseVectorModifierEntry(raw) {
         let x;
         let y;
         if (raw.length == 2) {

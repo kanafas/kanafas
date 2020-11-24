@@ -2,7 +2,7 @@ import { IClonable } from "../core/IClonable.js";
 import { Vector } from "./Vector.js";
 
 
-export type AngleType =
+export type AngleEntry =
     | [degrees: number]
     | [angle: Angle];
 
@@ -37,7 +37,7 @@ export class Angle implements IClonable<Angle> {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    add(...values: AngleType): Angle {
+    add(...values: AngleEntry): Angle {
         const value = values[0];
 
         if (value instanceof Angle) {
@@ -55,7 +55,7 @@ export class Angle implements IClonable<Angle> {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    subtract(...values: AngleType): Angle {
+    subtract(...values: AngleEntry): Angle {
         const value = values[0];
 
         if (value instanceof Angle) {
@@ -72,7 +72,7 @@ export class Angle implements IClonable<Angle> {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    multiply(...values: AngleType): Angle {
+    multiply(...values: AngleEntry): Angle {
         const value = values[0];
 
         if (value instanceof Angle) {
@@ -90,7 +90,7 @@ export class Angle implements IClonable<Angle> {
      * @param {Angle|number} value Angle or number (degrees)
      * @returns {Angle} Same Angle object.
      */
-    divide(...values: AngleType): Angle {
+    divide(...values: AngleEntry): Angle {
         const value = values[0];
 
         if (value instanceof Angle) {

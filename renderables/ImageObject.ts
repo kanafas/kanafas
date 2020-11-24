@@ -56,9 +56,15 @@ export class ImageObject implements IObject, IRenderable, IVisible, IClonable<Im
 
         const t = this.transform;
 
+        renderingLayer.setMatrixToTransform(t);
+
         ctx.globalAlpha = Utils.Numbers.limit(this.opacity, 0, 1);
 
-        renderingLayer.setMatrixToTransform(t);
+        if (this.shadow) {
+            this.shadow.apply(renderingLayer, this.getBoundingBox(renderingLayer));
+        } else {
+            Shadow.clear(renderingLayer);
+        }
 
         ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
         ctx.drawImage(this.source, 0, 0, this.width * pxs, this.height * pxs);
