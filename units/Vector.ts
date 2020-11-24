@@ -1,5 +1,5 @@
 import { IClonable } from "../core/IClonable.js";
-import { Angle, AngleType } from "./Angle.js";
+import { Angle, AngleEntry } from "./Angle.js";
 
 
 export interface IVector {
@@ -8,10 +8,13 @@ export interface IVector {
 }
 
 
-export type VectorType =
+export type VectorEntry =
     | [x: number, y: number]
-    | [vector: IVector]
-    | [length: number];
+    | [vector: IVector];
+
+export type VectorModifierEntry =
+    | VectorEntry
+    | [scalar: number];
 
 
 export class Vector implements IVector, IClonable<Vector> {
@@ -23,16 +26,16 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    constructor(...values: VectorType) {
-        const v = Vector._parseVectorType(values);
+    constructor(...values: VectorEntry) {
+        const v = Vector._parseVectorEntry(values);
 
         this.x = v.x;
         this.y = v.y;
     }
 
 
-    add(...values: VectorType): Vector {
-        const v = Vector._parseVectorType(values);
+    add(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x += v.x;
         this.y += v.y;
@@ -41,8 +44,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    subtract(...values: VectorType): Vector {
-        const v = Vector._parseVectorType(values);
+    subtract(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x -= v.x;
         this.y -= v.y;
@@ -51,8 +54,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    multiple(...values: VectorType): Vector {
-        const v = Vector._parseVectorType(values);
+    multiple(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x *= v.x;
         this.y *= v.y;
@@ -61,8 +64,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    divide(...values: VectorType): Vector {
-        const v = Vector._parseVectorType(values);
+    divide(...values: VectorModifierEntry): Vector {
+        const v = Vector._parseVectorModifierEntry(values);
 
         this.x /= v.x;
         this.y /= v.y;
@@ -71,7 +74,7 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    rotate(...values: AngleType): Vector {
+    rotate(...values: AngleEntry): Vector {
         const value = values[0];
 
         let degrees: number;
@@ -209,7 +212,31 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    private static _parseVectorType(raw: VectorType): IVector {
+    static distance(vector1: IVector, vector2: IVector): number {
+        const a = vector1.x - vector2.x;
+        const b = vector1.y - vector2.y;
+
+        return Math.sqrt(a**2 + b**2);
+    }
+
+
+    private static _parseVectorEntry(raw: VectorEntry): IVector {
+        let x: number;
+        let y: number;
+
+        if (raw.length == 2) {
+            x = raw[0];
+            y = raw[1];
+        } else {
+            x = raw[0].x;
+            y = raw[0].y;
+        }
+
+        return { x, y }
+    }
+
+
+    private static _parseVectorModifierEntry(raw: VectorModifierEntry): IVector {
         let x: number;
         let y: number;
 

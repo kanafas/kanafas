@@ -1,4 +1,5 @@
 import { Transform } from "./../properties/Transform.js";
+import { Shadow } from "./../properties/Shadow.js";
 import { Vector } from "./../units/Vector.js";
 import { Utils } from "./../utils/Utils.js";
 import { Gizmo } from "./../debugger/Gizmo.js";
@@ -30,8 +31,14 @@ export class ImageObject {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
         const t = this.transform;
-        ctx.globalAlpha = Utils.Numbers.limit(this.opacity, 0, 1);
         renderingLayer.setMatrixToTransform(t);
+        ctx.globalAlpha = Utils.Numbers.limit(this.opacity, 0, 1);
+        if (this.shadow) {
+            this.shadow.apply(renderingLayer, this.getBoundingBox(renderingLayer));
+        }
+        else {
+            Shadow.clear(renderingLayer);
+        }
         ctx.moveTo(-t.origin.x * pxs, -t.origin.y * pxs);
         ctx.drawImage(this.source, 0, 0, this.width * pxs, this.height * pxs);
         renderingLayer.resetMatrix();
