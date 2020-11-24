@@ -2,16 +2,11 @@ import { IClonable } from "../core/IClonable.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { Gizmo } from "../debugger/Gizmo.js";
 import { Shadow, Transform } from "../properties/index.js";
-import { IBoundingBox, IObject, IVisible } from "../renderables/index.js";
-import { IRenderable } from "../renderables/IRenderable.js";
+import { IBoundingBox } from "../renderables/index.js";
 import { IColorRGBA } from "../styles/Color.js";
-import { IVector, Vector } from "../units/index.js";
+import { Vector } from "../units/index.js";
 import { Numbers } from "../utils/Numbers.js";
-
-
-interface ITexture extends IObject, IRenderable, IVisible {
-    generate(renderingLayer: IRenderingLayer): Promise<void>,
-}
+import { ITexture } from "./ITexture.js";
 
 
 export class WorleyNoise implements ITexture, IClonable<WorleyNoise> {
