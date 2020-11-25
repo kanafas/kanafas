@@ -59,16 +59,36 @@ export class Color {
         const c = this.getHSL();
         return c.lightness;
     }
-    setHSLA(hue, saturation, lightness, alpha) {
-        const rgba = Color.convertHSLAtoRGBA(hue, saturation, lightness, alpha);
-        this.red = rgba.red;
-        this.green = rgba.green;
-        this.blue = rgba.blue;
-        this.alpha = rgba.alpha;
+    setRGBA(...values) {
+        const entry = Color._parseEntryType_ColorRGBA(values);
+        this.red = entry.red;
+        this.green = entry.green;
+        this.blue = entry.blue;
+        this.alpha = entry.alpha;
         return this;
     }
-    setHSL(hue, saturation, lightness) {
-        this.setHSLA(hue, saturation, lightness, this.alpha);
+    setRGB(...values) {
+        const entry = Color._parseEntryType_ColorRGB(values);
+        this.red = entry.red;
+        this.green = entry.green;
+        this.blue = entry.blue;
+        return this;
+    }
+    setHSLA(...values) {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+        const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
+        this.red = data.red;
+        this.green = data.green;
+        this.blue = data.blue;
+        this.alpha = data.alpha;
+        return this;
+    }
+    setHSL(...values) {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const data = Color.convertHSLtoRGB(entry.hue, entry.saturation, entry.lightness);
+        this.red = data.red;
+        this.green = data.green;
+        this.blue = data.blue;
         return this;
     }
     setHue(hue) {
@@ -84,19 +104,7 @@ export class Color {
         this.setHSLA(c.hue, c.saturation, lightness, c.alpha);
     }
     getHex() {
-        const red = Math.round(this.red).toString(16);
-        const green = Math.round(this.green).toString(16);
-        const blue = Math.round(this.blue).toString(16);
-        const alpha = Math.round(this.alpha * 255).toString(16);
-        const builder = ['#',
-            red.length == 2 ? red : '0' + red,
-            green.length == 2 ? green : '0' + green,
-            blue.length == 2 ? blue : '0' + blue,
-        ];
-        if (this.alpha < 1) {
-            builder.push(alpha.length == 2 ? alpha : '0' + alpha);
-        }
-        return builder.join('');
+        return Color.convertRGBAtoHex(this.red, this.green, this.blue, this.alpha);
     }
     getCSSValue() {
         if (this.alpha < 1) {
@@ -120,63 +128,63 @@ export class Color {
      * Create new Color object ❤️
      * @returns {Color} new Color
      */
-    static red(alpha = 1) {
-        return new Color(255, 0, 0, alpha);
+    static get red() {
+        return new Color(255, 0, 0);
     }
     /**
      * Create new Color object 🟨
      * @returns {Color} new Color
      */
-    static yellow(alpha = 1) {
-        return new Color(255, 255, 0, alpha);
+    static get yellow() {
+        return new Color(255, 255, 0);
     }
     /**
      * Create new Color object 🟩
      * @returns {Color} new Color
      */
-    static green(alpha = 1) {
-        return new Color(0, 255, 0, alpha);
+    static get green() {
+        return new Color(0, 255, 0);
     }
     /**
      * Create new Color object 🟦
      * @returns {Color} new Color
      */
-    static blue(alpha = 1) {
-        return new Color(0, 0, 255, alpha);
+    static get blue() {
+        return new Color(0, 0, 255);
     }
     /**
      * Create new Color object 🟪
      * @returns {Color} new Color
      */
-    static magenta(alpha = 1) {
-        return new Color(255, 0, 255, alpha);
+    static get magenta() {
+        return new Color(255, 0, 255);
     }
     /**
      * Create new Color object ⬛️
      * @returns {Color} new Color
      */
-    static black(alpha = 1) {
-        return new Color(0, 0, 0, alpha);
+    static get black() {
+        return new Color(0, 0, 0);
     }
     /**
      * Create new Color object ⬜️
      * @returns {Color} new Color
      */
-    static white(alpha = 1) {
-        return new Color(255, 255, 255, alpha);
+    static get white() {
+        return new Color(255, 255, 255);
     }
     /**
      * Create new Color object 🐀
      * @returns {Color} new Color
      */
-    static grey(alpha = 1) {
-        return new Color(127, 127, 127, alpha);
+    static get grey() {
+        return new Color(127, 127, 127);
     }
     /**
      * Create new Color object 🏁
      * @returns {Color} new Color
      */
-    static transparent() {
+    static get transparent() {
         return new Color(0, 0, 0, 0);
     }
     /**
@@ -232,8 +240,9 @@ export class Color {
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns {Color} new Color
      */
-    static fromRGBA(r, g, b, alpha) {
-        const color = new Color(r, g, b, alpha);
+    static fromRGBA(...values) {
+        const entry = Color._parseEntryType_ColorRGBA(values);
+        const color = new Color(entry.red, entry.green, entry.blue, entry.alpha);
         return color;
     }
     /**
@@ -243,8 +252,10 @@ export class Color {
      * @param {number} b 💙 Blue channel <0, 255>
      * @returns {Color} new Color
      */
-    static fromRGB(r, g, b) {
-        return this.fromRGBA(r, g, b, 1);
+    static fromRGB(...values) {
+        const entry = Color._parseEntryType_ColorRGB(values);
+        const color = this.fromRGBA(entry.red, entry.green, entry.blue, 1);
+        return color;
     }
     /**
      * Create new Color object from HSLA values
@@ -254,8 +265,9 @@ export class Color {
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns {Color} new Color
      */
-    static fromHSLA(h, s, l, alpha) {
-        const data = Color.convertHSLAtoRGBA(h, s, l, alpha);
+    static fromHSLA(...values) {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+        const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
         const color = new Color();
         color.red = data.red;
         color.green = data.green;
@@ -270,8 +282,60 @@ export class Color {
      * @param {number} l ☀️ Lightness channel <0, 100>
      * @returns {Color} new Color
      */
-    static fromHSL(h, s, l) {
-        return this.fromHSLA(h, s, l, 1);
+    static fromHSL(...values) {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const color = this.fromHSLA(entry.hue, entry.lightness, entry.lightness, 1);
+        return color;
+    }
+    static _parseEntryType_ColorRGBA(values) {
+        if (values.length == 4) {
+            return {
+                red: values[0],
+                green: values[1],
+                blue: values[2],
+                alpha: values[3],
+            };
+        }
+        else {
+            return values[0];
+        }
+    }
+    static _parseEntryType_ColorRGB(values) {
+        if (values.length == 3) {
+            return {
+                red: values[0],
+                green: values[1],
+                blue: values[2],
+            };
+        }
+        else {
+            return values[0];
+        }
+    }
+    static _parseEntryType_ColorHSLA(values) {
+        if (values.length == 4) {
+            return {
+                hue: values[0],
+                saturation: values[1],
+                lightness: values[2],
+                alpha: values[3],
+            };
+        }
+        else {
+            return values[0];
+        }
+    }
+    static _parseEntryType_ColorHSL(values) {
+        if (values.length == 3) {
+            return {
+                hue: values[0],
+                saturation: values[1],
+                lightness: values[2],
+            };
+        }
+        else {
+            return values[0];
+        }
     }
 }
 /**
@@ -282,11 +346,12 @@ export class Color {
  * @param {number} alpha 🏁 Alpha channel <0, 1>
  * @returns IColorHSLA
  */
-Color.convertRGBAtoHSLA = (r, g, b, alpha) => {
-    r = Numbers.limit(r, 0, 255);
-    g = Numbers.limit(g, 0, 255);
-    b = Numbers.limit(b, 0, 255);
-    alpha = Numbers.limit(alpha, 0, 1);
+Color.convertRGBAtoHSLA = (...values) => {
+    const entry = Color._parseEntryType_ColorRGBA(values);
+    let r = Numbers.limit(entry.red, 0, 255);
+    let g = Numbers.limit(entry.green, 0, 255);
+    let b = Numbers.limit(entry.blue, 0, 255);
+    let alpha = Numbers.limit(entry.alpha, 0, 1);
     r /= 255;
     g /= 255;
     b /= 255;
@@ -315,8 +380,10 @@ Color.convertRGBAtoHSLA = (r, g, b, alpha) => {
  * @param {number} b 🟦 Blue channel <0, 255>
  * @returns IColorHSL
  */
-Color.convertRGBtoHSL = (r, g, b) => {
-    const c = Color.convertRGBAtoHSLA(r, g, b, 1);
+// static convertRGBtoHSL = (r: number, g: number, b: number): IColorHSL => {
+Color.convertRGBtoHSL = (...values) => {
+    const entry = Color._parseEntryType_ColorRGB(values);
+    const c = Color.convertRGBAtoHSLA(entry.red, entry.green, entry.blue, 1);
     return {
         hue: c.hue,
         saturation: c.saturation,
@@ -331,7 +398,12 @@ Color.convertRGBtoHSL = (r, g, b) => {
  * @param {number} alpha 🏁 Alpha channel <0, 1>
  * @returns IColorRGBA
  */
-Color.convertHSLAtoRGBA = (h, s, l, alpha) => {
+Color.convertHSLAtoRGBA = (...values) => {
+    const entry = Color._parseEntryType_ColorHSLA(values);
+    let h = entry.hue;
+    let s = entry.saturation;
+    let l = entry.lightness;
+    let alpha = entry.alpha;
     if (h > 0)
         while (h >= 360)
             h -= 360;
@@ -386,14 +458,76 @@ Color.convertHSLAtoRGBA = (h, s, l, alpha) => {
  * @param {number} b 🟦 Blue channel <0, 255>
  * @returns IColorRGB
  */
-Color.convertHSLtoRGB = (h, s, l) => {
-    const c = Color.convertHSLAtoRGBA(h, s, l, 1);
+Color.convertHSLtoRGB = (...values) => {
+    const entry = Color._parseEntryType_ColorHSL(values);
+    const c = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, 1);
     return {
         red: c.red,
         green: c.green,
         blue: c.blue,
     };
 };
-Color.convertRGBAtoStyle = (color) => {
-    return `rgba(${color.red.toFixed(3)}, ${color.green.toFixed(3)}, ${color.blue.toFixed(3)}, ${color.alpha.toFixed(3)})`;
+/**
+ * Convert RGBA to Hex
+ * @param {number} r ❤️ Red channel <0, 255>
+ * @param {number} g 💚 Green channel <0, 255>
+ * @param {number} b 🟦 Blue channel <0, 255>
+ * @param {number} alpha 🏁 Alpha channel <0, 1>
+ * @returns string
+ */
+Color.convertRGBAtoHex = (...values) => {
+    const entry = Color._parseEntryType_ColorRGBA(values);
+    const red = Math.round(entry.red).toString(16);
+    const green = Math.round(entry.green).toString(16);
+    const blue = Math.round(entry.blue).toString(16);
+    const alpha = Math.round(entry.alpha * 255).toString(16);
+    const builder = ['#',
+        red.length == 2 ? red : '0' + red,
+        green.length == 2 ? green : '0' + green,
+        blue.length == 2 ? blue : '0' + blue,
+    ];
+    if (entry.alpha < 1) {
+        builder.push(alpha.length == 2 ? alpha : '0' + alpha);
+    }
+    return builder.join('');
+};
+/**
+ * Convert RGB to Hex
+ * @param {number} r ❤️ Red channel <0, 255>
+ * @param {number} g 💚 Green channel <0, 255>
+ * @param {number} b 🟦 Blue channel <0, 255>
+ * @returns string
+ */
+Color.convertRGBtoHex = (...values) => {
+    const entry = Color._parseEntryType_ColorRGB(values);
+    return Color.convertRGBAtoHex(entry.red, entry.green, entry.blue, 1);
+};
+/**
+ * Convert HSLA to Hex
+ * @param {number} h 🌈 Hue channel <0, 360)
+ * @param {number} s ☯️ Saturation channel <0, 100>
+ * @param {number} l ☀️ Lightness channel <0, 100>
+ * @param {number} alpha 🏁 Alpha channel <0, 1>
+ * @returns string
+ */
+Color.convertHSLAtoHex = (...values) => {
+    const entry = Color._parseEntryType_ColorHSLA(values);
+    const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
+    return Color.convertRGBAtoHex(data.red, data.green, data.blue, data.alpha);
+};
+/**
+ * Convert HSL to Hex
+ * @param {number} r ❤️ Red channel <0, 255>
+ * @param {number} g 💚 Green channel <0, 255>
+ * @param {number} b 🟦 Blue channel <0, 255>
+ * @returns string
+ */
+Color.convertHSLtoHex = (...values) => {
+    const entry = Color._parseEntryType_ColorHSL(values);
+    const data = Color.convertHSLtoRGB(entry.hue, entry.saturation, entry.lightness);
+    return Color.convertRGBtoHex(data.red, data.green, data.blue);
+};
+Color.convertRGBAtoStyle = (...values) => {
+    const entry = Color._parseEntryType_ColorRGBA(values);
+    return `rgba(${entry.red.toFixed(3)}, ${entry.green.toFixed(3)}, ${entry.blue.toFixed(3)}, ${entry.alpha.toFixed(3)})`;
 };

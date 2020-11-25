@@ -8,15 +8,6 @@ export interface IVector {
 }
 
 
-export type VectorEntry =
-    | [x: number, y: number]
-    | [vector: IVector];
-
-export type VectorModifierEntry =
-    | VectorEntry
-    | [scalar: number];
-
-
 export class Vector implements IVector, IClonable<Vector> {
     x: number;
     y: number;
@@ -26,16 +17,16 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    constructor(...values: VectorEntry) {
-        const v = Vector._parseVectorEntry(values);
+    constructor(...values: EntryType_Vector) {
+        const v = Vector._parseEntryType_Vector(values);
 
         this.x = v.x;
         this.y = v.y;
     }
 
 
-    add(...values: VectorModifierEntry): Vector {
-        const v = Vector._parseVectorModifierEntry(values);
+    add(...values: EntryType_VectorModifier): Vector {
+        const v = Vector._parseEntryType_VectorModifier(values);
 
         this.x += v.x;
         this.y += v.y;
@@ -44,8 +35,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    subtract(...values: VectorModifierEntry): Vector {
-        const v = Vector._parseVectorModifierEntry(values);
+    subtract(...values: EntryType_VectorModifier): Vector {
+        const v = Vector._parseEntryType_VectorModifier(values);
 
         this.x -= v.x;
         this.y -= v.y;
@@ -54,8 +45,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    multiple(...values: VectorModifierEntry): Vector {
-        const v = Vector._parseVectorModifierEntry(values);
+    multiple(...values: EntryType_VectorModifier): Vector {
+        const v = Vector._parseEntryType_VectorModifier(values);
 
         this.x *= v.x;
         this.y *= v.y;
@@ -64,8 +55,8 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    divide(...values: VectorModifierEntry): Vector {
-        const v = Vector._parseVectorModifierEntry(values);
+    divide(...values: EntryType_VectorModifier): Vector {
+        const v = Vector._parseEntryType_VectorModifier(values);
 
         this.x /= v.x;
         this.y /= v.y;
@@ -220,7 +211,7 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    private static _parseVectorEntry(raw: VectorEntry): IVector {
+    private static _parseEntryType_Vector(raw: EntryType_Vector): IVector {
         let x: number;
         let y: number;
 
@@ -236,7 +227,7 @@ export class Vector implements IVector, IClonable<Vector> {
     }
 
 
-    private static _parseVectorModifierEntry(raw: VectorModifierEntry): IVector {
+    private static _parseEntryType_VectorModifier(raw: EntryType_VectorModifier): IVector {
         let x: number;
         let y: number;
 
@@ -253,5 +244,14 @@ export class Vector implements IVector, IClonable<Vector> {
 
         return { x, y }
     }
-
 }
+
+
+export type EntryType_Vector =
+    | [x: number, y: number]
+    | [vector: IVector];
+
+
+export type EntryType_VectorModifier =
+    | EntryType_Vector
+    | [scalar: number];

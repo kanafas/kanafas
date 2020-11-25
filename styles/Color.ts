@@ -85,20 +85,49 @@ export class Color implements IClonable<Color>, IStyle {
     }
 
 
-    setHSLA(hue: number, saturation: number, lightness: number, alpha: number): Color {
-        const rgba = Color.convertHSLAtoRGBA(hue, saturation, lightness, alpha);
+    setRGBA(...values: EntryType_ColorRGBA): Color {
+        const entry = Color._parseEntryType_ColorRGBA(values);
 
-        this.red = rgba.red;
-        this.green = rgba.green;
-        this.blue = rgba.blue;
-        this.alpha = rgba.alpha;
+        this.red = entry.red;
+        this.green = entry.green;
+        this.blue = entry.blue;
+        this.alpha = entry.alpha;
 
         return this;
     }
 
 
-    setHSL(hue: number, saturation: number, lightness: number): Color {
-        this.setHSLA(hue, saturation, lightness, this.alpha);
+    setRGB(...values: EntryType_ColorRGB): Color {
+        const entry = Color._parseEntryType_ColorRGB(values);
+
+        this.red = entry.red;
+        this.green = entry.green;
+        this.blue = entry.blue;
+
+        return this;
+    }
+
+
+    setHSLA(...values: EntryType_ColorHSLA): Color {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+        const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
+
+        this.red = data.red;
+        this.green = data.green;
+        this.blue = data.blue;
+        this.alpha = data.alpha;
+
+        return this;
+    }
+
+
+    setHSL(...values: EntryType_ColorHSL): Color {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const data = Color.convertHSLtoRGB(entry.hue, entry.saturation, entry.lightness);
+
+        this.red = data.red;
+        this.green = data.green;
+        this.blue = data.blue;
 
         return this;
     }
@@ -123,22 +152,7 @@ export class Color implements IClonable<Color>, IStyle {
 
 
     getHex(): string {
-        const red = Math.round(this.red).toString(16);
-        const green = Math.round(this.green).toString(16);
-        const blue = Math.round(this.blue).toString(16);
-        const alpha = Math.round(this.alpha * 255).toString(16);
-
-        const builder: string[] = ['#',
-            red.length == 2 ? red : '0' + red,
-            green.length == 2 ? green : '0' + green,
-            blue.length == 2 ? blue : '0' + blue,
-        ];
-
-        if (this.alpha < 1) {
-            builder.push(alpha.length == 2 ? alpha : '0' + alpha,);
-        }
-
-        return builder.join('');
+        return Color.convertRGBAtoHex(this.red, this.green, this.blue, this.alpha);
     }
 
 
@@ -169,8 +183,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object ❤️
      * @returns {Color} new Color
      */
-    static red(alpha: number = 1): Color {
-        return new Color(255, 0, 0, alpha);
+    static get red(): Color {
+        return new Color(255, 0, 0);
     }
 
 
@@ -178,8 +192,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟨
      * @returns {Color} new Color
      */
-    static yellow(alpha: number = 1): Color {
-        return new Color(255, 255, 0, alpha);
+    static get yellow(): Color {
+        return new Color(255, 255, 0);
     }
 
 
@@ -187,8 +201,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟩
      * @returns {Color} new Color
      */
-    static green(alpha: number = 1): Color {
-        return new Color(0, 255, 0, alpha);
+    static get green(): Color {
+        return new Color(0, 255, 0);
     }
 
 
@@ -196,8 +210,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟦
      * @returns {Color} new Color
      */
-    static blue(alpha: number = 1): Color {
-        return new Color(0, 0, 255, alpha);
+    static get blue(): Color {
+        return new Color(0, 0, 255);
     }
 
 
@@ -205,8 +219,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟪
      * @returns {Color} new Color
      */
-    static magenta(alpha: number = 1): Color {
-        return new Color(255, 0, 255, alpha);
+    static get magenta(): Color {
+        return new Color(255, 0, 255);
     }
 
 
@@ -214,8 +228,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object ⬛️
      * @returns {Color} new Color
      */
-    static black(alpha: number = 1): Color {
-        return new Color(0, 0, 0, alpha);
+    static get black(): Color {
+        return new Color(0, 0, 0);
     }
 
 
@@ -223,8 +237,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object ⬜️
      * @returns {Color} new Color
      */
-    static white(alpha: number = 1): Color {
-        return new Color(255, 255, 255, alpha);
+    static get white(): Color {
+        return new Color(255, 255, 255);
     }
 
 
@@ -232,8 +246,8 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🐀
      * @returns {Color} new Color
      */
-    static grey(alpha: number = 1): Color {
-        return new Color(127, 127, 127, alpha);
+    static get grey(): Color {
+        return new Color(127, 127, 127);
     }
 
 
@@ -241,7 +255,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🏁
      * @returns {Color} new Color
      */
-    static transparent(): Color {
+    static get transparent(): Color {
         return new Color(0, 0, 0, 0);
     }
 
@@ -306,8 +320,9 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns {Color} new Color
      */
-    static fromRGBA(r: number, g: number, b: number, alpha: number): Color {
-        const color = new Color(r, g, b, alpha);
+    static fromRGBA(...values: EntryType_ColorRGBA): Color {
+        const entry = Color._parseEntryType_ColorRGBA(values);
+        const color = new Color(entry.red, entry.green, entry.blue, entry.alpha);
 
         return color;
     }
@@ -320,8 +335,11 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} b 💙 Blue channel <0, 255>
      * @returns {Color} new Color
      */
-    static fromRGB(r: number, g: number, b: number): Color {
-        return this.fromRGBA(r, g, b, 1);
+    static fromRGB(...values: EntryType_ColorRGB): Color {
+        const entry = Color._parseEntryType_ColorRGB(values);
+        const color = this.fromRGBA(entry.red, entry.green, entry.blue, 1);
+
+        return color;
     }
 
 
@@ -333,8 +351,9 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns {Color} new Color
      */
-    static fromHSLA(h: number, s: number, l: number, alpha: number): Color {
-        const data = Color.convertHSLAtoRGBA(h, s, l, alpha);
+    static fromHSLA(...values: EntryType_ColorHSLA): Color {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+        const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
 
         const color = new Color();
         color.red = data.red;
@@ -353,8 +372,11 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} l ☀️ Lightness channel <0, 100>
      * @returns {Color} new Color
      */
-    static fromHSL(h: number, s: number, l: number): Color {
-        return this.fromHSLA(h, s, l, 1);
+    static fromHSL(...values: EntryType_ColorHSL): Color {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const color = this.fromHSLA(entry.hue, entry.lightness, entry.lightness, 1);
+
+        return color;
     }
 
 
@@ -366,11 +388,13 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns IColorHSLA
      */
-    static convertRGBAtoHSLA = (r: number, g: number, b: number, alpha: number): IColorHSLA => {
-        r = Numbers.limit(r, 0, 255);
-        g = Numbers.limit(g, 0, 255);
-        b = Numbers.limit(b, 0, 255);
-        alpha = Numbers.limit(alpha, 0, 1);
+    static convertRGBAtoHSLA = (...values: EntryType_ColorRGBA): IColorHSLA => {
+        const entry = Color._parseEntryType_ColorRGBA(values);
+        
+        let r = Numbers.limit(entry.red, 0, 255);
+        let g = Numbers.limit(entry.green, 0, 255);
+        let b = Numbers.limit(entry.blue, 0, 255);
+        let alpha = Numbers.limit(entry.alpha, 0, 1);
 
         r /= 255;
         g /= 255;
@@ -409,8 +433,11 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} b 🟦 Blue channel <0, 255>
      * @returns IColorHSL
      */
-    static convertRGBtoHSL = (r: number, g: number, b: number): IColorHSL => {
-        const c = Color.convertRGBAtoHSLA(r, g, b, 1);
+    // static convertRGBtoHSL = (r: number, g: number, b: number): IColorHSL => {
+    static convertRGBtoHSL = (...values: EntryType_ColorRGB): IColorHSL => {
+        const entry = Color._parseEntryType_ColorRGB(values);
+        const c = Color.convertRGBAtoHSLA(entry.red, entry.green, entry.blue, 1);
+
         return {
             hue: c.hue,
             saturation: c.saturation,
@@ -427,7 +454,14 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} alpha 🏁 Alpha channel <0, 1>
      * @returns IColorRGBA
      */
-    static convertHSLAtoRGBA = (h: number, s: number, l: number, alpha: number): IColorRGBA => {
+    static convertHSLAtoRGBA = (...values: EntryType_ColorHSLA): IColorRGBA => {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+
+        let h = entry.hue;
+        let s = entry.saturation;
+        let l = entry.lightness;
+        let alpha = entry.alpha;
+
         if (h > 0) while (h >= 360) h -= 360;
         else if (h < 0) while (h < 0) h += 360;
 
@@ -474,7 +508,6 @@ export class Color implements IClonable<Color>, IStyle {
             r = c;
             g = 0;
             b = x;
-
         }
 
         r = (r + m) * 255;
@@ -492,8 +525,9 @@ export class Color implements IClonable<Color>, IStyle {
      * @param {number} b 🟦 Blue channel <0, 255>
      * @returns IColorRGB
      */
-    static convertHSLtoRGB = (h: number, s: number, l: number): IColorRGB => {
-        const c = Color.convertHSLAtoRGBA(h, s, l, 1);
+    static convertHSLtoRGB = (...values: EntryType_ColorHSL): IColorRGB => {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const c = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, 1);
 
         return {
             red: c.red,
@@ -503,8 +537,139 @@ export class Color implements IClonable<Color>, IStyle {
     }
 
 
-    static convertRGBAtoStyle = (color: IColorRGBA) => {
-        return `rgba(${color.red.toFixed(3)}, ${color.green.toFixed(3)}, ${color.blue.toFixed(3)}, ${color.alpha.toFixed(3)})`;
+    /**
+     * Convert RGBA to Hex
+     * @param {number} r ❤️ Red channel <0, 255>
+     * @param {number} g 💚 Green channel <0, 255>
+     * @param {number} b 🟦 Blue channel <0, 255>
+     * @param {number} alpha 🏁 Alpha channel <0, 1>
+     * @returns string
+     */
+    static convertRGBAtoHex = (...values: EntryType_ColorRGBA): string => {
+        const entry = Color._parseEntryType_ColorRGBA(values);
+
+        const red = Math.round(entry.red).toString(16);
+        const green = Math.round(entry.green).toString(16);
+        const blue = Math.round(entry.blue).toString(16);
+        const alpha = Math.round(entry.alpha * 255).toString(16);
+
+        const builder: string[] = ['#',
+            red.length == 2 ? red : '0' + red,
+            green.length == 2 ? green : '0' + green,
+            blue.length == 2 ? blue : '0' + blue,
+        ];
+
+        if (entry.alpha < 1) {
+            builder.push(alpha.length == 2 ? alpha : '0' + alpha);
+        }
+
+        return builder.join('');
+    }
+
+
+    /**
+     * Convert RGB to Hex
+     * @param {number} r ❤️ Red channel <0, 255>
+     * @param {number} g 💚 Green channel <0, 255>
+     * @param {number} b 🟦 Blue channel <0, 255>
+     * @returns string
+     */
+    static convertRGBtoHex = (...values: EntryType_ColorRGB): string => {
+        const entry = Color._parseEntryType_ColorRGB(values);
+
+        return Color.convertRGBAtoHex(entry.red, entry.green, entry.blue, 1);
+    }
+
+
+    /**
+     * Convert HSLA to Hex
+     * @param {number} h 🌈 Hue channel <0, 360)
+     * @param {number} s ☯️ Saturation channel <0, 100>
+     * @param {number} l ☀️ Lightness channel <0, 100>
+     * @param {number} alpha 🏁 Alpha channel <0, 1>
+     * @returns string
+     */
+    static convertHSLAtoHex = (...values: EntryType_ColorHSLA): string => {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+        const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
+
+        return Color.convertRGBAtoHex(data.red, data.green, data.blue, data.alpha);
+    }
+
+
+    /**
+     * Convert HSL to Hex
+     * @param {number} r ❤️ Red channel <0, 255>
+     * @param {number} g 💚 Green channel <0, 255>
+     * @param {number} b 🟦 Blue channel <0, 255>
+     * @returns string
+     */
+    static convertHSLtoHex = (...values: EntryType_ColorHSL): string => {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const data = Color.convertHSLtoRGB(entry.hue, entry.saturation, entry.lightness);
+
+        return Color.convertRGBtoHex(data.red, data.green, data.blue);
+    }
+
+
+    static convertRGBAtoStyle = (...values: EntryType_ColorRGBA): string => {
+        const entry = Color._parseEntryType_ColorRGBA(values);
+
+        return `rgba(${entry.red.toFixed(3)}, ${entry.green.toFixed(3)}, ${entry.blue.toFixed(3)}, ${entry.alpha.toFixed(3)})`;
+    }
+
+
+    private static _parseEntryType_ColorRGBA(values: EntryType_ColorRGBA): IColorRGBA {
+        if (values.length == 4) {
+            return {
+                red: values[0],
+                green: values[1],
+                blue: values[2],
+                alpha: values[3],
+            };
+        } else {
+            return values[0];
+        }
+    }
+
+
+    private static _parseEntryType_ColorRGB(values: EntryType_ColorRGB): IColorRGB {
+        if (values.length == 3) {
+            return {
+                red: values[0],
+                green: values[1],
+                blue: values[2],
+            };
+        } else {
+            return values[0];
+        }
+    }
+
+
+    private static _parseEntryType_ColorHSLA(values: EntryType_ColorHSLA): IColorHSLA {
+        if (values.length == 4) {
+            return {
+                hue: values[0],
+                saturation: values[1],
+                lightness: values[2],
+                alpha: values[3],
+            };
+        } else {
+            return values[0];
+        }
+    }
+
+
+    private static _parseEntryType_ColorHSL(values: EntryType_ColorHSL): IColorHSL {
+        if (values.length == 3) {
+            return {
+                hue: values[0],
+                saturation: values[1],
+                lightness: values[2],
+            };
+        } else {
+            return values[0];
+        }
     }
 }
 
@@ -531,3 +696,23 @@ export interface IColorHSL {
 export interface IColorHSLA extends IColorHSL {
     alpha: number,
 }
+
+
+export type EntryType_ColorRGBA =
+    | [red: number, green: number, blue: number, alpha: number]
+    | [color: IColorRGBA];
+
+
+export type EntryType_ColorRGB =
+    | [red: number, green: number, blue: number]
+    | [color: IColorRGB];
+
+
+export type EntryType_ColorHSLA =
+    | [hue: number, saturation: number, lightness: number, alpha: number]
+    | [color: IColorHSLA];
+
+
+export type EntryType_ColorHSL =
+    | [hue: number, saturation: number, lightness: number]
+    | [color: IColorHSL];

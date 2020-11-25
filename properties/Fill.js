@@ -1,6 +1,6 @@
 import { Color } from "../styles/Color.js";
 export class Fill {
-    constructor(style = Color.grey()) {
+    constructor(style = Color.grey) {
         this.style = style;
     }
     apply(renderingLayer, boundingBox) {
