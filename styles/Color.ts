@@ -581,6 +581,37 @@ export class Color implements IClonable<Color>, IStyle {
     }
 
 
+    /**
+     * Convert HSLA to Hex
+     * @param {number} h 🌈 Hue channel <0, 360)
+     * @param {number} s ☯️ Saturation channel <0, 100>
+     * @param {number} l ☀️ Lightness channel <0, 100>
+     * @param {number} alpha 🏁 Alpha channel <0, 1>
+     * @returns string
+     */
+    static convertHSLAtoHex = (...values: EntryType_ColorHSLA): string => {
+        const entry = Color._parseEntryType_ColorHSLA(values);
+        const data = Color.convertHSLAtoRGBA(entry.hue, entry.saturation, entry.lightness, entry.alpha);
+
+        return Color.convertRGBAtoHex(data.red, data.green, data.blue, data.alpha);
+    }
+
+
+    /**
+     * Convert HSL to Hex
+     * @param {number} r ❤️ Red channel <0, 255>
+     * @param {number} g 💚 Green channel <0, 255>
+     * @param {number} b 🟦 Blue channel <0, 255>
+     * @returns string
+     */
+    static convertHSLtoHex = (...values: EntryType_ColorHSL): string => {
+        const entry = Color._parseEntryType_ColorHSL(values);
+        const data = Color.convertHSLtoRGB(entry.hue, entry.saturation, entry.lightness);
+
+        return Color.convertRGBtoHex(data.red, data.green, data.blue);
+    }
+
+
     static convertRGBAtoStyle = (...values: EntryType_ColorRGBA): string => {
         const entry = Color._parseEntryType_ColorRGBA(values);
 
