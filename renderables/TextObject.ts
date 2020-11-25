@@ -27,7 +27,7 @@ export class TextObject implements IObject, IRenderable, IShape, IClonable<TextO
         this._contentLines = content.split(Utils.Regex.breakLines());
     }
 
-    fill: Fill | null = new Fill(Color.black());
+    fill: Fill | null = new Fill(Color.black);
     stroke: Stroke | null = null;
     font: Font = new Font();
 

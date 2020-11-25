@@ -120,63 +120,63 @@ export class Color {
      * Create new Color object ❤️
      * @returns {Color} new Color
      */
-    static red(alpha = 1) {
-        return new Color(255, 0, 0, alpha);
+    static get red() {
+        return new Color(255, 0, 0);
     }
     /**
      * Create new Color object 🟨
      * @returns {Color} new Color
      */
-    static yellow(alpha = 1) {
-        return new Color(255, 255, 0, alpha);
+    static get yellow() {
+        return new Color(255, 255, 0);
     }
     /**
      * Create new Color object 🟩
      * @returns {Color} new Color
      */
-    static green(alpha = 1) {
-        return new Color(0, 255, 0, alpha);
+    static get green() {
+        return new Color(0, 255, 0);
     }
     /**
      * Create new Color object 🟦
      * @returns {Color} new Color
      */
-    static blue(alpha = 1) {
-        return new Color(0, 0, 255, alpha);
+    static get blue() {
+        return new Color(0, 0, 255);
     }
     /**
      * Create new Color object 🟪
      * @returns {Color} new Color
      */
-    static magenta(alpha = 1) {
-        return new Color(255, 0, 255, alpha);
+    static get magenta() {
+        return new Color(255, 0, 255);
     }
     /**
      * Create new Color object ⬛️
      * @returns {Color} new Color
      */
-    static black(alpha = 1) {
-        return new Color(0, 0, 0, alpha);
+    static get black() {
+        return new Color(0, 0, 0);
     }
     /**
      * Create new Color object ⬜️
      * @returns {Color} new Color
      */
-    static white(alpha = 1) {
-        return new Color(255, 255, 255, alpha);
+    static get white() {
+        return new Color(255, 255, 255);
     }
     /**
      * Create new Color object 🐀
      * @returns {Color} new Color
      */
-    static grey(alpha = 1) {
-        return new Color(127, 127, 127, alpha);
+    static get grey() {
+        return new Color(127, 127, 127);
     }
     /**
      * Create new Color object 🏁
      * @returns {Color} new Color
      */
-    static transparent() {
+    static get transparent() {
         return new Color(0, 0, 0, 0);
     }
     /**
