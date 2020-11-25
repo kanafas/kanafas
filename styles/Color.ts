@@ -123,22 +123,7 @@ export class Color implements IClonable<Color>, IStyle {
 
 
     getHex(): string {
-        const red = Math.round(this.red).toString(16);
-        const green = Math.round(this.green).toString(16);
-        const blue = Math.round(this.blue).toString(16);
-        const alpha = Math.round(this.alpha * 255).toString(16);
-
-        const builder: string[] = ['#',
-            red.length == 2 ? red : '0' + red,
-            green.length == 2 ? green : '0' + green,
-            blue.length == 2 ? blue : '0' + blue,
-        ];
-
-        if (this.alpha < 1) {
-            builder.push(alpha.length == 2 ? alpha : '0' + alpha,);
-        }
-
-        return builder.join('');
+        return Color.convertRGBAtoHex(this.red, this.green, this.blue, this.alpha);
     }
 
 
@@ -503,7 +488,47 @@ export class Color implements IClonable<Color>, IStyle {
     }
 
 
-    static convertRGBAtoStyle = (color: IColorRGBA) => {
+    /**
+     * Convert RGBA to Hex
+     * @param {number} r ❤️ Red channel <0, 255>
+     * @param {number} g 💚 Green channel <0, 255>
+     * @param {number} b 🟦 Blue channel <0, 255>
+     * @param {number} alpha 🏁 Alpha channel <0, 1>
+     * @returns string
+     */
+    static convertRGBAtoHex = (r: number, g: number, b: number, a: number): string => {
+        const red = Math.round(r).toString(16);
+        const green = Math.round(g).toString(16);
+        const blue = Math.round(b).toString(16);
+        const alpha = Math.round(a * 255).toString(16);
+
+        const builder: string[] = ['#',
+            red.length == 2 ? red : '0' + red,
+            green.length == 2 ? green : '0' + green,
+            blue.length == 2 ? blue : '0' + blue,
+        ];
+
+        if (a < 1) {
+            builder.push(alpha.length == 2 ? alpha : '0' + alpha,);
+        }
+
+        return builder.join('');
+    }
+
+
+    /**
+     * Convert RGB to Hex
+     * @param {number} r ❤️ Red channel <0, 255>
+     * @param {number} g 💚 Green channel <0, 255>
+     * @param {number} b 🟦 Blue channel <0, 255>
+     * @returns string
+     */
+    static convertRGBtoHex = (r: number, g: number, b: number): string => {
+        return Color.convertRGBAtoHex(r, g, b, 1);
+    }
+
+
+    static convertRGBAtoStyle = (color: IColorRGBA): string => {
         return `rgba(${color.red.toFixed(3)}, ${color.green.toFixed(3)}, ${color.blue.toFixed(3)}, ${color.alpha.toFixed(3)})`;
     }
 }
