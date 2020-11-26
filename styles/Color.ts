@@ -374,7 +374,7 @@ export class Color implements IClonable<Color>, IStyle {
      */
     static fromHSL(...values: EntryType_ColorHSL): Color {
         const entry = Color._parseEntryType_ColorHSL(values);
-        const color = this.fromHSLA(entry.hue, entry.lightness, entry.lightness, 1);
+        const color = this.fromHSLA(entry.hue, entry.saturation, entry.lightness, 1);
 
         return color;
     }
