@@ -284,7 +284,7 @@ export class Color {
      */
     static fromHSL(...values) {
         const entry = Color._parseEntryType_ColorHSL(values);
-        const color = this.fromHSLA(entry.hue, entry.lightness, entry.lightness, 1);
+        const color = this.fromHSLA(entry.hue, entry.saturation, entry.lightness, 1);
         return color;
     }
     static _parseEntryType_ColorRGBA(values) {

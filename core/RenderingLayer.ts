@@ -47,7 +47,7 @@ export class RenderingLayer implements IRenderingLayer {
     }
 
 
-    updateSizeStyleCallback: updateSizeStyleCallbackType = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
+    updateSizeStyleCallback: updateSizeStyleCallbackType | null = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
 
 
     clear() {
@@ -139,6 +139,6 @@ export interface IRenderingLayer {
 }
 
 
-export type updateSizeStyleCallbackType =  null | {
+export type updateSizeStyleCallbackType = null | {
     (canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number): void;
 };
