@@ -6,9 +6,6 @@
         "url": "git+https://github.com/kanafas/kanafas.git",
         "directory": "kanafas/kanafas"
     },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
-    },
     "url": "https://github.com/kanafas/kanafas/issues",
     "description": "Objective oriented typescript library for rendering 2d graphics.",
     "license": "CC-BY-NC-ND-4.0",
