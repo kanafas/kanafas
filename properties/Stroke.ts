@@ -16,7 +16,7 @@ export class Stroke implements IClonable<Stroke> {
     miterLimit: number;
 
 
-    constructor(style: IStyle = Color.black, lineWidth: number = 1, lineJoin: CanvasLineJoin = 'miter', lineCap: CanvasLineCap = 'square', lineDashOffset: number = 0, miterLimit = 10) {
+    constructor(style: IStyle = Color.Black, lineWidth: number = 1, lineJoin: CanvasLineJoin = 'miter', lineCap: CanvasLineCap = 'square', lineDashOffset: number = 0, miterLimit = 10) {
         this.style = style;
 
         this.lineWidth = lineWidth;

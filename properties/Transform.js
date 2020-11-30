@@ -1,7 +1,7 @@
 import { Angle } from "../units/Angle.js";
 import { Vector } from "../units/Vector.js";
 export class Transform {
-    constructor(position = Vector.zero, scale = Vector.one, rotation = Angle.zero, origin = Vector.zero) {
+    constructor(position = Vector.Zero, scale = Vector.One, rotation = Angle.Zero, origin = Vector.Zero) {
         this._parent = null;
         this.position = position;
         this.scale = scale;

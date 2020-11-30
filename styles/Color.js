@@ -128,63 +128,63 @@ export class Color {
      * Create new Color object ❤️
      * @returns {Color} new Color
      */
-    static get red() {
+    static get Red() {
         return new Color(255, 0, 0);
     }
     /**
      * Create new Color object 🟨
      * @returns {Color} new Color
      */
-    static get yellow() {
+    static get Yellow() {
         return new Color(255, 255, 0);
     }
     /**
      * Create new Color object 🟩
      * @returns {Color} new Color
      */
-    static get green() {
+    static get Green() {
         return new Color(0, 255, 0);
     }
     /**
      * Create new Color object 🟦
      * @returns {Color} new Color
      */
-    static get blue() {
+    static get Blue() {
         return new Color(0, 0, 255);
     }
     /**
      * Create new Color object 🟪
      * @returns {Color} new Color
      */
-    static get magenta() {
+    static get Magenta() {
         return new Color(255, 0, 255);
     }
     /**
      * Create new Color object ⬛️
      * @returns {Color} new Color
      */
-    static get black() {
+    static get Black() {
         return new Color(0, 0, 0);
     }
     /**
      * Create new Color object ⬜️
      * @returns {Color} new Color
      */
-    static get white() {
+    static get White() {
         return new Color(255, 255, 255);
     }
     /**
      * Create new Color object 🐀
      * @returns {Color} new Color
      */
-    static get grey() {
+    static get Grey() {
         return new Color(127, 127, 127);
     }
     /**
      * Create new Color object 🏁
      * @returns {Color} new Color
      */
-    static get transparent() {
+    static get Transparent() {
         return new Color(0, 0, 0, 0);
     }
     /**

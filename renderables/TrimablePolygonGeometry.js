@@ -36,7 +36,7 @@ export class TrimablePolygonGeometry extends Geometry {
         const trimEndRatio = Numbers.limit(trimEndNormalized, 0, 1) + trimOffsetRatio;
         const sides = this.points.map((start, i, arr) => {
             const end = i + 1 < arr.length ? arr[i + 1] : arr[0];
-            const line = Vector.zero.add(end).subtract(start);
+            const line = Vector.Zero.add(end).subtract(start);
             return line;
         }).slice(0, this.closed ? this.points.length : this.points.length - 1);
         const circuit = sides.reduce((acc, side) => acc + side.length, 0);
@@ -53,7 +53,7 @@ export class TrimablePolygonGeometry extends Geometry {
             if (!this.closed) {
                 const resetMovement = sides.reduce((acc, side) => {
                     return acc.subtract(side);
-                }, Vector.zero);
+                }, Vector.Zero);
                 ctx.moveTo(resetMovement.x * pxs, resetMovement.y * pxs);
                 ctx.translate(resetMovement.x * pxs, resetMovement.y * pxs);
             }

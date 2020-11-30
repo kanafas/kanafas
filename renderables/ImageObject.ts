@@ -79,7 +79,7 @@ export class ImageObject implements IObject, IRenderable, IVisible, IClonable<Im
 
     renderGizmo(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.mediaColor);
+        Gizmo.origin(renderingLayer, Vector.Zero, Gizmo.mediaColor);
         renderingLayer.resetMatrix();
     }
 

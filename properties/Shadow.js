@@ -2,8 +2,8 @@ import { Color } from "../styles/Color.js";
 import { Vector } from "../units/Vector.js";
 export class Shadow {
     constructor(color, offset, blur) {
-        this.color = Color.black;
-        this.offset = Vector.zero;
+        this.color = Color.Black;
+        this.offset = Vector.Zero;
         this.blur = 0;
         this.color = color;
         this.offset = offset;

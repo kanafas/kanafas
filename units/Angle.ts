@@ -155,27 +155,27 @@ export class Angle implements IClonable<Angle> {
     }
 
 
-    static get zero(): Angle {
+    static get Zero(): Angle {
         return new Angle(0);
     }
 
 
-    static get quarter(): Angle {
+    static get Quarter(): Angle {
         return new Angle(90);
     }
 
 
-    static get third(): Angle {
+    static get Third(): Angle {
         return new Angle(120);
     }
 
 
-    static get half(): Angle {
+    static get Half(): Angle {
         return new Angle(180);
     }
 
 
-    static get full(): Angle {
+    static get Full(): Angle {
         return new Angle(360);
     }
 

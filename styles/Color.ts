@@ -183,7 +183,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object ❤️
      * @returns {Color} new Color
      */
-    static get red(): Color {
+    static get Red(): Color {
         return new Color(255, 0, 0);
     }
 
@@ -192,7 +192,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟨
      * @returns {Color} new Color
      */
-    static get yellow(): Color {
+    static get Yellow(): Color {
         return new Color(255, 255, 0);
     }
 
@@ -201,7 +201,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟩
      * @returns {Color} new Color
      */
-    static get green(): Color {
+    static get Green(): Color {
         return new Color(0, 255, 0);
     }
 
@@ -210,7 +210,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟦
      * @returns {Color} new Color
      */
-    static get blue(): Color {
+    static get Blue(): Color {
         return new Color(0, 0, 255);
     }
 
@@ -219,7 +219,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🟪
      * @returns {Color} new Color
      */
-    static get magenta(): Color {
+    static get Magenta(): Color {
         return new Color(255, 0, 255);
     }
 
@@ -228,7 +228,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object ⬛️
      * @returns {Color} new Color
      */
-    static get black(): Color {
+    static get Black(): Color {
         return new Color(0, 0, 0);
     }
 
@@ -237,7 +237,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object ⬜️
      * @returns {Color} new Color
      */
-    static get white(): Color {
+    static get White(): Color {
         return new Color(255, 255, 255);
     }
 
@@ -246,7 +246,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🐀
      * @returns {Color} new Color
      */
-    static get grey(): Color {
+    static get Grey(): Color {
         return new Color(127, 127, 127);
     }
 
@@ -255,7 +255,7 @@ export class Color implements IClonable<Color>, IStyle {
      * Create new Color object 🏁
      * @returns {Color} new Color
      */
-    static get transparent(): Color {
+    static get Transparent(): Color {
         return new Color(0, 0, 0, 0);
     }
 

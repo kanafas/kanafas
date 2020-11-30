@@ -144,7 +144,7 @@ export class Vector implements IVector, IClonable<Vector> {
      * Alias for `new Vector(0, 0);`
      * @returns {Vector} New instance of Vector
      */
-    static get zero(): Vector {
+    static get Zero(): Vector {
         return new Vector(0, 0);
     }
 
@@ -153,7 +153,7 @@ export class Vector implements IVector, IClonable<Vector> {
      * Alias for `new Vector(.5, .5);`
      * @returns {Vector} New instance of Vector
      */
-    static get half(): Vector {
+    static get Half(): Vector {
         return new Vector(.5, .5);
     }
 
@@ -162,7 +162,7 @@ export class Vector implements IVector, IClonable<Vector> {
      * Alias for `new Vector(1, 1);`
      * @returns {Vector} New instance of Vector
      */
-    static get one(): Vector {
+    static get One(): Vector {
         return new Vector(1, 1);
     }
 
@@ -171,7 +171,7 @@ export class Vector implements IVector, IClonable<Vector> {
       * Alias for `new Vector(0, -1);`
       * @returns {Vector} New instance of Vector
       */
-    static get top(): Vector {
+    static get Top(): Vector {
         return new Vector(0, -1);
     }
 
@@ -180,7 +180,7 @@ export class Vector implements IVector, IClonable<Vector> {
       * Alias for `new Vector(0, 1);`
       * @returns {Vector} New instance of Vector
       */
-    static get bottom(): Vector {
+    static get Bottom(): Vector {
         return new Vector(0, 1);
     }
 
@@ -189,7 +189,7 @@ export class Vector implements IVector, IClonable<Vector> {
       * Alias for `new Vector(-1, 0);`
       * @returns {Vector} New instance of Vector
       */
-    static get left(): Vector {
+    static get Left(): Vector {
         return new Vector(-1, 0);
     }
 

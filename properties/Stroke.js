@@ -1,6 +1,6 @@
 import { Color } from "../styles/Color.js";
 export class Stroke {
-    constructor(style = Color.black, lineWidth = 1, lineJoin = 'miter', lineCap = 'square', lineDashOffset = 0, miterLimit = 10) {
+    constructor(style = Color.Black, lineWidth = 1, lineJoin = 'miter', lineCap = 'square', lineDashOffset = 0, miterLimit = 10) {
         this.style = style;
         this.lineWidth = lineWidth;
         this.lineJoin = lineJoin;

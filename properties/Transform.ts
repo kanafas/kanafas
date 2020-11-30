@@ -13,7 +13,7 @@ export class Transform implements IClonable<Transform> {
     private _parent: Transform | null = null;
 
 
-    constructor(position: Vector = Vector.zero, scale: Vector = Vector.one, rotation: Angle = Angle.zero, origin: Vector = Vector.zero) {
+    constructor(position: Vector = Vector.Zero, scale: Vector = Vector.One, rotation: Angle = Angle.Zero, origin: Vector = Vector.Zero) {
         this.position = position;
         this.scale = scale;
         this.rotation = rotation;
