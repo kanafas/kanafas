@@ -93,49 +93,49 @@ export class Vector {
      * Alias for `new Vector(0, 0);`
      * @returns {Vector} New instance of Vector
      */
-    static zero() {
+    static get zero() {
         return new Vector(0, 0);
     }
     /**
      * Alias for `new Vector(.5, .5);`
      * @returns {Vector} New instance of Vector
      */
-    static half() {
+    static get half() {
         return new Vector(.5, .5);
     }
     /**
      * Alias for `new Vector(1, 1);`
      * @returns {Vector} New instance of Vector
      */
-    static one() {
+    static get one() {
         return new Vector(1, 1);
     }
     /**
       * Alias for `new Vector(0, -1);`
       * @returns {Vector} New instance of Vector
       */
-    static top() {
+    static get top() {
         return new Vector(0, -1);
     }
     /**
       * Alias for `new Vector(0, 1);`
       * @returns {Vector} New instance of Vector
       */
-    static bottom() {
+    static get bottom() {
         return new Vector(0, 1);
     }
     /**
       * Alias for `new Vector(-1, 0);`
       * @returns {Vector} New instance of Vector
       */
-    static left() {
+    static get left() {
         return new Vector(-1, 0);
     }
     /**
       * Alias for `new Vector(1, 0);`
       * @returns {Vector} New instance of Vector
       */
-    static right() {
+    static get right() {
         return new Vector(1, 0);
     }
     static distance(vector1, vector2) {

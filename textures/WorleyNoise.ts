@@ -128,7 +128,7 @@ export class WorleyNoise implements ITexture, IClonable<WorleyNoise> {
 
     renderGizmo(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
+        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.mediaColor);
         renderingLayer.resetMatrix();
     }
 

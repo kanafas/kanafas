@@ -3,7 +3,7 @@ import { Vector } from "../units/Vector.js";
 export class Shadow {
     constructor(color, offset, blur) {
         this.color = Color.black;
-        this.offset = Vector.zero();
+        this.offset = Vector.zero;
         this.blur = 0;
         this.color = color;
         this.offset = offset;

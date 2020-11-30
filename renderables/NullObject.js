@@ -8,7 +8,7 @@ export class NullObject {
     getBoundingBox(renderingLayer) {
         return {
             origin: this.transform.origin.clone(),
-            size: Vector.zero(),
+            size: Vector.zero,
         };
     }
     render(renderingLayer) {
@@ -17,7 +17,7 @@ export class NullObject {
     }
     renderGizmos(renderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.nullColor);
+        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.nullColor);
         renderingLayer.resetMatrix();
     }
     clone() {

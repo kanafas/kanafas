@@ -18,7 +18,7 @@ export class NullObject implements IObject, IClonable<NullObject> {
     getBoundingBox(renderingLayer: IRenderingLayer): IBoundingBox {
         return {
             origin: this.transform.origin.clone(),
-            size: Vector.zero(),
+            size: Vector.zero,
         }
     }
 
@@ -30,7 +30,7 @@ export class NullObject implements IObject, IClonable<NullObject> {
 
     renderGizmos(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.nullColor);
+        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.nullColor);
         renderingLayer.resetMatrix();
     }
 

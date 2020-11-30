@@ -78,7 +78,7 @@ export class ImageSliceObject implements IObject, IRenderable, IVisible {
 
     renderGizmo(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
+        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.mediaColor);
         renderingLayer.resetMatrix();
     }
 

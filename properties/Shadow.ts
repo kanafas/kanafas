@@ -8,7 +8,7 @@ import { IClonable } from "../core/IClonable.js";
 export class Shadow implements IClonable<Shadow> {
 
     color: IColorRGBA = Color.black;
-    offset: Vector = Vector.zero();
+    offset: Vector = Vector.zero;
     blur: number = 0;
 
 

@@ -17,8 +17,8 @@ export class PolygonGeometry extends Geometry {
             ctx.closePath();
         };
         const b = (t) => {
-            const min = Vector.zero();
-            const max = Vector.zero();
+            const min = Vector.zero;
+            const max = Vector.zero;
             points.forEach(p => {
                 min.x = Math.min(min.x, p.x);
                 min.y = Math.min(min.y, p.y);
