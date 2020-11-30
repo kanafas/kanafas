@@ -1,29 +1,38 @@
 export class RenderingLayer {
-    constructor(canvas, width, height, pixelScale = 1, updateSize = true) {
-        this._pixelScale = 1;
+    constructor(canvas, width, height, pixelScale = 1, updateStyleSize = true) {
         this._width = 0;
         this._height = 0;
         this.gizmoVisibility = false;
         this.gizmoScale = 1;
-        this.updateSizeStyleCallback = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
+        this.updateStyleSizeCallback = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
         this._canvas = canvas;
-        if (updateSize) {
-            this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
-        }
+        this._pixelScale = !isNaN(pixelScale) ? pixelScale : 1;
+        this._updateStyleSize = updateStyleSize;
+        this.updateSize(width, height, this._pixelScale, this._updateStyleSize);
     }
     static get PIXELSCALE() { return window.devicePixelRatio; }
     get pixelScale() { return this._pixelScale; }
     get width() { return this._width; }
     get height() { return this._height; }
-    updateSize(width, height, pixelScale = NaN) {
-        if (!isNaN(pixelScale))
+    /**
+     *
+     * @param width Width of canvas.
+     * @param height Height of canvas.
+     * @param pixelScale Resolution scale for retina stuff. If `undefined`, will used value from last time.
+     * @param updateStyleSize If it is `true`, the style will be set by the callback `updateStyleSizeCallback`. If `undefined`, will used value from last time.
+
+     */
+    updateSize(width, height, pixelScale, updateStyleSize) {
+        if (pixelScale !== undefined)
             this._pixelScale = Math.max(pixelScale, 0);
+        if (updateStyleSize !== undefined)
+            this._updateStyleSize = updateStyleSize;
         this._width = Math.max(width, 0);
         this._height = Math.max(height, 0);
-        this._canvas.width = width * pixelScale;
-        this._canvas.height = height * pixelScale;
-        if (this.updateSizeStyleCallback !== null)
-            this.updateSizeStyleCallback(this._canvas, width, height, this._pixelScale);
+        this._canvas.width = this._width * this._pixelScale;
+        this._canvas.height = this._height * this._pixelScale;
+        if (this._updateStyleSize)
+            this.updateStyleSizeCallback(this._canvas, this._width, this._height, this._pixelScale);
         this._renderingContext = this._canvas.getContext('2d');
     }
     clear() {
