@@ -61,7 +61,6 @@ export class Style implements IStyle, IClonable<Style> {
 }
 
 
-
 export type EntryType_Style =
     | IStyle
     | string
