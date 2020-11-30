@@ -7,7 +7,7 @@ import { IRenderingLayer } from "../core/RenderingLayer.js";
 
 export class RadialGradient extends Gradient {
 
-    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox) {
+    computeStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
 

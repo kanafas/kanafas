@@ -165,7 +165,7 @@ export class Color implements IClonable<Color>, IStyle {
     }
 
 
-    getStyle(): string {
+    computeStyle(): string {
         return Color.convertRGBAtoStyle(this);
     }
 

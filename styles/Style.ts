@@ -8,7 +8,7 @@ type getStyleCallback = {
 }
 
 export interface IStyle {
-    getStyle: getStyleCallback
+    computeStyle: getStyleCallback
 }
 
 
@@ -16,21 +16,24 @@ export class Style implements IStyle, IClonable<Style> {
 
     private _style: IStyle;
 
-    constructor(style: IStyle | string | CanvasGradient | CanvasPattern) {
-        if (typeof style === 'object' && style.hasOwnProperty('getStyle')) {
-            this._style = style as IStyle;
-        } else {
-            this._style = {
-                getStyle: (renderingLayer: IRenderingLayer, boundingBox: IBoundingBox) => {
-                    return style as string | CanvasGradient | CanvasPattern;
-                }
-            }
-        }
+
+    constructor(style: EntryType_Style) {
+        this._style = Style._parseEntryType_Style(style);
     }
 
 
-    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): string | CanvasGradient | CanvasPattern {
-        return this._style.getStyle(renderingLayer, boundingBox);
+    computeStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): string | CanvasGradient | CanvasPattern {
+        return this._style.computeStyle(renderingLayer, boundingBox);
+    }
+
+
+    setStyle(style: EntryType_Style) {
+        this._style = Style._parseEntryType_Style(style);
+    }
+
+
+    getStyle() {
+        return this._style;
     }
 
 
@@ -41,4 +44,26 @@ export class Style implements IStyle, IClonable<Style> {
         return new Style(style);
     }
 
+
+    private static _parseEntryType_Style(raw: EntryType_Style): IStyle {
+        const style = raw;
+
+        if (typeof style === 'object' && style.hasOwnProperty('getStyle')) {
+            return style as IStyle;
+        } else {
+            return {
+                computeStyle: (renderingLayer: IRenderingLayer, boundingBox: IBoundingBox) => {
+                    return style as string | CanvasGradient | CanvasPattern;
+                }
+            }
+        }
+    }
 }
+
+
+
+export type EntryType_Style =
+    | IStyle
+    | string
+    | CanvasGradient
+    | CanvasPattern;

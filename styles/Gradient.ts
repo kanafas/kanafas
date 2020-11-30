@@ -18,7 +18,7 @@ export abstract class Gradient implements IGradient, IStyle {
     }
 
 
-    getStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): string | CanvasGradient | CanvasPattern {
+    computeStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): string | CanvasGradient | CanvasPattern {
         throw new Error("Mehod `getStyle` is not implemented.");
     }
 }
