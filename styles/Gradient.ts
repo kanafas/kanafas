@@ -1,5 +1,5 @@
 import { Vector } from "../units/Vector.js";
-import { IStyle } from "./IStyle.js";
+import { IStyle } from "./Style.js";
 import { IColorRGBA } from "./Color.js";
 import { IRenderingLayer } from "../core/index.js";
 import { IBoundingBox } from "../renderables/index.js";

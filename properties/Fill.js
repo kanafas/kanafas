@@ -1,15 +1,15 @@
 import { Color } from "../styles/Color.js";
-export class Fill {
+import { Style } from "../styles/Style.js";
+export class Fill extends Style {
     constructor(style = Color.Grey) {
-        this.style = style;
+        super(style);
     }
     apply(renderingLayer, boundingBox) {
         const ctx = renderingLayer.getRenderingContext();
-        ctx.fillStyle = this.style.getStyle(renderingLayer, boundingBox);
+        ctx.fillStyle = this.getStyle(renderingLayer, boundingBox);
     }
     clone() {
-        const thisStyle = this.style;
-        const style = thisStyle.hasOwnProperty('clone') ? thisStyle.clone() : { ...this.style };
+        const style = super.clone();
         return new Fill(style);
     }
     static clear(renderingLayer) {

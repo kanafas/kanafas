@@ -5,8 +5,8 @@ export class Timeline {
         this.update = (frames) => {
             this._updateCallbacks.forEach(callback => callback(frames));
         };
-        this.playByLoop = (milliseconds, delta) => {
-            const framesFromLoop = Math.floor(milliseconds / (1000 / this.fps));
+        this.playByLoop = (time, delta) => {
+            const framesFromLoop = Math.floor(time / (1000 / this.fps));
             if (framesFromLoop > this.frames) {
                 const iterations = framesFromLoop - this.frames;
                 for (let i = 0; i < iterations; i++) {
@@ -40,18 +40,18 @@ export class Timeline {
         }
         this._updateCallbacks.splice(i, 1);
     }
-    rewind(framCount = 1) {
-        if (framCount <= 0)
+    rewind(frames = 1) {
+        if (frames <= 0)
             return;
-        for (let i = 0; i < framCount; i++) {
+        for (let i = 0; i < frames; i++) {
             this._frames--;
             this.update(this._frames);
         }
     }
-    forward(framCount = 1) {
-        if (framCount <= 0)
+    forward(frames = 1) {
+        if (frames <= 0)
             return;
-        for (let i = 0; i < framCount; i++) {
+        for (let i = 0; i < frames; i++) {
             this._frames++;
             this.update(this._frames);
         }

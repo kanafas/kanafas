@@ -48,8 +48,8 @@ export class Timeline {
     }
 
 
-    playByLoop: ILoopUpdateCallback = (milliseconds: number, delta: number) => {
-        const framesFromLoop = Math.floor(milliseconds / (1000 / this.fps));
+    playByLoop: ILoopUpdateCallback = (time: number, delta: number) => {
+        const framesFromLoop = Math.floor(time / (1000 / this.fps));
 
         if (framesFromLoop > this.frames) {
             const iterations = framesFromLoop - this.frames;
@@ -70,20 +70,20 @@ export class Timeline {
     }
 
 
-    rewind(framCount: number = 1) {
-        if (framCount <= 0) return;
+    rewind(frames: number = 1) {
+        if (frames <= 0) return;
 
-        for (let i = 0; i < framCount; i++) {
+        for (let i = 0; i < frames; i++) {
             this._frames--;
             this.update(this._frames);
         }
     }
 
 
-    forward(framCount: number = 1) {
-        if (framCount <= 0) return;
+    forward(frames: number = 1) {
+        if (frames <= 0) return;
 
-        for (let i = 0; i < framCount; i++) {
+        for (let i = 0; i < frames; i++) {
             this._frames++;
             this.update(this._frames);
         }

@@ -14,7 +14,7 @@ export class Engine extends RenderingLayer {
         this.loop = new Loop();
 
         // this.debuggerBar = new DebuggerBar(this);
-        // this.loop.addUpdateCallback((milliseconds: number, delta: number) => this.debuggerBar.update(milliseconds, delta));
+        // this.loop.addUpdateCallback((time: number, delta: number) => this.debuggerBar.update(time, delta));
     }
 
 }

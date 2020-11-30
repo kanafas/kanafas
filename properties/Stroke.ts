@@ -1,13 +1,11 @@
 import { Color } from "../styles/Color.js";
 import { IBoundingBox } from "../renderables/IBoundingBox.js";
-import { IStyle } from "../styles/IStyle.js";
+import { IStyle, Style } from "../styles/Style.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { IClonable } from "../core/IClonable.js";
 
 
-export class Stroke implements IClonable<Stroke> {
-
-    style: IStyle;
+export class Stroke extends Style implements IClonable<Stroke> {
 
     lineWidth: number;
     lineJoin: CanvasLineJoin;
@@ -16,8 +14,8 @@ export class Stroke implements IClonable<Stroke> {
     miterLimit: number;
 
 
-    constructor(style: IStyle = Color.Black, lineWidth: number = 1, lineJoin: CanvasLineJoin = 'miter', lineCap: CanvasLineCap = 'square', lineDashOffset: number = 0, miterLimit = 10) {
-        this.style = style;
+    constructor(style: IStyle | string | CanvasGradient | CanvasPattern = Color.Black, lineWidth: number = 1, lineJoin: CanvasLineJoin = 'miter', lineCap: CanvasLineCap = 'square', lineDashOffset: number = 0, miterLimit = 10) {
+        super(style);
 
         this.lineWidth = lineWidth;
         this.lineJoin = lineJoin;
@@ -37,13 +35,12 @@ export class Stroke implements IClonable<Stroke> {
         ctx.lineCap = this.lineCap;
         ctx.miterLimit = this.miterLimit * pxs;
 
-        ctx.strokeStyle = this.style.getStyle(renderingLayer, boundingBox);
+        ctx.strokeStyle = this.getStyle(renderingLayer, boundingBox);
     }
 
 
     clone(): Stroke {
-        const thisStyle = this.style as any;
-        const style = thisStyle.hasOwnProperty('clone') ? thisStyle.clone() : { ...this.style };
+        const style = super.clone();
 
         return new Stroke(style, this.lineWidth, this.lineJoin, this.lineCap, this.lineDashOffset, this.miterLimit);
     }

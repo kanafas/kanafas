@@ -1,30 +1,26 @@
 import { Color } from "../styles/Color.js";
 import { IBoundingBox } from "../renderables/IBoundingBox.js";
-import { IStyle } from "../styles/IStyle.js";
+import { IStyle, Style } from "../styles/Style.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { IClonable } from "../core/IClonable.js";
 
 
-export class Fill implements IClonable<Fill> {
+export class Fill extends Style implements IClonable<Fill> {
 
-    style: IStyle;
-
-
-    constructor(style: IStyle = Color.Grey) {
-        this.style = style;
+    constructor(style: IStyle | string | CanvasGradient | CanvasPattern = Color.Grey) {
+        super(style);
     }
 
 
     apply(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): void {
         const ctx = renderingLayer.getRenderingContext();
 
-        ctx.fillStyle = this.style.getStyle(renderingLayer, boundingBox);
+        ctx.fillStyle = this.getStyle(renderingLayer, boundingBox);
     }
 
 
     clone(): Fill {
-        const thisStyle = this.style as any;
-        const style = thisStyle.hasOwnProperty('clone') ? thisStyle.clone() : { ...this.style };
+        const style = super.clone();
 
         return new Fill(style);
     }

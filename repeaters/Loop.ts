@@ -1,17 +1,17 @@
 export interface ILoopUpdateCallback {
     /**
-     * @param tickTime Počet uplinulích framů
-     * @param delta Čas v milisekundách od předchozého framu
+     * @param time Number of milliseconds elapsed.
+     * @param delta Time in milliseconds since the previous frame.
      */
-    (milliseconds: number, delta: number): void
+    (time: number, delta: number): void
 }
 
 
 export class Loop extends EventTarget {
 
-    private _milliseconds: number = 0;
-    get milliseconds(): number {
-        return this._milliseconds;
+    private _time: number = 0;
+    get time(): number {
+        return this._time;
     }
 
     private _startTimestamp: number = 0;
@@ -43,63 +43,61 @@ export class Loop extends EventTarget {
     }
 
 
-    run() {
+    start() {
         this._isRunningToggle = true;
 
         this._startTimestamp = Date.now();
         this._previousTimestamp = Date.now();
 
-        window.requestAnimationFrame((t => {
-            this._animationStep(t);
-        }));
+        window.requestAnimationFrame(t => this._frame(t));
 
-        this.dispatchEvent(new RunLoopEvent());
+        this.dispatchEvent(new StartLoopEvent());
     }
 
 
-    pause() {
+    stop() {
         this._isRunningToggle = false;
 
-        this.dispatchEvent(new RunLoopEvent());
+        this.dispatchEvent(new StartLoopEvent());
     }
 
 
-    update: ILoopUpdateCallback = (milliseconds: number, delta: number) => {
-        this._updateCallbacks.forEach(callback => callback(milliseconds, delta));
+    update(time: number, delta: number) {
+        this._updateCallbacks.forEach(callback => callback(time, delta));
     }
 
 
-    private _animationStep(time: number) {
+    private _frame(time: number) {
         if (!this._isRunningToggle) return;
 
         const delta = ((n: number) => n > 1 ? n : 1)(time - this._previousTimestamp);
 
-        this.update(this._milliseconds, delta);
+        this.update(this._time, delta);
 
         this._previousTimestamp = time;
-        this._milliseconds += delta;
+        this._time += delta;
 
         window.requestAnimationFrame((t => {
-            this._animationStep(t);
+            this._frame(t);
         }));
     }
 
 }
 
 
-export class RunLoopEvent extends CustomEvent<{}> {
-    static arg: 'run-loop';
+export class StartLoopEvent extends CustomEvent<{}> {
+    static arg: 'start';
 
     constructor() {
-        super(RunLoopEvent.arg);
+        super(StartLoopEvent.arg);
     }
 }
 
 
 export class StopLoopEvent extends CustomEvent<{}> {
-    static arg: 'stop-loop';
+    static arg: 'stop';
 
     constructor() {
-        super(RunLoopEvent.arg);
+        super(StartLoopEvent.arg);
     }
 }

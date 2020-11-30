@@ -1,4 +1,4 @@
-export { IStyle } from "./IStyle.js";
+export { IStyle } from "./Style.js";
 export { Color } from "./Color.js";
 export { Gradient, IGradient, IGradientStep } from "./Gradient.js";
 export { LinearGradient } from "./LinearGradient.js";
