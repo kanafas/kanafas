@@ -106,10 +106,10 @@ export class RoundedRectangleGeometry extends Geometry implements IClonable<Roun
         this.width = width;
         this.height = height;
 
-        this.topLeftRadius = Vector.zero();
-        this.topRightRadius = Vector.zero();
-        this.bottomLeftRadius = Vector.zero();
-        this.bottomRightRadius = Vector.zero();
+        this.topLeftRadius = Vector.zero;
+        this.topRightRadius = Vector.zero;
+        this.bottomLeftRadius = Vector.zero;
+        this.bottomRightRadius = Vector.zero;
 
         this.setRadius(...radius);
     }

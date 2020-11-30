@@ -40,7 +40,7 @@ export class ImageSliceObject {
     }
     renderGizmo(renderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero(), Gizmo.mediaColor);
+        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.mediaColor);
         renderingLayer.resetMatrix();
     }
     getImageElement() {
