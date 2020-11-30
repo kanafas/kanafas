@@ -1,6 +1,6 @@
 import { IClonable } from "../core/IClonable.js";
 import { Numbers } from "../utils/Numbers.js";
-import { IStyle } from "../styles/IStyle.js";
+import { IStyle } from "./Style.js";
 
 
 export class Color implements IClonable<Color>, IStyle {

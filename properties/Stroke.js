@@ -1,7 +1,8 @@
 import { Color } from "../styles/Color.js";
-export class Stroke {
+import { Style } from "../styles/Style.js";
+export class Stroke extends Style {
     constructor(style = Color.Black, lineWidth = 1, lineJoin = 'miter', lineCap = 'square', lineDashOffset = 0, miterLimit = 10) {
-        this.style = style;
+        super(style);
         this.lineWidth = lineWidth;
         this.lineJoin = lineJoin;
         this.lineCap = lineCap;
@@ -16,11 +17,10 @@ export class Stroke {
         ctx.lineJoin = this.lineJoin;
         ctx.lineCap = this.lineCap;
         ctx.miterLimit = this.miterLimit * pxs;
-        ctx.strokeStyle = this.style.getStyle(renderingLayer, boundingBox);
+        ctx.strokeStyle = this.getStyle(renderingLayer, boundingBox);
     }
     clone() {
-        const thisStyle = this.style;
-        const style = thisStyle.hasOwnProperty('clone') ? thisStyle.clone() : { ...this.style };
+        const style = super.clone();
         return new Stroke(style, this.lineWidth, this.lineJoin, this.lineCap, this.lineDashOffset, this.miterLimit);
     }
     static clear(renderingLayer) {
