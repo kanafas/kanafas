@@ -8,8 +8,8 @@ export class Engine extends RenderingLayer {
     readonly loop: Loop;
 
 
-    constructor(canvas: HTMLCanvasElement, width: number, height: number, pixelScale?: number) {
-        super(canvas, width, height, pixelScale);
+    constructor(canvas: HTMLCanvasElement, width: number, height: number, pixelScale?: number, updateSize?: boolean) {
+        super(canvas, width, height, pixelScale, updateSize);
 
         this.loop = new Loop();
 

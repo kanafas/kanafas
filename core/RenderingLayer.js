@@ -1,5 +1,5 @@
 export class RenderingLayer {
-    constructor(canvas, width, height, pixelScale = 1) {
+    constructor(canvas, width, height, pixelScale = 1, updateSize = true) {
         this._pixelScale = 1;
         this._width = 0;
         this._height = 0;
@@ -7,7 +7,9 @@ export class RenderingLayer {
         this.gizmoScale = 1;
         this.updateSizeStyleCallback = RenderingLayer.DEFAULT_UPDATESIZE_CALLBACK;
         this._canvas = canvas;
-        this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
+        if (updateSize) {
+            this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
+        }
     }
     static get PIXELSCALE() { return window.devicePixelRatio; }
     get pixelScale() { return this._pixelScale; }

@@ -26,9 +26,12 @@ export class RenderingLayer implements IRenderingLayer {
     gizmoScale: number = 1;
 
 
-    constructor(canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number = 1) {
+    constructor(canvas: HTMLCanvasElement, width: number, height: number, pixelScale: number = 1, updateSize: boolean = true) {
         this._canvas = canvas;
-        this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
+            
+        if (updateSize) {
+            this.updateSize(width, height, !isNaN(pixelScale) ? pixelScale : 1);
+        }
     }
 
 
