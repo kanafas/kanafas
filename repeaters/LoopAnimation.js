@@ -1,32 +1,32 @@
 import { Utils } from "../utils/Utils.js";
 export class LoopAnimation {
     constructor(callback, duration, delay, looping) {
-        this._miliseconds = 0;
-        this.update = (milliseconds, delta) => {
-            this._miliseconds = LoopAnimation.convertGlobalMilisecondsToLocal(milliseconds, this.duration, this.delay, this.looping);
+        this._time = 0;
+        this.update = (time, delta) => {
+            this._time = LoopAnimation.convertGlobalMilisecondsToLocal(time, this.duration, this.delay, this.looping);
             ;
-            this._callback(milliseconds, delta);
+            this._callback(time, delta);
         };
         this._callback = callback;
         this.duration = duration;
         this.delay = delay;
         this.looping = looping;
     }
-    get miliseconds() {
-        return this._miliseconds;
+    get time() {
+        return this._time;
     }
     isFirstIteration() {
-        return this.miliseconds == 0;
+        return this.time == 0;
     }
     isLastIteration() {
-        return this.miliseconds == this.duration;
+        return this.time == this.duration;
     }
     getNumberOfCycles() {
         // TODO: Otestovat negativní hodnoty
-        return Math.floor(this.miliseconds / this.duration);
+        return Math.floor(this.time / this.duration);
     }
-    static convertGlobalMilisecondsToLocal(miliseconds, duration, delay, looping) {
-        const m = miliseconds - delay;
+    static convertGlobalMilisecondsToLocal(time, duration, delay, looping) {
+        const m = time - delay;
         if (looping) {
             return m % duration;
         }

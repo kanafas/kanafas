@@ -11,9 +11,9 @@ export class LoopAnimation implements IAnimation<ILoopUpdateCallback> {
     delay: number;
     looping: boolean
 
-    private _miliseconds: number = 0;
-    get miliseconds(): number {
-        return this._miliseconds;
+    private _time: number = 0;
+    get time(): number {
+        return this._time;
     }
 
 
@@ -27,30 +27,30 @@ export class LoopAnimation implements IAnimation<ILoopUpdateCallback> {
 
 
     isFirstIteration(): boolean {
-        return this.miliseconds == 0;
+        return this.time == 0;
     }
 
 
     isLastIteration(): boolean {
-        return this.miliseconds == this.duration;
+        return this.time == this.duration;
     }
 
 
     getNumberOfCycles(): number {
         // TODO: Otestovat negativní hodnoty
-        return Math.floor(this.miliseconds / this.duration);
+        return Math.floor(this.time / this.duration);
     }
 
 
-    update: ILoopUpdateCallback = (milliseconds: number, delta: number) => {
-        this._miliseconds = LoopAnimation.convertGlobalMilisecondsToLocal(milliseconds, this.duration, this.delay, this.looping);;
+    update: ILoopUpdateCallback = (time: number, delta: number) => {
+        this._time = LoopAnimation.convertGlobalMilisecondsToLocal(time, this.duration, this.delay, this.looping);;
 
-        this._callback(milliseconds, delta);
+        this._callback(time, delta);
     }
 
 
-    static convertGlobalMilisecondsToLocal(miliseconds: number, duration: number, delay: number, looping: boolean): number {
-        const m = miliseconds - delay;
+    static convertGlobalMilisecondsToLocal(time: number, duration: number, delay: number, looping: boolean): number {
+        const m = time - delay;
 
         if (looping) {
             return m % duration;

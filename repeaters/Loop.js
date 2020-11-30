@@ -1,17 +1,14 @@
 export class Loop extends EventTarget {
     constructor() {
         super(...arguments);
-        this._milliseconds = 0;
+        this._time = 0;
         this._startTimestamp = 0;
         this._previousTimestamp = 0;
         this._isRunningToggle = false;
         this._updateCallbacks = [];
-        this.update = (milliseconds, delta) => {
-            this._updateCallbacks.forEach(callback => callback(milliseconds, delta));
-        };
     }
-    get milliseconds() {
-        return this._milliseconds;
+    get time() {
+        return this._time;
     }
     addUpdateCallback(callback) {
         this._updateCallbacks.push(callback);
@@ -26,38 +23,39 @@ export class Loop extends EventTarget {
     isRunning() {
         return this._isRunningToggle;
     }
-    run() {
+    start() {
         this._isRunningToggle = true;
         this._startTimestamp = Date.now();
         this._previousTimestamp = Date.now();
-        window.requestAnimationFrame((t => {
-            this._animationStep(t);
-        }));
-        this.dispatchEvent(new RunLoopEvent());
+        window.requestAnimationFrame(t => this._frame(t));
+        this.dispatchEvent(new StartLoopEvent());
     }
-    pause() {
+    stop() {
         this._isRunningToggle = false;
-        this.dispatchEvent(new RunLoopEvent());
+        this.dispatchEvent(new StartLoopEvent());
     }
-    _animationStep(time) {
+    update(time, delta) {
+        this._updateCallbacks.forEach(callback => callback(time, delta));
+    }
+    _frame(time) {
         if (!this._isRunningToggle)
             return;
         const delta = ((n) => n > 1 ? n : 1)(time - this._previousTimestamp);
-        this.update(this._milliseconds, delta);
+        this.update(this._time, delta);
         this._previousTimestamp = time;
-        this._milliseconds += delta;
+        this._time += delta;
         window.requestAnimationFrame((t => {
-            this._animationStep(t);
+            this._frame(t);
         }));
     }
 }
-export class RunLoopEvent extends CustomEvent {
+export class StartLoopEvent extends CustomEvent {
     constructor() {
-        super(RunLoopEvent.arg);
+        super(StartLoopEvent.arg);
     }
 }
 export class StopLoopEvent extends CustomEvent {
     constructor() {
-        super(RunLoopEvent.arg);
+        super(StartLoopEvent.arg);
     }
 }
