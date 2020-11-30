@@ -1,6 +1,6 @@
 import { Color } from "../styles/Color.js";
 import { IBoundingBox } from "../renderables/IBoundingBox.js";
-import { IStyle, Style } from "../styles/Style.js";
+import { Style, EntryType_Style } from "../styles/Style.js";
 import { IRenderingLayer } from "../core/RenderingLayer.js";
 import { IClonable } from "../core/IClonable.js";
 
@@ -14,7 +14,7 @@ export class Stroke extends Style implements IClonable<Stroke> {
     miterLimit: number;
 
 
-    constructor(style: IStyle | string | CanvasGradient | CanvasPattern = Color.Black, lineWidth: number = 1, lineJoin: CanvasLineJoin = 'miter', lineCap: CanvasLineCap = 'square', lineDashOffset: number = 0, miterLimit = 10) {
+    constructor(style: EntryType_Style = Color.Black, lineWidth: number = 1, lineJoin: CanvasLineJoin = 'miter', lineCap: CanvasLineCap = 'square', lineDashOffset: number = 0, miterLimit = 10) {
         super(style);
 
         this.lineWidth = lineWidth;
@@ -35,7 +35,7 @@ export class Stroke extends Style implements IClonable<Stroke> {
         ctx.lineCap = this.lineCap;
         ctx.miterLimit = this.miterLimit * pxs;
 
-        ctx.strokeStyle = this.getStyle(renderingLayer, boundingBox);
+        ctx.strokeStyle = this.computeStyle(renderingLayer, boundingBox);
     }
 
 
