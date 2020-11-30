@@ -30,8 +30,8 @@ export class PolygonGeometry extends Geometry {
 
 
         const b = (t: Transform): IBoundingBox => {
-            const min: Vector = Vector.zero;
-            const max: Vector = Vector.zero;
+            const min: Vector = Vector.Zero;
+            const max: Vector = Vector.Zero;
 
             points.forEach(p => {
                 min.x = Math.min(min.x, p.x);

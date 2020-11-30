@@ -10,7 +10,7 @@ export class Fill implements IClonable<Fill> {
     style: IStyle;
 
 
-    constructor(style: IStyle = Color.grey) {
+    constructor(style: IStyle = Color.Grey) {
         this.style = style;
     }
 

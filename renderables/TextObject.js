@@ -11,7 +11,7 @@ export class TextObject {
     constructor(content) {
         this.transform = new Transform();
         this._contentLines = [];
-        this.fill = new Fill(Color.black);
+        this.fill = new Fill(Color.Black);
         this.stroke = null;
         this.font = new Font();
         this.shadow = null;
@@ -78,7 +78,7 @@ export class TextObject {
     }
     renderGizmo(renderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.textColor);
+        Gizmo.origin(renderingLayer, Vector.Zero, Gizmo.textColor);
         renderingLayer.resetMatrix();
     }
     clone() {

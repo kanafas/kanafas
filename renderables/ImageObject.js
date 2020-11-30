@@ -48,7 +48,7 @@ export class ImageObject {
     }
     renderGizmo(renderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.mediaColor);
+        Gizmo.origin(renderingLayer, Vector.Zero, Gizmo.mediaColor);
         renderingLayer.resetMatrix();
     }
     clone() {

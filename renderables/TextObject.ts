@@ -27,7 +27,7 @@ export class TextObject implements IObject, IRenderable, IShape, IClonable<TextO
         this._contentLines = content.split(Utils.Regex.breakLines());
     }
 
-    fill: Fill | null = new Fill(Color.black);
+    fill: Fill | null = new Fill(Color.Black);
     stroke: Stroke | null = null;
     font: Font = new Font();
 
@@ -110,7 +110,7 @@ export class TextObject implements IObject, IRenderable, IShape, IClonable<TextO
 
     renderGizmo(renderingLayer: IRenderingLayer) {
         renderingLayer.setMatrixToTransform(this.transform);
-        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.textColor);
+        Gizmo.origin(renderingLayer, Vector.Zero, Gizmo.textColor);
         renderingLayer.resetMatrix();
     }
 

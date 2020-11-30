@@ -7,7 +7,7 @@ export class BezierPoint extends Vector implements IClonable<BezierPoint> {
     endControl: Vector;
 
 
-    constructor(position: IVector, startControl: IVector = Vector.zero, endControl: IVector = Vector.zero) {
+    constructor(position: IVector, startControl: IVector = Vector.Zero, endControl: IVector = Vector.Zero) {
         super(position.x, position.y);
 
         this.startControl = new Vector(startControl.x, startControl.y);

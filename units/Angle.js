@@ -111,19 +111,19 @@ export class Angle {
         angle.revolutions = revolutions;
         return angle;
     }
-    static get zero() {
+    static get Zero() {
         return new Angle(0);
     }
-    static get quarter() {
+    static get Quarter() {
         return new Angle(90);
     }
-    static get third() {
+    static get Third() {
         return new Angle(120);
     }
-    static get half() {
+    static get Half() {
         return new Angle(180);
     }
-    static get full() {
+    static get Full() {
         return new Angle(360);
     }
     /**

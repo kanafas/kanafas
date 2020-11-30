@@ -94,7 +94,7 @@ export class Shape {
     static renderGizmo(renderingLayer: IRenderingLayer, geometry: IGeometry) {
         renderingLayer.setMatrixToTransform(geometry.transform);
 
-        Gizmo.origin(renderingLayer, Vector.zero, Gizmo.shapeColor);
+        Gizmo.origin(renderingLayer, Vector.Zero, Gizmo.shapeColor);
 
         renderingLayer.resetMatrix();
     }
