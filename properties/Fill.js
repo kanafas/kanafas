@@ -6,7 +6,7 @@ export class Fill extends Style {
     }
     apply(renderingLayer, boundingBox) {
         const ctx = renderingLayer.getRenderingContext();
-        ctx.fillStyle = this.getStyle(renderingLayer, boundingBox);
+        ctx.fillStyle = this.computeStyle(renderingLayer, boundingBox);
     }
     clone() {
         const style = super.clone();

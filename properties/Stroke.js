@@ -17,7 +17,7 @@ export class Stroke extends Style {
         ctx.lineJoin = this.lineJoin;
         ctx.lineCap = this.lineCap;
         ctx.miterLimit = this.miterLimit * pxs;
-        ctx.strokeStyle = this.getStyle(renderingLayer, boundingBox);
+        ctx.strokeStyle = this.computeStyle(renderingLayer, boundingBox);
     }
     clone() {
         const style = super.clone();
