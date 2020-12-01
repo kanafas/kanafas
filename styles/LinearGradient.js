@@ -1,7 +1,7 @@
 import { Utils } from "../utils/Utils.js";
 import { Gradient } from "./Gradient.js";
 export class LinearGradient extends Gradient {
-    getStyle(renderingLayer, boundingBox) {
+    computeStyle(renderingLayer, boundingBox) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
         // TODO: Zkontrolovat jestli "origin" přičítám, nebo odčítáms

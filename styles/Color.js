@@ -114,7 +114,7 @@ export class Color {
             return this.getHex();
         }
     }
-    getStyle() {
+    computeStyle() {
         return Color.convertRGBAtoStyle(this);
     }
     /**

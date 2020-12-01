@@ -5,7 +5,7 @@ export class Gradient {
         this.end = end;
         this.steps = steps;
     }
-    getStyle(renderingLayer, boundingBox) {
+    computeStyle(renderingLayer, boundingBox) {
         throw new Error("Mehod `getStyle` is not implemented.");
     }
 }

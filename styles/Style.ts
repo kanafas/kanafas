@@ -23,7 +23,8 @@ export class Style implements IStyle, IClonable<Style> {
 
 
     computeStyle(renderingLayer: IRenderingLayer, boundingBox: IBoundingBox): string | CanvasGradient | CanvasPattern {
-        return this._style.computeStyle(renderingLayer, boundingBox);
+        const v = this._style.computeStyle(renderingLayer, boundingBox);
+        return v;
     }
 
 
@@ -48,7 +49,7 @@ export class Style implements IStyle, IClonable<Style> {
     private static _parseEntryType_Style(raw: EntryType_Style): IStyle {
         const style = raw;
 
-        if (typeof style === 'object' && style.hasOwnProperty('getStyle')) {
+        if (typeof style === 'object' && typeof (style as IStyle).computeStyle === 'function') {
             return style as IStyle;
         } else {
             return {
@@ -59,7 +60,6 @@ export class Style implements IStyle, IClonable<Style> {
         }
     }
 }
-
 
 
 export type EntryType_Style =

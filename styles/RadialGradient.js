@@ -1,7 +1,7 @@
 import { Utils } from "../utils/Utils.js";
 import { Gradient } from "./Gradient.js";
 export class RadialGradient extends Gradient {
-    getStyle(renderingLayer, boundingBox) {
+    computeStyle(renderingLayer, boundingBox) {
         const ctx = renderingLayer.getRenderingContext();
         const pxs = renderingLayer.pixelScale;
         const centerPoint = this.start.clone()
